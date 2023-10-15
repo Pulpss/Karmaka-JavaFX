@@ -21,7 +21,7 @@
             </Text>
             <VBox layoutX="115.0" layoutY="152.0" prefHeight="200.0" prefWidth="167.0">
                <children>
-                  <Label text="Player 1">
+                  <Label text="Joueur 1">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -29,11 +29,11 @@
                   <Label text="Type :" />
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="167.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Human" />
+                        <RadioButton mnemonicParsing="false" text="Humain" />
                         <RadioButton mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
-                  <Label text="Name :" />
+                  <Label text="Nom :" />
                   <TextField />
                </children>
             </VBox>
@@ -45,7 +45,7 @@
             </HBox>
             <VBox layoutX="358.0" layoutY="152.0" prefHeight="200.0" prefWidth="167.0">
                <children>
-                  <Label text="Player 2">
+                  <Label text="Joueur 2">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -53,11 +53,11 @@
                   <Label text="Type :" />
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="167.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Human" />
+                        <RadioButton mnemonicParsing="false" text="Humain" />
                         <RadioButton mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
-                  <Label text="Name :" />
+                  <Label text="Nom :" />
                   <TextField />
                </children>
             </VBox>

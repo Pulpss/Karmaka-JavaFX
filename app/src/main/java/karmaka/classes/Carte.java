@@ -1,10 +1,10 @@
 package karmaka.classes;
 
 public abstract class Carte {
-    public String nom;
-    public Couleur couleur;
-    public String description;
-    public int points;
+    private String nom;
+    private Couleur couleur;
+    private String description;
+    private int points;
 
     public Carte(String nom, Couleur couleur, String description, int points) {
         this.nom = nom;
