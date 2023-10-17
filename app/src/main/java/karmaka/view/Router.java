@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public final class Router {
     private static String scene;
     private static Stage stage;
-    private static Router instance;
+    private static Router instance = null;
     private static HashMap<String, String> scenes = new HashMap<String, String>();
 
     private Router(Stage initStage) {
@@ -19,7 +19,7 @@ public final class Router {
     }
 
     private void addScenes() {
-        scenes.put("main", "fxml/Main.fxml");
+        scenes.put("menu", "fxml/Menu.fxml");
         scenes.put("createGame", "fxml/CreateGame.fxml");
     }
 
@@ -30,9 +30,6 @@ public final class Router {
     }
 
     public static Router getInstance() {
-        if (instance == null) {
-            return null;
-        }
         return instance;
     }
 

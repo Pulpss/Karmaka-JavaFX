@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import karmaka.view.Router;
 
-public class MainController implements Initializable {
+public class MenuController implements Initializable {
     @FXML
-    void handlePlayButton() throws IOException {
+    private void handlePlayButton() throws IOException {
         Router.getInstance().setScene("createGame");
     }
 

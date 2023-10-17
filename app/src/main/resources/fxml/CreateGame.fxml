@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="489.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="489.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="karmaka.controllers.CreateGameController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="457.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="198.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a game">
+            <Text layoutX="198.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer une partie">
                <font>
                   <Font size="38.0" />
                </font>
@@ -29,18 +29,18 @@
                   <Label text="Type :" />
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="167.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Humain" />
-                        <RadioButton mnemonicParsing="false" text="Robot" />
+                        <RadioButton fx:id="j1Humain" onMouseClicked="#handleJ1Humain" mnemonicParsing="false" text="Humain" />
+                        <RadioButton fx:id="j1Robot"  onMouseClicked="#handleJ1Robot" mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
                   <Label text="Nom :" />
-                  <TextField />
+                  <TextField fx:id="j1Nom" />
                </children>
             </VBox>
             <HBox alignment="CENTER" layoutX="220.0" layoutY="332.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" style="-fx-translate-x: -10;" text="Create" />
-                  <Button mnemonicParsing="false" style="-fx-translate-x: 10;" text="Cancel" />
+                  <Button onMouseClicked="#handleCreer" mnemonicParsing="false" style="-fx-translate-x: -10;" text="Créer" />
+                  <Button onMouseClicked="#handleAnnuler" mnemonicParsing="false" style="-fx-translate-x: 10;" text="Annuler" />
                </children>
             </HBox>
             <VBox layoutX="358.0" layoutY="152.0" prefHeight="200.0" prefWidth="167.0">
@@ -53,12 +53,12 @@
                   <Label text="Type :" />
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="167.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Humain" />
-                        <RadioButton mnemonicParsing="false" text="Robot" />
+                        <RadioButton fx:id="j2Humain" onMouseClicked="#handleJ2Humain" mnemonicParsing="false" text="Humain" />
+                        <RadioButton fx:id="j2Robot"  onMouseClicked="#handleJ2Robot" mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
                   <Label text="Nom :" />
-                  <TextField />
+                  <TextField fx:id="j2Nom" />
                </children>
             </VBox>
          </children>
