@@ -47,5 +47,6 @@ public class CreateGameController implements Initializable {
         Joueur j1 = j1Humain.isSelected() ? new Humain(j1Nom.getText()) : new Robot(j1Nom.getText());
         Joueur j2 = j2Humain.isSelected() ? new Humain(j2Nom.getText()) : new Robot(j2Nom.getText());
         Partie.init(j1, j2);
+        Router.getInstance().setScene("plateau");
     }
 }

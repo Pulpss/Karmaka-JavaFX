@@ -21,6 +21,7 @@ public final class Router {
     private void addScenes() {
         scenes.put("menu", "fxml/Menu.fxml");
         scenes.put("createGame", "fxml/CreateGame.fxml");
+        scenes.put("plateau", "fxml/Plateau.fxml");
     }
 
     public static void init(Stage stage) {
@@ -39,5 +40,12 @@ public final class Router {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(scene)))));
         stage.show();
         System.out.println("Scene changed to " + scene);
+    }
+
+    public void update() throws IOException{
+        stage.setTitle(scene);
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(scene)))));
+        stage.show();
+        System.out.println("Scene updated to " + scene);
     }
 }
