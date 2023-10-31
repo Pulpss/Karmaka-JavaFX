@@ -11,18 +11,28 @@
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
          VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="720" fitWidth="1080" layoutX="0" layoutY="0">
+            <ImageView fitHeight="900" fitWidth="1600" layoutX="0" layoutY="0">
                <image>
                   <Image url="@/images/plateau.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="source" fitHeight="160" fitWidth="114" layoutX="540" layoutY="360">
+            <ImageView fx:id="adversaireVieFuture" fitHeight="160" fitWidth="115" layoutX="400" layoutY="50">
             </ImageView>
-            <ImageView fitHeight="111.0" fitWidth="438.0" layoutX="101.0" layoutY="31.0"
-               pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/images/karmaka_banner.jpg" />
-               </image>
+            <ImageView fx:id="adversaireOeuvres" fitHeight="160" fitWidth="115" layoutX="1000" layoutY="50">
+            </ImageView>
+            <ImageView fx:id="adversaireDeck" fitHeight="160" fitWidth="115" layoutX="1200" layoutY="50">
+            </ImageView>
+            <ImageView fx:id="source" fitHeight="160" fitWidth="115" layoutX="550" layoutY="250">
+            </ImageView>
+            <ImageView fx:id="fosse" fitHeight="160" fitWidth="115" layoutX="737" layoutY="250">
+            </ImageView>
+            <ImageView fx:id="deck" fitHeight="160" fitWidth="115" layoutX="400" layoutY="500">
+            </ImageView>
+            <ImageView fx:id="oeuvres" fitHeight="160" fitWidth="115" layoutX="600" layoutY="500">
+            </ImageView>
+            <ImageView fx:id="vieFuture" fitHeight="160" fitWidth="115" layoutX="1200" layoutY="500">
+            </ImageView>
+            <ImageView fx:id="main" fitHeight="160" fitWidth="115" layoutX="470" layoutY="700">
             </ImageView>
          </children>
       </AnchorPane>
