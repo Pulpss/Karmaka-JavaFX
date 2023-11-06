@@ -29,4 +29,20 @@ public abstract class Joueur {
     public Deck getDeck() {
         return deck;
     }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public VieFuture getVieFuture() {
+        return vieFuture;
+    }
+
+    public Oeuvres getOeuvres() {
+        return oeuvres;
+    }
+
+    public int getNbAnneaux() {
+        return nbAnneaux;
+    }
 }
