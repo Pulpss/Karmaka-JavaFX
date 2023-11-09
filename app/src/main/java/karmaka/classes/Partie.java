@@ -60,7 +60,7 @@ public final class Partie {
     }
 
     public static void distribuer() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             joueurs[i].getMain().ajouter(source.piocher(4));
             joueurs[i].getDeck().ajouter(source.piocher(2));
         }

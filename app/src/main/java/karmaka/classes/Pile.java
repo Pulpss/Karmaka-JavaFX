@@ -26,7 +26,7 @@ public abstract class Pile {
 
     public ArrayList<Carte> piocher(int qte) {
         ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
-        for (int i = 0; i < (qte > cartes.size() ? qte : cartes.size()) - 1; i++) {
+        for (int i = 0; i < (qte < cartes.size() ? qte : cartes.size() - 1); i++) {
             cartesPiochees.add(cartes.remove(0));
         }
         return cartesPiochees;
@@ -40,11 +40,5 @@ public abstract class Pile {
         return cartes.size();
     }
 
-    public String toString() {
-        String str = "";
-        for (Carte carte : cartes) {
-            str += carte.toString() + "\n";
-        }
-        return str;
-    }
+
 }

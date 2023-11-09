@@ -10,16 +10,20 @@ public abstract class Joueur {
     private int score;
     private int nbAnneaux;
     private int points;
-    private Main main = new Main();
-    private Deck deck = new Deck();
-    private VieFuture vieFuture = new VieFuture();
-    private Oeuvres oeuvres = new Oeuvres();
+    private Main main;
+    private Deck deck;
+    private VieFuture vieFuture;
+    private Oeuvres oeuvres;
 
     public Joueur(String nom) {
         this.nom = nom;
         this.score = 0;
         this.nbAnneaux = 0;
         this.points = 0;
+        this.main = new Main();
+        this.deck = new Deck();
+        this.vieFuture = new VieFuture();
+        this.oeuvres = new Oeuvres();
     }
 
     public Main getMain() {

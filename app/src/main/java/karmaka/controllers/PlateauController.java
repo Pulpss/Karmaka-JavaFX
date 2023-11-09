@@ -9,20 +9,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Partie;
 import karmaka.view.Router;
 
 public class PlateauController implements Initializable {
-    // Cards dimensions are 160x115
+    // Cards dimensions are 115x160
     @FXML
-    private ImageView source, fosse, adversaireDeck, adversaireOeuvres, adversaireVieFuture, deck, oeuvres, vieFuture,
-            main;
+    private ImageView source, fosse, adversaireDeck, adversaireVieFuture, vieFuture, deck;
 
     @FXML
     private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte;
-    
+
+    @FXML
+    private HBox main, oeuvres, adversaireOeuvres;
+
     @FXML
     public void handleEchelleButton() throws IOException {
         Router.getInstance().setScene("echelle");
@@ -36,29 +39,114 @@ public class PlateauController implements Initializable {
         }
     }
 
-    private void initPileQte() {
+    public ImageView carte(String url) {
+        ImageView carte = new ImageView();
+        carte.setFitHeight(160);
+        carte.setFitWidth(115);
+        carte.setImage(new Image(url));
+        return carte;
+    }
+
+    private void initMain() {
         Partie partie = Partie.getInstance();
-        System.out.println(partie.getJoueur(1).getDeck().toString());
-        adversaireVieFutureQte.setText(Integer.toString(partie.getJoueur((partie.getTour()+1) % 2).getVieFuture().size()));
-        adversaireDeckQte.setText(Integer.toString(partie.getJoueur((partie.getTour()+1) % 2).getDeck().size()));
-        sourceQte.setText(Integer.toString(partie.getSource().size()));
-        fosseQte.setText(Integer.toString(partie.getFosse().size()));
-        deckQte.setText(Integer.toString(partie.getJoueur(partie.getTour()).getDeck().size()));
-        vieFutureQte.setText(Integer.toString(partie.getJoueur(partie.getTour()).getVieFuture().size()));
+        ArrayList<ImageView> cartes = new ArrayList<ImageView>();
+        partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
+                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+        main.getChildren().addAll(cartes);
+    }
+
+    private void initOeuvres() {
+        // joueur actuel
+        Partie partie = Partie.getInstance();
+        ArrayList<ImageView> cartes = new ArrayList<ImageView>();
+        partie.getJoueur(partie.getTour()).getOeuvres().getCartes().iterator()
+                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+        oeuvres.getChildren().addAll(cartes);
+        // joueur adversaire
+        cartes.clear();
+        partie.getJoueur((partie.getTour() + 1) % 2).getOeuvres().getCartes().iterator()
+                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+        adversaireOeuvres.getChildren().addAll(cartes);
+    }
+
+    private void initFosse() {
+        Partie partie = Partie.getInstance();
+        if (partie.getFosse().size() > 0) {
+            fosse.setVisible(true);
+            fosseQte.setVisible(true);
+            fosse.setImage(new Image("/images/cartes/" + partie.getFosse().getCartes().get(0).getNom() + ".png"));
+            fosseQte.setText(Integer.toString(partie.getFosse().size()));
+        } else {
+            fosse.setVisible(false);
+            fosseQte.setVisible(false);
+        }
+    }
+
+    private void initVieFuture() {
+        Partie partie = Partie.getInstance();
+        // joueur actuel vie future
+        if (partie.getJoueur(partie.getTour()).getVieFuture().size() > 0) {
+            vieFuture.setVisible(true);
+            vieFutureQte.setVisible(true);
+            vieFuture.setImage(new Image("/images/cartes/"
+                    + partie.getJoueur(partie.getTour()).getVieFuture().getCartes().get(0).getNom() + ".png"));
+            vieFutureQte.setText(Integer.toString(partie.getJoueur(partie.getTour()).getVieFuture().size()));
+        } else {
+            vieFuture.setVisible(false);
+            vieFutureQte.setVisible(false);
+        }
+        // adversaire vie future
+        if (partie.getJoueur((partie.getTour() + 1) % 2).getVieFuture().size() > 0) {
+            adversaireVieFuture.setVisible(true);
+            adversaireVieFutureQte.setVisible(true);
+            adversaireVieFutureQte
+                    .setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getVieFuture().size()));
+        } else {
+            adversaireVieFuture.setVisible(false);
+            adversaireVieFutureQte.setVisible(false);
+        }
+    }
+
+    private void initDeck() {
+        Partie partie = Partie.getInstance();
+        // joueur actuel deck
+        if (partie.getJoueur(partie.getTour()).getDeck().size() > 0) {
+            deck.setVisible(true);
+            deckQte.setVisible(true);
+            deckQte.setText(Integer.toString(partie.getJoueur(partie.getTour()).getDeck().size()));
+        } else {
+            deckQte.setVisible(false);
+            deck.setVisible(false);
+        }
+        // adversaire deck
+        if (partie.getJoueur((partie.getTour() + 1) % 2).getDeck().size() > 0) {
+            adversaireDeck.setVisible(true);
+            adversaireDeckQte.setVisible(true);
+            adversaireDeckQte.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getDeck().size()));
+        } else {
+            adversaireDeck.setVisible(false);
+            adversaireDeckQte.setVisible(false);
+        }
+    }
+
+    private void initSource() {
+        Partie partie = Partie.getInstance();
+        if (partie.getSource().size() > 0) {
+            source.setVisible(true);
+            sourceQte.setText(Integer.toString(partie.getSource().size()));
+        } else {
+            source.setVisible(false);
+            sourceQte.setVisible(false);
+        }
     }
 
     @FXML
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println(Partie.getInstance().toString());
-        initPileQte();
-        source.setImage(new Image("/images/cartes/Back.png"));
-        fosse.setImage(new Image("/images/cartes/Bassesse.png"));
-        adversaireDeck.setImage(new Image("/images/cartes/Back.png"));
-        adversaireOeuvres.setImage(new Image("/images/cartes/Bassesse.png"));
-        adversaireVieFuture.setImage(new Image("/images/cartes/Bassesse.png"));
-        deck.setImage(new Image("/images/cartes/Back.png"));
-        oeuvres.setImage(new Image("/images/cartes/Bassesse.png"));
-        vieFuture.setImage(new Image("/images/cartes/Bassesse.png"));
-        main.setImage(new Image("/images/cartes/Bassesse.png"));
+        initSource();
+        initMain();
+        initOeuvres();
+        initFosse();
+        initVieFuture();
+        initDeck();
     }
 }

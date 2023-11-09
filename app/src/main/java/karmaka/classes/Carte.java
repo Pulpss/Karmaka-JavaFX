@@ -13,5 +13,9 @@ public abstract class Carte {
         this.points = points;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
     public abstract void action();
 }

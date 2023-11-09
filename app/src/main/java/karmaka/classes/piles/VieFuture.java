@@ -6,8 +6,7 @@ import karmaka.classes.Carte;
 import karmaka.classes.Pile;
 
 public class VieFuture extends Pile {
-    static ArrayList<Carte> cartesInit = new ArrayList<Carte>();
     public VieFuture() {
-        super(cartesInit);
+        super(new ArrayList<Carte>());
     }
 }

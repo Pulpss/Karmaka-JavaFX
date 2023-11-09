@@ -4,40 +4,47 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
 
 <VBox prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/21"
    xmlns:fx="http://javafx.com/fxml/1" fx:controller="karmaka.controllers.PlateauController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
-         VBox.vgrow="ALWAYS">
+         VBox.vgrow="ALWAYS" fx:id="anchorPane">
          <children>
-            <ImageView fitHeight="720" fitWidth="1280" layoutX="0" layoutY="0">
-               <image>
-                  <Image url="@/images/plateau.png" />
-               </image>
-            </ImageView>
-
             <!-- Vie Future Adversaire -->
             <ImageView fx:id="adversaireVieFuture" fitHeight="160" fitWidth="115" layoutX="200"
                layoutY="16">
+               <image>
+                  <Image url="@/images/cartes/Back.png" />
+               </image>
             </ImageView>
-            <Text fx:id="adversaireVieFutureQte" layoutX="161.0" layoutY="51.0" strokeWidth="0.0" text="0">
+            <Text fx:id="adversaireVieFutureQte" layoutX="161.0" layoutY="51.0" strokeWidth="0.0"
+               text="0">
                <font>
                   <Font size="32.0" />
                </font>
             </Text>
 
             <!-- Oeuvres Adversaire -->
-            <ImageView fx:id="adversaireOeuvres" fitHeight="160" fitWidth="115" layoutX="820"
-               layoutY="16">
-            </ImageView>
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="345" layoutY="16">
+               <HBox fx:id="adversaireOeuvres" spacing="10" prefWidth="590">
+                  <children>
+                  </children>
+               </HBox>
+            </ScrollPane>
 
             <!-- Deck Adversaire -->
             <ImageView fx:id="adversaireDeck" fitHeight="160" fitWidth="115" layoutX="965"
                layoutY="16">
+               <image>
+                  <Image url="@/images/cartes/Back.png" />
+               </image>
             </ImageView>
             <Text fx:id="adversaireDeckQte" layoutX="1092.0" layoutY="51" strokeWidth="0.0" text="0">
                <font>
@@ -51,6 +58,9 @@
 
             <!-- Source -->
             <ImageView fx:id="source" fitHeight="160" fitWidth="115" layoutX="415" layoutY="192">
+               <image>
+                  <Image url="@/images/cartes/Back.png" />
+               </image>
             </ImageView>
             <Text fx:id="sourceQte" layoutX="365.0" layoutY="227.0" strokeWidth="0.0" text="0">
                <font>
@@ -70,6 +80,9 @@
             <!-- Deck -->
             <ImageView onMouseClicked="#handleDeck" fx:id="deck" fitHeight="160" fitWidth="115"
                layoutX="200" layoutY="368">
+               <image>
+                  <Image url="@/images/cartes/Back.png" />
+               </image>
             </ImageView>
             <Text fx:id="deckQte" layoutX="161.0" layoutY="403" strokeWidth="0.0" text="0">
                <font>
@@ -78,8 +91,12 @@
             </Text>
 
             <!-- Oeuvres -->
-            <ImageView fx:id="oeuvres" fitHeight="160" fitWidth="115" layoutX="345" layoutY="368">
-            </ImageView>
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="345" layoutY="368">
+               <HBox fx:id="oeuvres" spacing="10" prefWidth="590">
+                  <children>
+                  </children>
+               </HBox>
+            </ScrollPane>
 
             <!-- Vie Future -->
             <ImageView fx:id="vieFuture" fitHeight="160" fitWidth="115" layoutX="965" layoutY="368">
@@ -91,8 +108,12 @@
             </Text>
 
             <!-- Main -->
-            <ImageView fx:id="main" fitHeight="160" fitWidth="115" layoutX="425" layoutY="544">
-            </ImageView>
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="200" layoutY="544">
+               <HBox fx:id="main" spacing="10" prefWidth="880">
+                  <children>
+                  </children>
+               </HBox>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

@@ -72,7 +72,6 @@ public class Source extends Pile {
         new Roulette(),
         new Roulette(),
         new Bassesse(),
-        new Bassesse(),
         new Bassesse()
     ));
     public Source() {
