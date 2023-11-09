@@ -8,7 +8,7 @@ public class Mimetisme extends Carte {
         super("Mimetisme", Couleur.MOSAIQUE, "Choisissez un Rival. Copiez le pouvoir de son Oeuvre Exposée.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Mimetisme");
     }
 }

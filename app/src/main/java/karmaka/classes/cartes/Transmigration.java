@@ -8,7 +8,7 @@ public class Transmigration extends Carte {
         super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importequelle carte de votre Vie Future.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Transmigration");
     }
 }

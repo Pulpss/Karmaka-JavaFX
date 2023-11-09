@@ -8,7 +8,7 @@ public class Longevite extends Carte {
         super("Longevite", Couleur.VERT, "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.", 2);
     }
     
-    public void action() {
+    public void pouvoir() {
         System.out.println("Longevite");
     }
 }

@@ -8,7 +8,7 @@ public class Vengeance extends Carte {
         super("Vengeance", Couleur.ROUGE, "Défaussez l’Oeuvre Exposée d’un rival.", 3);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Vengeance");
     }
 }

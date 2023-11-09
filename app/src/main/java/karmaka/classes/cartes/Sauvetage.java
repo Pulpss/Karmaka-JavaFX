@@ -8,7 +8,7 @@ public class Sauvetage extends Carte {
         super("Sauvetage", Couleur.VERT, "Ajoutez à votre Main une des3 dernières cartes de la Fosse.", 2);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Sauvetage");
     }
 }

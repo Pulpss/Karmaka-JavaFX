@@ -17,5 +17,9 @@ public abstract class Carte {
         return nom;
     }
 
-    public abstract void action();
+    public int getPoints() {
+        return points;
+    }
+
+    public abstract void pouvoir();
 }

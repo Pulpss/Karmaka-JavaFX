@@ -8,7 +8,7 @@ public class RevesBrises extends Carte {
         super("RevesBrises", Couleur.BLEU, "Placez la première carte de la Vie Future d'un rival sur la vôtre.", 2);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("RevesBrises");
     }
 }

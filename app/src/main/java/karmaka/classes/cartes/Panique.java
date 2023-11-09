@@ -9,7 +9,7 @@ public class Panique extends Carte {
                 "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Panique");
     }
 }

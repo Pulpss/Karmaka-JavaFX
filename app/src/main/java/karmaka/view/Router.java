@@ -2,12 +2,18 @@ package karmaka.view;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Stage;
+import karmaka.classes.Partie;
 
 public final class Router {
     private static String scene;
@@ -60,5 +66,20 @@ public final class Router {
         alert.setContentText(inst);
 
         alert.showAndWait();
+    }
+
+    public void choix(String message, String choixDefault, String... choix) {
+        ChoiceDialog<String> dialog = new ChoiceDialog<String>(choixDefault, choix);
+        dialog.setTitle("Veuillez faire un choix.");
+        dialog.setHeaderText(null);
+        dialog.setContentText(message);
+
+        Optional<String> result = dialog.showAndWait();
+        
+        if (result.isPresent()) {
+            Partie.getInstance().setDernierChoix(result.get());
+        } else {
+            Partie.getInstance().setDernierChoix(null);
+        }
     }
 }

@@ -10,7 +10,7 @@ public class Destinee extends Carte {
                 2);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Destinee");
     }
 }

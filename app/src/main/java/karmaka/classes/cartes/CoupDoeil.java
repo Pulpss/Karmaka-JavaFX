@@ -8,7 +8,7 @@ public class CoupDoeil extends Carte {
         super("CoupDoeil", Couleur.BLEU, "Regardez la Main d’un rival. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("CoupDoeil");
     }
 }

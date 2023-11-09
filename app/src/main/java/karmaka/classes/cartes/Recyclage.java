@@ -8,7 +8,7 @@ public class Recyclage extends Carte {
         super("Recyclage", Couleur.VERT, "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Recyclage");
     }
 }

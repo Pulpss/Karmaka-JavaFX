@@ -8,7 +8,7 @@ public class Deni extends Carte {
         super("Deni", Couleur.BLEU, "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.", 2);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Deni");
     }
 }

@@ -8,7 +8,7 @@ public class Voyage extends Carte {
         super("Voyage", Couleur.VERT, "Puisez 3 cartes à la Source. Vous pouvez ensuite jouer une autre carte.", 3);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Voyage");
     }
 }

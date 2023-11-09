@@ -49,4 +49,8 @@ public abstract class Joueur {
     public int getNbAnneaux() {
         return nbAnneaux;
     }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }

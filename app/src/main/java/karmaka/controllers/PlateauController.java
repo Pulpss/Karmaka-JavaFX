@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import karmaka.classes.Action;
+import karmaka.classes.Carte;
 import karmaka.classes.Partie;
 import karmaka.view.Router;
 
@@ -21,7 +22,7 @@ public class PlateauController implements Initializable {
     private ImageView source, fosse, adversaireDeck, adversaireVieFuture, vieFuture, deck;
 
     @FXML
-    private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte;
+    private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte, adversairePoints, points;
 
     @FXML
     private HBox main, oeuvres, adversaireOeuvres;
@@ -32,18 +33,35 @@ public class PlateauController implements Initializable {
     }
 
     @FXML
-    public void handleDeck() {
+    public void handleDeck() throws IOException {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        System.out.println(actionsPossibles);
         if (actionsPossibles.contains(Action.PIOCHER_DECK)) {
-            Partie.tour();
+            Partie.getInstance().tour();
         }
     }
 
-    public ImageView carte(String url) {
+    private void handleMouseClicked(Carte c) throws IOException {
+        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        System.out.println(actionsPossibles);
+        if (actionsPossibles.contains(Action.CHOISIR_CARTE_MAIN)) {
+            Partie.getInstance().setCarteChoisie(c);
+            Partie.getInstance().tour();
+        }
+    }
+
+    public ImageView carte(Carte c) throws IOException {
         ImageView carte = new ImageView();
         carte.setFitHeight(160);
         carte.setFitWidth(115);
-        carte.setImage(new Image(url));
+        carte.setImage(new Image("/images/cartes/" + c.getNom() + ".png"));
+        carte.setOnMouseClicked(e -> {
+            try {
+                handleMouseClicked(c);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
         return carte;
     }
 
@@ -51,7 +69,13 @@ public class PlateauController implements Initializable {
         Partie partie = Partie.getInstance();
         ArrayList<ImageView> cartes = new ArrayList<ImageView>();
         partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
-                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+                .forEachRemaining(c -> {
+                    try {
+                        cartes.add(carte(c));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
         main.getChildren().addAll(cartes);
     }
 
@@ -60,12 +84,24 @@ public class PlateauController implements Initializable {
         Partie partie = Partie.getInstance();
         ArrayList<ImageView> cartes = new ArrayList<ImageView>();
         partie.getJoueur(partie.getTour()).getOeuvres().getCartes().iterator()
-                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+                .forEachRemaining(c -> {
+                    try {
+                        cartes.add(carte(c));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
         oeuvres.getChildren().addAll(cartes);
         // joueur adversaire
         cartes.clear();
         partie.getJoueur((partie.getTour() + 1) % 2).getOeuvres().getCartes().iterator()
-                .forEachRemaining(c -> cartes.add(carte("/images/cartes/" + c.getNom() + ".png")));
+                .forEachRemaining(c -> {
+                    try {
+                        cartes.add(carte(c));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
         adversaireOeuvres.getChildren().addAll(cartes);
     }
 
@@ -140,6 +176,12 @@ public class PlateauController implements Initializable {
         }
     }
 
+    private void initPoints() {
+        Partie partie = Partie.getInstance();
+        points.setText(Integer.toString(partie.getJoueur(partie.getTour()).getPoints()));
+        adversairePoints.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getPoints()));
+    }
+
     @FXML
     public void initialize(URL arg0, ResourceBundle arg1) {
         initSource();
@@ -148,5 +190,6 @@ public class PlateauController implements Initializable {
         initFosse();
         initVieFuture();
         initDeck();
+        initPoints();
     }
 }

@@ -8,7 +8,7 @@ public class DernierSouffle extends Carte {
         super("DernierSouffle", Couleur.ROUGE, "Le joueur de votre choix défausse une carte de sa Main.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("DernierSouffle");
     }
 }

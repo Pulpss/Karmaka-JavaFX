@@ -8,7 +8,7 @@ public class Vol extends Carte {
         super("Vol", Couleur.BLEU, "Placez dans votre Main l’Oeuvre Exposée d'un rival.", 3);
     }
     
-    public void action() {
+    public void pouvoir() {
         System.out.println("Vol");
     }
 }

@@ -8,7 +8,7 @@ public class Fournaise extends Carte {
         super("Fournaise", Couleur.ROUGE, "Défaussez les 2 premières cartes de la Vie Future d'un rival.", 2);
     }
     
-    public void action() {
+    public void pouvoir() {
         System.out.println("Fournaise");
     }
 }

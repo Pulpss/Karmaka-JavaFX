@@ -8,7 +8,7 @@ public class Bassesse extends Carte {
         super("Bassesse", Couleur.ROUGE, "Défaussez au hasard 2 cartes de la Main d’un rival.", 3);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Bassesse");
     }
 }

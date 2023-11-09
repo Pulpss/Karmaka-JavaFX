@@ -17,6 +17,18 @@
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
          VBox.vgrow="ALWAYS" fx:id="anchorPane">
          <children>
+            <!-- Points Adversaire -->
+            <Text layoutX="12" layoutY="51" strokeWidth="0.0" text="Points :">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="adversairePoints" layoutX="130" layoutY="51" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+
             <!-- Vie Future Adversaire -->
             <ImageView fx:id="adversaireVieFuture" fitHeight="160" fitWidth="115" layoutX="200"
                layoutY="16">
@@ -32,7 +44,8 @@
             </Text>
 
             <!-- Oeuvres Adversaire -->
-            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="345" layoutY="16">
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true"
+               layoutX="345" layoutY="16">
                <HBox fx:id="adversaireOeuvres" spacing="10" prefWidth="590">
                   <children>
                   </children>
@@ -77,6 +90,18 @@
                </font>
             </Text>
 
+            <!-- Points -->
+            <Text layoutX="12" layoutY="579" strokeWidth="0.0" text="Points :">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+            <Text fx:id="points" layoutX="130" layoutY="579" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+
             <!-- Deck -->
             <ImageView onMouseClicked="#handleDeck" fx:id="deck" fitHeight="160" fitWidth="115"
                layoutX="200" layoutY="368">
@@ -91,7 +116,8 @@
             </Text>
 
             <!-- Oeuvres -->
-            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="345" layoutY="368">
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true"
+               layoutX="345" layoutY="368">
                <HBox fx:id="oeuvres" spacing="10" prefWidth="590">
                   <children>
                   </children>
@@ -108,7 +134,8 @@
             </Text>
 
             <!-- Main -->
-            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true" layoutX="200" layoutY="544">
+            <ScrollPane vbarPolicy="NEVER" fitToHeight="true" minHeight="175" fitToWidth="true"
+               layoutX="200" layoutY="544">
                <HBox fx:id="main" spacing="10" prefWidth="880">
                   <children>
                   </children>

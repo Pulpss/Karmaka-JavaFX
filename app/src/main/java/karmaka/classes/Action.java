@@ -1,5 +1,5 @@
 package karmaka.classes;
 
 public enum Action {
-    PIOCHER_DECK
+    PIOCHER_DECK, CHOISIR_CARTE_MAIN
 }

@@ -8,7 +8,7 @@ public class Incarnation extends Carte {
         super("Incarnation", Couleur.MOSAIQUE, "Choisissez une de vos Oeuvres. Copiez son pouvoir.", 1);
     }
     
-    public void action() {
+    public void pouvoir() {
         System.out.println("Incarnation");
     }
 }

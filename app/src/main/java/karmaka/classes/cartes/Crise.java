@@ -8,7 +8,7 @@ public class Crise extends Carte {
         super("Crise", Couleur.ROUGE, "Le rival de votre choix défausse une de ses Oeuvres.", 2);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Crise");
     }
 }

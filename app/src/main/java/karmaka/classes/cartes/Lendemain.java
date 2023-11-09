@@ -8,7 +8,7 @@ public class Lendemain extends Carte {
         super("Lendemain", Couleur.VERT, "Puisez une carte à la Source. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void action() {
+    public void pouvoir() {
         System.out.println("Lendemain");
     }
 }

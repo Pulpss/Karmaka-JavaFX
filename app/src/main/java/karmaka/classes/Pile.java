@@ -31,9 +31,19 @@ public abstract class Pile {
         }
         return cartesPiochees;
     }
+    public Carte piocher() {
+        return cartes.remove(0);
+    }
+    public Carte piocher(Carte c) {
+        cartes.remove(c);
+        return c;
+    }
 
     public void ajouter(ArrayList<Carte> cartesAjoutees) {
         cartes.addAll(cartesAjoutees);
+    }
+    public void ajouter(Carte c) {
+        cartes.add(c);
     }
 
     public int size() {
