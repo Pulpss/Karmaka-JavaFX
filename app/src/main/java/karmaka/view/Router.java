@@ -1,6 +1,7 @@
 package karmaka.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -12,7 +13,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import karmaka.classes.Carte;
 import karmaka.classes.Partie;
 
 public final class Router {
@@ -68,18 +76,36 @@ public final class Router {
         alert.showAndWait();
     }
 
-    public void choix(String message, String choixDefault, String... choix) {
+    public String choix(String message, String choixDefault, String... choix) {
         ChoiceDialog<String> dialog = new ChoiceDialog<String>(choixDefault, choix);
         dialog.setTitle("Veuillez faire un choix.");
         dialog.setHeaderText(null);
         dialog.setContentText(message);
 
         Optional<String> result = dialog.showAndWait();
-        
+
         if (result.isPresent()) {
-            Partie.getInstance().setDernierChoix(result.get());
+            return result.get();
         } else {
-            Partie.getInstance().setDernierChoix(null);
+            return null;
         }
+    }
+
+    public Carte choix(String message, ArrayList<Carte> cartes) {
+        ChoixCarte alert = new ChoixCarte(message, cartes);
+
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            return alert.getCarteSel();
+        } else {
+            return null;
+        }
+    }
+
+    public void afficher(String message, ArrayList<Carte> cartes) {
+        AffichageCartes alert = new AffichageCartes(message, cartes);
+
+        alert.showAndWait();
     }
 }

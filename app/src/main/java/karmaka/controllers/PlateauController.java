@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Carte;
 import karmaka.classes.Partie;
+import karmaka.view.CarteView;
 import karmaka.view.Router;
 
 public class PlateauController implements Initializable {
@@ -22,7 +23,8 @@ public class PlateauController implements Initializable {
     private ImageView source, fosse, adversaireDeck, adversaireVieFuture, vieFuture, deck;
 
     @FXML
-    private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte, adversairePoints, points;
+    private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte,
+            adversairePoints, points;
 
     @FXML
     private HBox main, oeuvres, adversaireOeuvres;
@@ -44,25 +46,12 @@ public class PlateauController implements Initializable {
     private void handleMouseClicked(Carte c) throws IOException {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
         System.out.println(actionsPossibles);
-        if (actionsPossibles.contains(Action.CHOISIR_CARTE_MAIN)) {
+        // Si on peut choisir une carte de la main et si cette carte est dans la main.
+        if (actionsPossibles.contains(Action.CHOISIR_CARTE_MAIN)
+                && Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain().getCartes().contains(c)) {
             Partie.getInstance().setCarteChoisie(c);
             Partie.getInstance().tour();
         }
-    }
-
-    public ImageView carte(Carte c) throws IOException {
-        ImageView carte = new ImageView();
-        carte.setFitHeight(160);
-        carte.setFitWidth(115);
-        carte.setImage(new Image("/images/cartes/" + c.getNom() + ".png"));
-        carte.setOnMouseClicked(e -> {
-            try {
-                handleMouseClicked(c);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-        return carte;
     }
 
     private void initMain() {
@@ -71,7 +60,15 @@ public class PlateauController implements Initializable {
         partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
                 .forEachRemaining(c -> {
                     try {
-                        cartes.add(carte(c));
+                        ImageView tempView = new CarteView(c);
+                        tempView.setOnMouseClicked(e -> {
+                            try {
+                                handleMouseClicked(c);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        });
+                        cartes.add(tempView);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -86,7 +83,15 @@ public class PlateauController implements Initializable {
         partie.getJoueur(partie.getTour()).getOeuvres().getCartes().iterator()
                 .forEachRemaining(c -> {
                     try {
-                        cartes.add(carte(c));
+                        ImageView tempView = new CarteView(c);
+                        tempView.setOnMouseClicked(e -> {
+                            try {
+                                handleMouseClicked(c);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        });
+                        cartes.add(tempView);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -96,8 +101,16 @@ public class PlateauController implements Initializable {
         cartes.clear();
         partie.getJoueur((partie.getTour() + 1) % 2).getOeuvres().getCartes().iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        cartes.add(carte(c));
+                     try {
+                        ImageView tempView = new CarteView(c);
+                        tempView.setOnMouseClicked(e -> {
+                            try {
+                                handleMouseClicked(c);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        });
+                        cartes.add(tempView);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -124,9 +137,10 @@ public class PlateauController implements Initializable {
         if (partie.getJoueur(partie.getTour()).getVieFuture().size() > 0) {
             vieFuture.setVisible(true);
             vieFutureQte.setVisible(true);
+            ArrayList<Carte> vf = partie.getJoueur(partie.getTour()).getVieFuture().getCartes();
             vieFuture.setImage(new Image("/images/cartes/"
-                    + partie.getJoueur(partie.getTour()).getVieFuture().getCartes().get(0).getNom() + ".png"));
-            vieFutureQte.setText(Integer.toString(partie.getJoueur(partie.getTour()).getVieFuture().size()));
+                    + vf.get(vf.size() - 1).getNom() + ".png"));
+            vieFutureQte.setText(Integer.toString(vf.size()));
         } else {
             vieFuture.setVisible(false);
             vieFutureQte.setVisible(false);

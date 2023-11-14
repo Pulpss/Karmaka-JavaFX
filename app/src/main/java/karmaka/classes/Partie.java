@@ -21,10 +21,9 @@ public final class Partie {
     private static int tour = 0; // 0 = j1, 1 = j2
 
     private static Etape etape = Etape.DEBUT;
-    private static String dernierChoix = "";
     private static Carte carteChoisie = null;
 
-    private enum Etape {
+    public enum Etape {
         DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE
     }
 
@@ -65,12 +64,12 @@ public final class Partie {
         return tour;
     }
 
-    public void setDernierChoix(String choix) {
-        dernierChoix = choix;
-    }
-
     public void setCarteChoisie(Carte carte) {
         carteChoisie = carte;
+    }
+
+    public void setEtape(Etape et) {
+        etape = et;
     }
 
     private void distribuer() {
@@ -80,8 +79,12 @@ public final class Partie {
         }
     }
 
-    public void tourSuivant() {
+    public void tourSuivant() throws IOException {
         tour = (tour + 1) % 2;
+        etape = Etape.DEBUT;
+        actionsPossibles.clear();
+        Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
+        tour();
     }
 
     public void tour() throws IOException {
@@ -91,7 +94,7 @@ public final class Partie {
         VieFuture vieFuture = joueurs[tour].getVieFuture();
         switch (etape) {
             case DEBUT:
-                if (deck.getCartes().size() != 0) {
+                if (deck.getCartes().size() > 0) {
                     Router.getInstance().instructions("Veuillez piocher une carte dans votre deck");
                     actionsPossibles.clear();
                     actionsPossibles.add(Action.PIOCHER_DECK);
@@ -102,7 +105,7 @@ public final class Partie {
                 }
                 break;
             case PIOCHER_DECK:
-                main.ajouter(deck.piocher(1));
+                main.ajouter(deck.piocher());
                 Router.getInstance().update();
                 etape = Etape.CHOISIR_CARTE_MAIN;
                 tour();
@@ -114,24 +117,27 @@ public final class Partie {
                 etape = Etape.CHOISIR_UTILISATION_CARTE;
                 break;
             case CHOISIR_UTILISATION_CARTE:
-                Router.getInstance().choix("Veuillez choisir une utilisation pour la carte " + carteChoisie.getNom(),
+                String choix = Router.getInstance().choix(
+                        "Veuillez choisir une utilisation pour la carte " + carteChoisie.getNom(),
                         "Points", "Points", "Pouvoir", "Futur");
-                System.out.println(dernierChoix);
-                if (dernierChoix == null) {
+                System.out.println(choix);
+                if (choix == null) {
                     etape = Etape.CHOISIR_CARTE_MAIN;
                     tour();
                     break;
                 }
-                switch (dernierChoix) {
+                switch (choix) {
                     case "Points":
                         oeuvres.ajouter(main.piocher(carteChoisie));
                         joueurs[tour].setPoints(joueurs[tour].getPoints() + carteChoisie.getPoints());
+                        tourSuivant();
                         break;
                     case "Pouvoir":
                         carteChoisie.pouvoir();
                         break;
                     case "Futur":
                         vieFuture.ajouter(main.piocher(carteChoisie));
+                        tourSuivant();
                         break;
                 }
                 Router.getInstance().update();

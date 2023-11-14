@@ -1,5 +1,6 @@
 package karmaka.classes;
 
+import karmaka.classes.cartes.Transmigration;
 import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
@@ -24,6 +25,16 @@ public abstract class Joueur {
         this.deck = new Deck();
         this.vieFuture = new VieFuture();
         this.oeuvres = new Oeuvres();
+        this.main.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
+        this.vieFuture.ajouter(new Transmigration());
     }
 
     public Main getMain() {

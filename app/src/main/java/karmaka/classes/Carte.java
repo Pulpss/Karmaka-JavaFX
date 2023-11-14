@@ -1,5 +1,7 @@
 package karmaka.classes;
 
+import java.io.IOException;
+
 public abstract class Carte {
     private String nom;
     private Couleur couleur;
@@ -21,5 +23,5 @@ public abstract class Carte {
         return points;
     }
 
-    public abstract void pouvoir();
+    public abstract void pouvoir() throws IOException;
 }
