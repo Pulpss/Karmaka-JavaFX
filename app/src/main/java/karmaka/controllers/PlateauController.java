@@ -56,7 +56,6 @@ public class PlateauController implements Initializable {
 
     private void initMain() {
         Partie partie = Partie.getInstance();
-        ArrayList<ImageView> cartes = new ArrayList<ImageView>();
         partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
                 .forEachRemaining(c -> {
                     try {
@@ -68,12 +67,11 @@ public class PlateauController implements Initializable {
                                 e1.printStackTrace();
                             }
                         });
-                        cartes.add(tempView);
+                        main.getChildren().add(tempView);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
-        main.getChildren().addAll(cartes);
     }
 
     private void initOeuvres() {

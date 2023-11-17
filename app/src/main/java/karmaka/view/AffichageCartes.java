@@ -45,6 +45,7 @@ public class AffichageCartes extends Alert {
         DialogPane dialogPane = new DialogPane();
         dialogPane.setContent(vbox);
         // Alert containing the DialogPane
+        super.setWidth(800);
         super.setTitle("Affichage cartes.");
         super.setDialogPane(dialogPane);
         super.getButtonTypes().add(ButtonType.OK);

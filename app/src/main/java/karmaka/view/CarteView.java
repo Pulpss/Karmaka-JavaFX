@@ -8,9 +8,9 @@ import karmaka.classes.Carte;
 
 public class CarteView extends ImageView {
     public CarteView (Carte c) throws IOException {
-        ImageView carte = new ImageView();
-        carte.setFitHeight(160);
-        carte.setFitWidth(115);
-        carte.setImage(new Image("/images/cartes/" + c.getNom() + ".png"));
+        super();
+        super.setFitHeight(160);
+        super.setFitWidth(115);
+        super.setImage(new Image("/images/cartes/" + c.getNom() + ".png"));
     }
 }
