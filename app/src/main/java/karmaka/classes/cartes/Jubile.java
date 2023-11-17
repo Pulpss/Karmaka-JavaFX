@@ -7,7 +7,7 @@ public class Jubile extends Carte {
     public Jubile() {
         super("Jubile", Couleur.VERT, "Placez jusqu’à 2 cartes de votre Main sur vos Oeuvres", 3);
     }
-    
+
     public void pouvoir() {
         System.out.println("Jubile");
     }

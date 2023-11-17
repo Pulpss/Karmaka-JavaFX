@@ -4,8 +4,9 @@ import java.io.IOException;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
-import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
+import karmaka.classes.piles.Main;
+import karmaka.classes.piles.VieFuture;
 import karmaka.view.Router;
 
 public class Transmigration extends Carte {
@@ -15,10 +16,12 @@ public class Transmigration extends Carte {
 
     public void pouvoir() throws IOException {
         System.out.println("Transmigration");
-        Joueur j = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-        if (j.getVieFuture().size() != 0) {
-            Carte choix = Router.getInstance().choix("Veuillez choisir une carte dans votre Vie Future.", j.getVieFuture().getCartes());
-            j.getMain().ajouter(j.getVieFuture().piocher(choix));
+        VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
+        Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
+        if (vieFuture.size() != 0) {
+            Carte choix = Router.getInstance().choix("Veuillez choisir une carte dans votre Vie Future.",
+                    vieFuture.getCartes());
+            main.ajouter(vieFuture.piocher(choix));
         } else {
             Router.getInstance().instructions("Il n'y a pas de cartes dans votre vie future.");
         }

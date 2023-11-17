@@ -8,21 +8,25 @@ import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Source;
+import karmaka.view.Router;
 
 public class Voyage extends Carte {
     public Voyage() {
         super("Voyage", Couleur.VERT, "Puisez 3 cartes à la Source. Vous pouvez ensuite jouer une autre carte.", 3);
     }
 
-    public void pouvoir() {
+    public void pouvoir() throws IOException {
+        // TODO: tester
         System.out.println("Voyage");
         Source source = Partie.getInstance().getSource();
         Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
-        ArrayList<Carte> troisCartes = new ArrayList<Carte>(source.getCartes().subList(Math.max(0, source.size() - 3), source.size()));
-        if (troisCartes.size() > 0) {
-            deck.ajouter(troisCartes);
+        if (source.size() > 0) {
+            deck.ajouter(source.piocher(Math.min(3, source.size())));
         } else {
-            System.out.println("La source ne contient pas assez de cartes.");
+            Router.getInstance().instructions("La source est vide.");
         }
+        Router.getInstance().instructions("Vous pouvez rejouer.");
+        Partie.getInstance().setEtape(Partie.Etape.CHOISIR_CARTE_MAIN);
+        Partie.getInstance().tour();
     }
 }

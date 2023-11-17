@@ -16,7 +16,8 @@ public class RevesBrises extends Carte {
     public void pouvoir() throws IOException {
         // TODO: tester
         System.out.println("RevesBrises");
-        VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1)%2).getVieFuture();
+        VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
+                .getVieFuture();
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         if (vieFutureAdv.size() > 0) {
             vieFuture.ajouter(vieFutureAdv.piocher());

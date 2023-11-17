@@ -17,7 +17,8 @@ public class Mimetisme extends Carte {
         System.out.println("Mimetisme");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         if (oeuvresAdv.size() > 0) {
-            Carte choix = Router.getInstance().choix("Veuillez choisir la carte de l'adversaire que vous voulez copier: ",
+            Carte choix = Router.getInstance().choix(
+                    "Veuillez choisir la carte de l'adversaire que vous voulez copier: ",
                     oeuvresAdv.getCartes());
             choix.pouvoir();
         } else {

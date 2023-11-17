@@ -12,12 +12,13 @@ public class Incarnation extends Carte {
     public Incarnation() {
         super("Incarnation", Couleur.MOSAIQUE, "Choisissez une de vos Oeuvres. Copiez son pouvoir.", 1);
     }
-    
+
     public void pouvoir() throws IOException {
         System.out.println("Incarnation");
-                Oeuvres oeuvres = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
+        Oeuvres oeuvres = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
         if (oeuvres.size() > 0) {
-            Carte choix = Router.getInstance().choix("Veuillez choisir la carte de l'adversaire que vous voulez copier: ",
+            Carte choix = Router.getInstance().choix(
+                    "Veuillez choisir la carte de l'adversaire que vous voulez copier: ",
                     oeuvres.getCartes());
             choix.pouvoir();
         } else {

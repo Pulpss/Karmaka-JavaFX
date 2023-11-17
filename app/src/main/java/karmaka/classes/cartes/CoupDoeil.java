@@ -16,7 +16,7 @@ public class CoupDoeil extends Carte {
     public void pouvoir() throws IOException {
         // TODO: tester
         System.out.println("CoupDoeil");
-        Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1)%2).getMain();
+        Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         Router.getInstance().afficher("Voici la main de votre adversaire.", mainAdv.getCartes());
         Router.getInstance().instructions("Vous pouvez rejouer.");
         Partie.getInstance().setEtape(Partie.Etape.CHOISIR_CARTE_MAIN);
