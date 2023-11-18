@@ -28,7 +28,7 @@ public class Jubile extends Carte {
         scanner.close(); //Normalement on sait à partir de cette ligne le nombre de cartes à retirer de la main.
         for (int i = 0; i < valeurChoisie; i++) {
         	Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
-        	Oeuvres oeuvre = Partie.getInstance().getPile(); //Pas encore définis ?
+        	Oeuvres oeuvre = new Oeuvres();
         	if (main.size() > 0) {
         		Carte c = Router.getInstance().choix("Choisissez une carte à défausser.", main.getCartes());
                 oeuvre.ajouter(main.piocher(c));
