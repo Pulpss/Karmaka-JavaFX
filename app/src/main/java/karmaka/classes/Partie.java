@@ -134,6 +134,18 @@ public final class Partie {
                         break;
                     case "Pouvoir":
                         carteChoisie.pouvoir();
+                        //Encore non fonctionnel, s'occupe des cas après l'utilisation du pouvoir de la carte
+                        //L'adversaire accepte ou non la carte jouée, s'il accete, elle va dans sa vie future, sinon elle va dans la fosse.
+                        /*
+                        boolean AccepteCarte = true;
+                        if (AccepteCarte == true) {
+                        	VieFuture viefutureadv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getVieFuture();
+                        	viefuturadv.ajouter(main.piocher(carteChoisie));
+                        }
+                        else {
+                        	fosse.ajouter(carteChoisie);
+                        }
+                        */
                         break;
                     case "Futur":
                         vieFuture.ajouter(main.piocher(carteChoisie));

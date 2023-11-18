@@ -22,6 +22,7 @@ public class Deni extends Carte {
             Fosse fosse = Partie.getInstance().getFosse();
             Carte c = Router.getInstance().choix("Choisissez une carte à défausser.", main.getCartes());
             fosse.ajouter(main.piocher(c));
+            c.pouvoir();// Active le pouvoir de la carte défaussée
         } else {
             Router.getInstance().instructions("Vous n'avez pas de carte dans votre main.");
         }
