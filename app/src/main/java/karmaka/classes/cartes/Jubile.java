@@ -5,6 +5,7 @@ import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
+import karmaka.classes.piles.Oeuvres;
 import karmaka.view.Router;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class Jubile extends Carte {
     }
 
     public void pouvoir() throws IOException{
-    	//TODO: Tester
+    	//TODO : Completer
         System.out.println("Jubile");
         Scanner scanner = new Scanner(System.in); //Je ne suis pas sur que cela fonctionne dans une interface graphique
         Router.getInstance().instructions("Indiquez si vous souhaitez placer 0, 1 ou 2 cartes dans vos Oeuvres");
@@ -27,10 +28,10 @@ public class Jubile extends Carte {
         scanner.close(); //Normalement on sait à partir de cette ligne le nombre de cartes à retirer de la main.
         for (int i = 0; i < valeurChoisie; i++) {
         	Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
-        	Fosse fosse = Partie.getInstance().getFosse();
+        	Oeuvres oeuvre = Partie.getInstance().getPile(); //Pas encore définis ?
         	if (main.size() > 0) {
         		Carte c = Router.getInstance().choix("Choisissez une carte à défausser.", main.getCartes());
-                fosse.ajouter(main.piocher(c));
+                oeuvre.ajouter(main.piocher(c));
                 Router.getInstance().instructions("Une carte a été défaussée !");
                 }
                 else {

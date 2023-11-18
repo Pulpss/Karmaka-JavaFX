@@ -21,10 +21,11 @@ public class DernierSouffle extends Carte {
         System.out.println("DernierSouffle");
         
         // TODO : Ajouter l'option qui permet de se désigner soi-même ou l'adversaire
-        // Je pense qu'il faut créer une nouvelle méthode .choix qui va permettre à l'utilisateur de choisir entre les 2 joueurs.
+        // Je pense qu'il faut créer une nouvelle méthode .choix qui va permettre à l'utilisateur de choisir entre les 2 joueurs celui qu'il désigne.
         Router.getInstance().instructions("Choisissez le joueur qui va défausser une carte de sa main");
         int joueur = 0; //Ligne à enlever une fois solution trouvée
         if (joueur == 0) { //Condition à modifier une fois solution trouvée
+        //Cas défausse adversaire
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         Fosse fosse = Partie.getInstance().getFosse();
@@ -38,6 +39,7 @@ public class DernierSouffle extends Carte {
         	Router.getInstance().instructions("L'adversaire n'a pas de carte en main !");
         }
         }
+      //Cas défausse soi-même
         else {
         	Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         	Fosse fosse = Partie.getInstance().getFosse();
