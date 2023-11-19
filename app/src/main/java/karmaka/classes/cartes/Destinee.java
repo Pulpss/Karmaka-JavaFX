@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
-import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
 import karmaka.view.Router;
@@ -19,7 +18,8 @@ public class Destinee extends Carte {
     }
 
     public void pouvoir() throws IOException {
-    	//TODO : test
+    	//TODO : tester
+        System.out.println("Destinee");
     	Source source = Partie.getInstance().getSource();
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(

@@ -5,7 +5,6 @@ import java.io.IOException;
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
-import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
 import karmaka.view.Router;
 

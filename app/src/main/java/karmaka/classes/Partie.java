@@ -83,6 +83,7 @@ public final class Partie {
         tour = (tour + 1) % 2;
         etape = Etape.DEBUT;
         actionsPossibles.clear();
+        Router.getInstance().setScene("plateauPlaceholder");
         Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
         tour();
     }

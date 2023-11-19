@@ -15,7 +15,7 @@ public class Deni extends Carte {
     }
 
     public void pouvoir() throws IOException {
-        // TODO: tester
+        // TODO : tester
         System.out.println("Deni");
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         if (main.size() > 0) {
