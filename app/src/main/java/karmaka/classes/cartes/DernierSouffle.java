@@ -1,7 +1,6 @@
 package karmaka.classes.cartes;
 
 import java.io.IOException;
-import java.util.Random;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -45,7 +44,6 @@ public class DernierSouffle extends Carte {
                 Router.getInstance().instructions("Vous n'avez pas de carte en main !");
             }
         }
-        Partie.getInstance().tourSuivant();
     }
 
 }

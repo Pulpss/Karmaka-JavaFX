@@ -24,7 +24,8 @@ public final class Partie {
     private static Carte carteChoisie = null;
 
     public enum Etape {
-        DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE
+        DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
+        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT
     }
 
     private Partie(Joueur j1, Joueur j2) throws IOException {
@@ -79,15 +80,6 @@ public final class Partie {
         }
     }
 
-    public void tourSuivant() throws IOException {
-        tour = (tour + 1) % 2;
-        etape = Etape.DEBUT;
-        actionsPossibles.clear();
-        Router.getInstance().setScene("plateauPlaceholder");
-        Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
-        tour();
-    }
-
     public void tour() throws IOException {
         Deck deck = joueurs[tour].getDeck();
         Main main = joueurs[tour].getMain();
@@ -131,31 +123,82 @@ public final class Partie {
                     case "Points":
                         oeuvres.ajouter(main.piocher(carteChoisie));
                         joueurs[tour].setPoints(joueurs[tour].getPoints() + carteChoisie.getPoints());
-                        tourSuivant();
+                        etape = Etape.TOUR_SUIVANT;
+                        tour();
                         break;
                     case "Pouvoir":
                         carteChoisie.pouvoir();
-                        //Encore non fonctionnel, s'occupe des cas après l'utilisation du pouvoir de la carte
-                        //L'adversaire accepte ou non la carte jouée, s'il accete, elle va dans sa vie future, sinon elle va dans la fosse.
+                        etape = Etape.PROPOSER_CARTE;
+                        tour();
+                        // Encore non fonctionnel, s'occupe des cas après l'utilisation du pouvoir de la
+                        // carte
+                        // L'adversaire accepte ou non la carte jouée, s'il accete, elle va dans sa vie
+                        // future, sinon elle va dans la fosse.
                         /*
-                        boolean AccepteCarte = true;
-                        if (AccepteCarte == true) {
-                        	VieFuture viefutureadv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getVieFuture();
-                        	viefuturadv.ajouter(main.piocher(carteChoisie));
-                        }
-                        else {
-                        	fosse.ajouter(carteChoisie);
-                        }
-                        */
+                         * boolean AccepteCarte = true;
+                         * if (AccepteCarte == true) {
+                         * VieFuture viefutureadv =
+                         * Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) %
+                         * 2).getVieFuture();
+                         * viefuturadv.ajouter(main.piocher(carteChoisie));
+                         * }
+                         * else {
+                         * fosse.ajouter(carteChoisie);
+                         * }
+                         */
                         break;
                     case "Futur":
                         vieFuture.ajouter(main.piocher(carteChoisie));
-                        tourSuivant();
+                        etape = Etape.TOUR_SUIVANT;
+                        tour();
                         break;
                 }
                 Router.getInstance().update();
                 break;
+            case PROPOSER_CARTE:
+                Router.getInstance().setScene("plateauPlaceholder");
+                Router.getInstance()
+                        .instructions("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
+                String choixAdversaire = Router.getInstance().choix(
+                        "Voulez vous accepter la carte " + carteChoisie.getNom(), "Accepter", "Accepter", "Refuser");
+                if (choixAdversaire == "Accepter") {
+                    VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
+                            .getVieFuture();
+                    vieFutureAdv.ajouter(main.piocher(carteChoisie));
+                } else {
+                    fosse.ajouter(carteChoisie);
+                }
+                etape = Etape.TOUR_SUIVANT;
+                tour();
+                break;
+            case PROPOSER_CARTE_REJOUER:
+                Router.getInstance().setScene("plateauPlaceholder");
+                Router.getInstance()
+                        .instructions("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
+                choixAdversaire = Router.getInstance().choix(
+                        "Voulez vous accepter la carte " + carteChoisie.getNom(), "Accepter", "Accepter", "Refuser");
+                if (choixAdversaire == "Accepter") {
+                    VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
+                            .getVieFuture();
+                    vieFutureAdv.ajouter(main.piocher(carteChoisie));
+                } else {
+                    fosse.ajouter(carteChoisie);
+                }
+                Router.getInstance().instructions("Le joueur peut rejouer une carte. Laissez-le continuer.");
+                Router.getInstance().setScene("plateau");
+                etape = Etape.CHOISIR_CARTE_MAIN;
+                tour();
+                break;
+            case TOUR_SUIVANT:
+                tour = (tour + 1) % 2;
+                etape = Etape.DEBUT;
+                actionsPossibles.clear();
+                Router.getInstance().setScene("plateauPlaceholder");
+                Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
+                Router.getInstance().setScene("plateau");
+                tour();
+                break;
         }
+        return;
     }
-
 }

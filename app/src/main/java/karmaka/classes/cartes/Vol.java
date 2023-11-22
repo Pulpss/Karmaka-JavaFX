@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
@@ -14,7 +12,7 @@ public class Vol extends Carte {
         super("Vol", Couleur.BLEU, "Placez dans votre Main l’Oeuvre Exposée d'un rival.", 3);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO: tester
         System.out.println("Vol");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
@@ -26,6 +24,5 @@ public class Vol extends Carte {
         } else {
             Router.getInstance().instructions("Votre adversaire n'a pas d'oeuvres.");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

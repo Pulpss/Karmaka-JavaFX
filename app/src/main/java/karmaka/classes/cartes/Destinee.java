@@ -1,6 +1,4 @@
 package karmaka.classes.cartes;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import karmaka.classes.Carte;
@@ -17,22 +15,34 @@ public class Destinee extends Carte {
                 2);
     }
 
-    public void pouvoir() throws IOException {
-    	//TODO : tester
+    public void pouvoir()  {
+        // TODO : tester
         System.out.println("Destinee");
-    	Source source = Partie.getInstance().getSource();
+        Source source = Partie.getInstance().getSource();
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(
-        		source.getCartes().subList(Math.max(0, source.size() - 3), source.size() - 1));
-        for (int i = 0; i<2;i++) {
-        if (troisCartes.size() > 0) {
-            Carte c = Router.getInstance().choix("Choisissez une carte à ajouter à votre vie future.", troisCartes);
-            vieFuture.ajouter(source.piocher(c));
+                source.getCartes().subList(Math.max(0, source.size() - 3 - 1), source.size() - 1));
+        if (source.size() > 0) {
+            Router.getInstance().choix("Voici les 3 premières cartes de la source.", troisCartes);
+            int choix = Integer.parseInt(Router.getInstance().choix(
+                    "Combien de cartes voulez vous ajouter à votre vie future ?", "0", "0", "1",
+                    "2"));
+            for (int i = 0; i < choix; i++) {
+                Carte c = Router.getInstance().choix("Choisissez la carte à ajouter à votre vie future.",
+                        troisCartes);
+                vieFuture.ajouter(source.piocher(c));
+                troisCartes.remove(c);
+            }
+            for (int i = 0; i < troisCartes.size(); i++) {
+                Carte c = Router.getInstance().choix("Choisissez la carte à replacer dans la source en position" + i,
+                        troisCartes);
+                source.ajouter(source.piocher(c));
+                troisCartes.remove(c);
+            }
+
         } else {
-            System.out.println("La fosse est vide.");
+            Router.getInstance().instructions("La source est vide.");
         }
-        }
-        Partie.getInstance().tourSuivant();
-    
-}
+
+    }
 }

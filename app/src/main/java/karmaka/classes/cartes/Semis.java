@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
@@ -16,7 +14,7 @@ public class Semis extends Carte {
                 "Puisez 2 cartes à la Source, puis placez sur votre Vie Future 2 cartes de votre Main.", 2);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO: tester
         System.out.println("Semis");
         Source source = Partie.getInstance().getSource();
@@ -44,6 +42,5 @@ public class Semis extends Carte {
         } else {
             Router.getInstance().instructions("Il n'y a pas de cartes dans votre main.");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
@@ -14,7 +12,7 @@ public class Transmigration extends Carte {
         super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importequelle carte de votre Vie Future.", 1);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         System.out.println("Transmigration");
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
@@ -25,6 +23,5 @@ public class Transmigration extends Carte {
         } else {
             Router.getInstance().instructions("Il n'y a pas de cartes dans votre vie future.");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

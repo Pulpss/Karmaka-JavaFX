@@ -7,14 +7,12 @@ import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
 import karmaka.view.Router;
 
-import java.io.IOException;
-
 public class Jubile extends Carte {
     public Jubile() {
         super("Jubile", Couleur.VERT, "Placez jusqu’à 2 cartes de votre Main sur vos Oeuvres", 3);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO : tester
         System.out.println("Jubile");
         String choix = Router.getInstance().choix("Combien de carte de votre main voulez vous placez votre", "0", "0",
@@ -26,6 +24,5 @@ public class Jubile extends Carte {
             Carte c = Router.getInstance().choix("Choisissez une carte à placer sur vos oeuvres.", main.getCartes());
             oeuvres.ajouter(main.piocher(c));
         }
-        Partie.getInstance().tourSuivant();
     }
 }

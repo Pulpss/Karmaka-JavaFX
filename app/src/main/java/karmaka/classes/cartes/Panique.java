@@ -27,7 +27,7 @@ public class Panique extends Carte {
             Router.getInstance()
                     .instructions("L'adversaire n'avait pas de cartes dans sa pile. Vous pouvez quand même rejouer.");
         }
-        Partie.getInstance().setEtape(Partie.Etape.CHOISIR_CARTE_MAIN);
+        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
         Partie.getInstance().tour();
     }
 }

@@ -1,6 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class Duperie extends Carte {
         super("Duperie", Couleur.BLEU, "Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.", 3);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO: tester
         System.out.println("Duperie");
         Random random = new Random();
@@ -31,9 +30,13 @@ public class Duperie extends Carte {
             randomPrec.add(newRandom);
             carteTemp.add(mainAdv.getCartes().get(newRandom));
         }
-        Carte c = Router.getInstance().choix("Voici 3 cartes aléatoires de la main de votre adversaire, choisissez-en une.", carteTemp);
-        main.ajouter(mainAdv.piocher(c));
-        Router.getInstance().instructions("La carte a été ajoutée à votre main.");
-        Partie.getInstance().tourSuivant();
+        if (carteTemp.size() > 0) {
+            Carte c = Router.getInstance()
+                    .choix("Voici les cartes aléatoires de la main de votre adversaire, choisissez-en une.", carteTemp);
+            main.ajouter(mainAdv.piocher(c));
+            Router.getInstance().instructions("La carte a été ajoutée à votre main.");
+        } else {
+            Router.getInstance().instructions("L'adversaire n'a pas de carte dans sa main !");
+        }
     }
 }

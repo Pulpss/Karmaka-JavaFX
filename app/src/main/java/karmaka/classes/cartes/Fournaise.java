@@ -1,6 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import karmaka.classes.Carte;
@@ -15,18 +14,17 @@ public class Fournaise extends Carte {
         super("Fournaise", Couleur.ROUGE, "Défaussez les 2 premières cartes de la Vie Future d'un rival.", 2);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO : tester
         System.out.println("Fournaise");
         VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
                 .getVieFuture();
         Fosse fosse = Partie.getInstance().getFosse();
-        ArrayList<Carte> cartes = vieFutureAdv.piocher(Math.min(2, vieFutureAdv.size()));
         if (vieFutureAdv.size() > 0) {
+            ArrayList<Carte> cartes = vieFutureAdv.piocher(Math.min(2, vieFutureAdv.size()));
             fosse.ajouter(cartes);
         } else {
             Router.getInstance().instructions("L'adversaire n'a pas de carte dans sa vie future !");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

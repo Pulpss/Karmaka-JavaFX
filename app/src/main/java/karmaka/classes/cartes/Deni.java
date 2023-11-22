@@ -26,6 +26,5 @@ public class Deni extends Carte {
         } else {
             Router.getInstance().instructions("Vous n'avez pas de carte dans votre main.");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

@@ -24,6 +24,5 @@ public class Incarnation extends Carte {
         } else {
             Router.getInstance().instructions("Vous n'aviez pas de cartes dans votre pile Oeuvres !");
         }
-        Partie.getInstance().tourSuivant();
     }
 }

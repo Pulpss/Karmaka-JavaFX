@@ -25,8 +25,7 @@ public class Voyage extends Carte {
         } else {
             Router.getInstance().instructions("La source est vide.");
         }
-        Router.getInstance().instructions("Vous pouvez rejouer.");
-        Partie.getInstance().setEtape(Partie.Etape.CHOISIR_CARTE_MAIN);
+        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
         Partie.getInstance().tour();
     }
 }

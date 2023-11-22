@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Partie;
@@ -18,7 +16,7 @@ public class Roulette extends Carte {
                 2);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir() {
         // TODO: tester
         System.out.println("Roulette");
         String choix = Router.getInstance().choix("Combien de cartes voulez vous defausser de votre main ?", "0", "0",
@@ -38,6 +36,5 @@ public class Roulette extends Carte {
         } else {
             System.out.println("La source est vide.");
         }
-        Partie.getInstance().tourSuivant();
     }
 }
