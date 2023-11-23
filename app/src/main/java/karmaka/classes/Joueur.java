@@ -31,16 +31,16 @@ public abstract class Joueur {
         this.deck = new Deck();
         this.vieFuture = new VieFuture();
         this.oeuvres = new Oeuvres();
-        this.main.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
-        this.vieFuture.ajouter(new Transmigration());
+        // this.main.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
+        // this.vieFuture.ajouter(new Transmigration());
     }
 
     public Main getMain() {
@@ -67,7 +67,20 @@ public abstract class Joueur {
         return nbAnneaux;
     }
 
+    public void setNbAnneaux(int nbAnneaux) {
+        this.nbAnneaux = nbAnneaux;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public void addAnneau() {
+        this.nbAnneaux += 1;
+    }
+
 }

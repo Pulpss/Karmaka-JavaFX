@@ -23,5 +23,9 @@ public abstract class Carte {
         return points;
     }
 
+    public Couleur getCouleur() {
+        return couleur;
+    }
+
     public abstract void pouvoir() throws IOException;
 }

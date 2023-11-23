@@ -141,6 +141,10 @@
                   </children>
                </HBox>
             </ScrollPane>
+
+            <!-- Bouton Passer -->
+            <Button fx:id="passer" onMouseClicked="#handlePasser" layoutX="1100" layoutY="639"
+               mnemonicParsing="false" prefHeight="70" prefWidth="160" text="Passer son tour" />
          </children>
       </AnchorPane>
    </children>

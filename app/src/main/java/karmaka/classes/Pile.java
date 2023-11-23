@@ -27,7 +27,8 @@ public abstract class Pile {
 
     public ArrayList<Carte> piocher(int qte) {
         ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
-        for (int i = 0; i < (qte <= cartes.size() ? qte : cartes.size() - 1); i++) {
+        int iMax = qte <= cartes.size() ? qte : cartes.size() - 1;
+        for (int i = 0; i < iMax; i++) {
             cartesPiochees.add(cartes.remove(cartes.size() - 1));
         }
         return cartesPiochees;

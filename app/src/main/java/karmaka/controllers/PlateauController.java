@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Carte;
 import karmaka.classes.Partie;
+import karmaka.classes.piles.Deck;
 import karmaka.view.CarteView;
 import karmaka.view.Router;
 
@@ -28,6 +30,20 @@ public class PlateauController implements Initializable {
 
     @FXML
     private HBox main, oeuvres, adversaireOeuvres;
+
+    @FXML
+    private Button passer;
+
+    @FXML
+    public void handlePasser() throws IOException {
+        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        if (actionsPossibles.contains(Action.PASSER)) {
+            Partie.getInstance().setEtape(Partie.Etape.TOUR_SUIVANT);
+            Partie.getInstance().tour();
+        } else {
+            Router.getInstance().instructions("Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
+        }
+    }
 
     @FXML
     public void handleEchelleButton() throws IOException {
@@ -99,7 +115,7 @@ public class PlateauController implements Initializable {
         cartes.clear();
         partie.getJoueur((partie.getTour() + 1) % 2).getOeuvres().getCartes().iterator()
                 .forEachRemaining(c -> {
-                     try {
+                    try {
                         ImageView tempView = new CarteView(c);
                         tempView.setOnMouseClicked(e -> {
                             try {
@@ -194,6 +210,15 @@ public class PlateauController implements Initializable {
         adversairePoints.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getPoints()));
     }
 
+    private void initPasser() {
+        Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
+        if (deck.size() > 0) {
+            passer.setVisible(true);
+        } else {
+            passer.setVisible(false);
+        }
+    }
+
     @FXML
     public void initialize(URL arg0, ResourceBundle arg1) {
         initSource();
@@ -203,5 +228,6 @@ public class PlateauController implements Initializable {
         initVieFuture();
         initDeck();
         initPoints();
+        initPasser();
     }
 }

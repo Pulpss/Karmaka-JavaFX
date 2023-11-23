@@ -15,17 +15,17 @@ public final class Partie {
     private static Joueur[] joueurs = new Joueur[2];
     private static Source source = new Source();
     private static Fosse fosse = new Fosse();
-    private static int anneaux = 12;
     private static Partie instance = null;
     private static ArrayList<Action> actionsPossibles = new ArrayList<Action>();
     private static int tour = 0; // 0 = j1, 1 = j2
+    private static int gagnant;
 
     private static Etape etape = Etape.DEBUT;
     private static Carte carteChoisie = null;
 
     public enum Etape {
         DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
-        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT
+        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MORT, GAGNANT
     }
 
     private Partie(Joueur j1, Joueur j2) throws IOException {
@@ -83,104 +83,69 @@ public final class Partie {
     public void tour() throws IOException {
         Deck deck = joueurs[tour].getDeck();
         Main main = joueurs[tour].getMain();
-        
-        // Probleme si meme attribut pour 2 joueurs ???
-        int compteurRouge;
-        int compteurVert;
-        int compteurBleu;
-        int compteurMosaique;
-        int compteurMax;
-        
         Oeuvres oeuvres = joueurs[tour].getOeuvres();
         VieFuture vieFuture = joueurs[tour].getVieFuture();
         switch (etape) {
             case DEBUT:
-                if (deck.getCartes().size() > 0) {
+                if (deck.size() > 0) {
+                    // Cas normal de jeu
                     Router.getInstance().instructions("Veuillez piocher une carte dans votre deck");
                     actionsPossibles.clear();
                     actionsPossibles.add(Action.PIOCHER_DECK);
                     etape = Etape.PIOCHER_DECK;
-                    etape = Etape.CHOISIR_CARTE_MAIN;
-                    tour();
-                	}                     
-                else if(joueurs[tour].mort == false && main.getCartes().size() > 0){
-                	etape = Etape.CHOISIR_CARTE_MAIN;
-                	tour();
-
-                	}
-                else if(joueurs[tour].mort == false && main.getCartes().size() == 0) { //Je sais pas si joueurs[tour].mort fonctionne
-                	Router.getInstance().instructions("Vous etes mort.");
-                	joueurs[tour].mort = true;
-                	etape = Etape.TOUR_SUIVANT;
-            		}
-                else if(joueurs[tour].mort == true) {
-                	Router.getInstance().instructions("Vous etes sur le point de vous reincarner, nous comptons vos points.");
-                	compteurRouge = compteurVert = compteurBleu = compteurMosaique = 0;
-                	// On recup la pile oeuvre du joueur
-                	Fosse fosse = Partie.getInstance().getFosse();
-                	Oeuvres oeuvreJoueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
-                	// On compte les points tout en défaussant la pile dans la fosse.
-                	for (int i = 0; i < oeuvreJoueur.size(); i++) {
-                		// Defausse la carte
-                		fosse.ajouter(oeuvreJoueur.piocher());
-                		// On recupere la carte de la defausse et on inspecte sa couleur et sa valeur
-                		Carte CarteRetiree = fosse.getCartes().get(0);
-                		if (CarteRetiree.Couleur == ROUGE) { 
-                			compteurRouge += CarteRetiree.points; // Je n'arrive pas a recuperer les attributs des cartes (visibilité ?)
-                		}
-                		else if (CarteRetiree.Couleur == BLEU) {
-                			compteurBleu += CarteRetiree.points;
-                		}
-                		else if (CarteRetiree.Couleur == VERT) {
-                			compteurVert += CarteRetiree.points;
-                		}
-                		else {
-                			compteurMosaique += CarteRetiree.points;
-                		}
-                		
-                	}
-                	//On comptabilise les points
-                	compteurMax = compteurRouge;
-                	if (compteurRouge < compteurBleu && compteurBleu >= compteurVert) {
-                		compteurMax = compteurBleu;
-                	}
-                	else if (compteurRouge < compteurVert && compteurBleu <= compteurVert)
-                	{
-                		compteurMax = compteurVert;
-                	}
-                	compteurMax += compteurMosaique;
-                	if (compteurMax >= joueurs[tour].score) {
-                		joueurs[tour].score += 1; //Probleme de visibilité ?
-                		if (joueurs[tour].score > 8) {
-                			// Le dernier niveau est le niveau 8
-                			Router.getInstance().instructions("Vous avez gagné la partie !");
-                			// TODO : FIN DE PARTIE
-                		}
-                		else {
-                			Router.getInstance().instructions("Vous gagnez un niveau, vous êtes niveau " + joueurs[tour].score + " !");
-                		}
-                	}
-                	else if (compteurMax + joueurs[tour].nbAnneaux  >= joueurs[tour].score) {
-                		int difference = joueurs[tour].score - compteurMax;
-                		Router.getInstance().instructions("Vous pouvez gagner un niveau si vous dépensez " + difference + " anneaux karmiques. Le souhaitez vous ?");
-                		//Je ne sais pas comment gérer ce choix, si le joueur refuse, il gagne un anneau karmique, sinon il perd le nb d'anneaux indiqué et gagne un niveau
-                	}
-                	else {
-                		Router.getInstance().instructions("Vous n'aviez pas assez de points ! Prenez un anneau karmique en compensation.");
-                		joueurs[tour].nbAnneaux += 1;
-                	}
-                	Router.getInstance().instructions("Nous allons maintenant recompléter votre main et votre deck.");
-                	while (vieFuture.size() != 0) {
-                		main.ajouter(vieFuture.piocher());
-                		}
-                	while ((main.size()+deck.size()) <= 6) {
-                		deck.ajouter(source.piocher());
-                	}
-                	Router.getInstance().instructions("Votre reincarnation a pris du temps, vous passez votre tour !");
-                	etape = Etape.TOUR_SUIVANT;
+                } else {
+                    if (main.size() > 0) {
+                        // Le joueur n'a plus de carte dans son deck mais en a dans sa main donc il joue
+                        etape = Etape.CHOISIR_CARTE_MAIN;
+                        tour();
+                    } else {
+                        // Le joueur n'a plus rien donc il meuurt dans d'atroces souffrances !
+                        etape = Etape.MORT;
+                        tour();
+                    }
                 }
                 break;
-
+            case MORT:
+                int points = oeuvres.calculerPoints();
+                if (joueurs[tour].getNbAnneaux() > 0) {
+                    String[] choixPossibles = new String[joueurs[tour].getNbAnneaux() + 1];
+                    for (int i = 0; i < joueurs[tour].getNbAnneaux() + 1; i++) {
+                        choixPossibles[i] = Integer.toString(i);
+                    }
+                    int choixPoints = Integer.parseInt(Router.getInstance().choix("Vous etes mort. Vous marquez " + points
+                            + " points. Combien d'anneaux karmiques voulez vous utiliser ?", "0", choixPossibles));
+                    points += choixPoints;
+                    joueurs[tour].setNbAnneaux(joueurs[tour].getNbAnneaux() - choixPoints);
+                } else {
+                    Router.getInstance().instructions(
+                            "Vous etes mort. Vous marquez " + points + " points. Vous n'avez pas d'anneaux karmiques.");
+                }
+                // Affecter les points ou ajouter un anneau
+                if (points > 7) {
+                    gagnant = tour;
+                    etape = Etape.GAGNANT;
+                    tour();
+                    break;
+                } else if (joueurs[tour].getPoints() <= points && joueurs[tour].getPoints() >= 4) {
+                    joueurs[tour].setPoints(points);
+                } else {
+                    joueurs[tour].addAnneau();
+                }
+                // TODO : regler le pb où toutes les oeuvres ne sont pas défaussées
+                fosse.ajouter(oeuvres.piocher(oeuvres.size()));
+                System.out.println(main.size());
+                System.out.println(vieFuture.size());
+                main.ajouter(vieFuture.piocher(vieFuture.size()));
+                System.out.println(main.size());
+                System.out.println(vieFuture.size());
+                if (main.size() < 6) {
+                    deck.ajouter(source.piocher(6 - main.size()));
+                    Router.getInstance().instructions("Vous avez moins de 6 cartes dans votre main. Vous piochez "
+                            + (6 - main.size()) + " cartes.");
+                }
+                etape = Etape.TOUR_SUIVANT;
+                tour();
+                break;
             case PIOCHER_DECK:
                 main.ajouter(deck.piocher());
                 Router.getInstance().update();
@@ -188,9 +153,12 @@ public final class Partie {
                 tour();
                 break;
             case CHOISIR_CARTE_MAIN:
-                Router.getInstance().instructions("Veuillez choisir une carte dans votre main.");
+                Router.getInstance().instructions("Veuillez choisir une carte dans votre main ou passez votre tour.");
                 actionsPossibles.clear();
                 actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
+                if (deck.size() > 0) {
+                    actionsPossibles.add(Action.PASSER);
+                }
                 etape = Etape.CHOISIR_UTILISATION_CARTE;
                 break;
             case CHOISIR_UTILISATION_CARTE:
@@ -206,7 +174,6 @@ public final class Partie {
                 switch (choix) {
                     case "Points":
                         oeuvres.ajouter(main.piocher(carteChoisie));
-                        joueurs[tour].setPoints(joueurs[tour].getPoints() + carteChoisie.getPoints());
                         etape = Etape.TOUR_SUIVANT;
                         tour();
                         break;
@@ -214,22 +181,6 @@ public final class Partie {
                         carteChoisie.pouvoir();
                         etape = Etape.PROPOSER_CARTE;
                         tour();
-                        // Encore non fonctionnel, s'occupe des cas après l'utilisation du pouvoir de la
-                        // carte
-                        // L'adversaire accepte ou non la carte jouée, s'il accete, elle va dans sa vie
-                        // future, sinon elle va dans la fosse.
-                        /*
-                         * boolean AccepteCarte = true;
-                         * if (AccepteCarte == true) {
-                         * VieFuture viefutureadv =
-                         * Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) %
-                         * 2).getVieFuture();
-                         * viefuturadv.ajouter(main.piocher(carteChoisie));
-                         * }
-                         * else {
-                         * fosse.ajouter(carteChoisie);
-                         * }
-                         */
                         break;
                     case "Futur":
                         vieFuture.ajouter(main.piocher(carteChoisie));
@@ -281,6 +232,9 @@ public final class Partie {
                 Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
                 Router.getInstance().setScene("plateau");
                 tour();
+                break;
+            case GAGNANT:
+                Router.getInstance().instructions("Le joueur " + joueurs[(gagnant + 1)].getNom() + " a gagné !");
                 break;
         }
         return;
