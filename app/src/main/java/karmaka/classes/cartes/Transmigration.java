@@ -9,7 +9,7 @@ import karmaka.view.Router;
 
 public class Transmigration extends Carte {
     public Transmigration() {
-        super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importequelle carte de votre Vie Future.", 1);
+        super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importe quelle carte de votre Vie Future.", 1);
     }
 
     public void pouvoir() {

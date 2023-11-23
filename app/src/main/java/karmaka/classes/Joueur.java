@@ -15,8 +15,14 @@ public abstract class Joueur {
     private Deck deck;
     private VieFuture vieFuture;
     private Oeuvres oeuvres;
+    //J'ai juste rajouté la mort
+    boolean mort = false; 
 
+    
+    
+    
     public Joueur(String nom) {
+    	this.mort = false;
         this.nom = nom;
         this.score = 0;
         this.nbAnneaux = 0;

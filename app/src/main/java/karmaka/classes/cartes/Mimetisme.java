@@ -12,7 +12,7 @@ public class Mimetisme extends Carte {
     public Mimetisme() {
         super("Mimetisme", Couleur.MOSAIQUE, "Choisissez un Rival. Copiez le pouvoir de son Oeuvre Exposée.", 1);
     }
-
+    // TODO : Changer le pouvoir : l'oeuvre exposée n'est pas une carte choisie, c'est la carte au dessus de la pile
     public void pouvoir() throws IOException {
         System.out.println("Mimetisme");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
