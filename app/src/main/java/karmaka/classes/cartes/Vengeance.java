@@ -14,7 +14,7 @@ public class Vengeance extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Vengeance");
+    	Router.getInstance().instructions("La carte Vengeance va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Fosse fosse = Partie.getInstance().getFosse();
         if (oeuvresAdv.size() > 0) {

@@ -16,7 +16,7 @@ public class Sauvetage extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Sauvetage");
+    	Router.getInstance().instructions("La carte Sauvetage va être jouée !");
         Fosse fosse = Partie.getInstance().getFosse();
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(

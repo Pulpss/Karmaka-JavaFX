@@ -16,7 +16,7 @@ public class DernierSouffle extends Carte {
 
     public void pouvoir() throws IOException {
         // TODO : tester
-        System.out.println("DernierSouffle");
+    	Router.getInstance().instructions("La carte Dernier Souffle va être jouée !");
         String choixJoueur = Router.getInstance().choix("Choisissez le joueur qui va défausser une carte de sa main", "Adversaire", "Adversaire", "Moi");
         if (choixJoueur == "Adversaire") {
             Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();

@@ -17,7 +17,7 @@ public class Voyage extends Carte {
 
     public void pouvoir() throws IOException {
         // TODO: tester
-        System.out.println("Voyage");
+    	Router.getInstance().instructions("La carte Voyage va être jouée !");
         Source source = Partie.getInstance().getSource();
         Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
         if (source.size() > 0) {

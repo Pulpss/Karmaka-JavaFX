@@ -16,7 +16,7 @@ public class Deni extends Carte {
 
     public void pouvoir() throws IOException {
         // TODO : tester
-        System.out.println("Deni");
+    	Router.getInstance().instructions("La carte Deni va être jouée !");
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         if (main.size() > 0) {
             Fosse fosse = Partie.getInstance().getFosse();

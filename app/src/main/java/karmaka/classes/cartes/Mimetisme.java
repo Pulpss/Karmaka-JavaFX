@@ -12,15 +12,14 @@ public class Mimetisme extends Carte {
     public Mimetisme() {
         super("Mimetisme", Couleur.MOSAIQUE, "Choisissez un Rival. Copiez le pouvoir de son Oeuvre Exposée.", 1);
     }
-    // TODO : Changer le pouvoir : l'oeuvre exposée n'est pas une carte choisie, c'est la carte au dessus de la pile
+    // TODO : TEST
     public void pouvoir() throws IOException {
-        System.out.println("Mimetisme");
+    	Router.getInstance().instructions("La carte Mimetisme va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         if (oeuvresAdv.size() > 0) {
-            Carte choix = Router.getInstance().choix(
-                    "Veuillez choisir la carte de l'adversaire que vous voulez copier: ",
-                    oeuvresAdv.getCartes());
-            choix.pouvoir();
+        	Router.getInstance().instructions("Vous copiez l'oeuvre exposée de votre adversaire !");
+            Carte c = oeuvresAdv.getCartes().get(oeuvresAdv.size()-1);
+            c.pouvoir();
         } else {
             Router.getInstance().instructions("L'adversaire n'avait pas de cartes dans ses oeuvres.");
         }

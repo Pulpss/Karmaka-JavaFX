@@ -13,7 +13,7 @@ public class RevesBrises extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("RevesBrises");
+    	Router.getInstance().instructions("La carte Rêves Brisés va être jouée !");
         VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
                 .getVieFuture();
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();

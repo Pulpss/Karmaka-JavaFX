@@ -16,7 +16,7 @@ public class Bassesse extends Carte {
 
     public void pouvoir()  {
         // TODO : tester
-        System.out.println("Bassesse");
+    	Router.getInstance().instructions("La carte Bassesse va être jouée !");
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         Fosse fosse = Partie.getInstance().getFosse();

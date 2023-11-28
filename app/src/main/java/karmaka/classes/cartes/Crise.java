@@ -15,7 +15,7 @@ public class Crise extends Carte {
     }
 
     public void pouvoir() throws IOException {
-        System.out.println("Crise");
+    	Router.getInstance().instructions("La carte Crise va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Fosse fosse = Partie.getInstance().getFosse();
         if (oeuvresAdv.size() > 0) {

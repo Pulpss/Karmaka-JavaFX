@@ -16,7 +16,7 @@ public class Lendemain extends Carte {
 
     public void pouvoir() throws IOException {
         // TODO: tester
-        System.out.println("Lendemain");
+        Router.getInstance().instructions("La carte Lendemain va être jouée !");
         Source source = Partie.getInstance().getSource();
         Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
         if (source.size() > 0) {

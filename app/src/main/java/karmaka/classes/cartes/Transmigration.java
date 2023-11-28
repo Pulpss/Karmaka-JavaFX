@@ -13,7 +13,7 @@ public class Transmigration extends Carte {
     }
 
     public void pouvoir() {
-        System.out.println("Transmigration");
+    	Router.getInstance().instructions("La carte Transmigration va être jouée !");
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         if (vieFuture.size() != 0) {

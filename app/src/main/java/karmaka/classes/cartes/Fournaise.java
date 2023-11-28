@@ -16,7 +16,7 @@ public class Fournaise extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-        System.out.println("Fournaise");
+    	Router.getInstance().instructions("La carte Fournaise va être jouée !");
         VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
                 .getVieFuture();
         Fosse fosse = Partie.getInstance().getFosse();

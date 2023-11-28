@@ -17,7 +17,7 @@ public class Panique extends Carte {
 
     public void pouvoir() throws IOException {
         // TODO: tester
-        System.out.println("Panique");
+    	Router.getInstance().instructions("La carte Panique va être jouée !");
         Fosse fosse = Partie.getInstance().getFosse();
         Pile pileAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getDeck();
         if (pileAdv.size() > 0) {

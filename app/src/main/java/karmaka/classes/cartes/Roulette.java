@@ -18,7 +18,7 @@ public class Roulette extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Roulette");
+    	Router.getInstance().instructions("La carte Roulette va être jouée !");
         String choix = Router.getInstance().choix("Combien de cartes voulez vous defausser de votre main ?", "0", "0",
                 "1", "2");
         int nbCartes = Integer.parseInt(choix);

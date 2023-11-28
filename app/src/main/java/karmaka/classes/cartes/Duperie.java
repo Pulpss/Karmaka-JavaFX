@@ -16,7 +16,7 @@ public class Duperie extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Duperie");
+    	Router.getInstance().instructions("La carte Duperie va être jouée !");
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();

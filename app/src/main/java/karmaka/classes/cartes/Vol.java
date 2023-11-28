@@ -14,7 +14,7 @@ public class Vol extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Vol");
+    	Router.getInstance().instructions("La carte Vol va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
         if (oeuvresAdv.size() > 0) {

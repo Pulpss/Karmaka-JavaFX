@@ -17,7 +17,7 @@ public class Destinee extends Carte {
 
     public void pouvoir()  {
         // TODO : tester
-        System.out.println("Destinee");
+    	Router.getInstance().instructions("La carte Destinée va être jouée !");
         Source source = Partie.getInstance().getSource();
         VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(

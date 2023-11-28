@@ -14,7 +14,7 @@ public class Incarnation extends Carte {
     }
 
     public void pouvoir() throws IOException {
-        System.out.println("Incarnation");
+    	Router.getInstance().instructions("La carte Incarnation va être jouée !");
         Oeuvres oeuvres = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
         if (oeuvres.size() > 0) {
             Carte choix = Router.getInstance().choix(

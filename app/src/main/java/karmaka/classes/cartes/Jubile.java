@@ -14,7 +14,7 @@ public class Jubile extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-        System.out.println("Jubile");
+    	Router.getInstance().instructions("La carte Jubile va être jouée !");
         String choix = Router.getInstance().choix("Combien de carte de votre main voulez vous placez votre", "0", "0",
                 "1", "2");
         int valeurChoisie = Integer.parseInt(choix);

@@ -14,7 +14,7 @@ public class Longevite extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-        System.out.println("Longevite");
+    	Router.getInstance().instructions("La carte Longévité va être jouée !");
         Source source = Partie.getInstance().getSource();
         String choixJoueur = Router.getInstance().choix(
                 "Choisissez le joueur sur lequel vous allez placez les 2 cartes de la source", "Adversaire",

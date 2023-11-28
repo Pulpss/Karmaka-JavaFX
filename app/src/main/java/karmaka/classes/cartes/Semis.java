@@ -16,7 +16,7 @@ public class Semis extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-        System.out.println("Semis");
+    	Router.getInstance().instructions("La carte Semis va être jouée !");
         Source source = Partie.getInstance().getSource();
         if (source.size() > 0) {
             source.piocher(Math.min(2, source.size()));
