@@ -25,7 +25,7 @@ public final class Partie {
 
     public enum Etape {
         DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
-        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MORT, GAGNANT
+        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MEURT, MORT, GAGNANT 
     }
 
     private Partie(Joueur j1, Joueur j2) throws IOException {
@@ -104,6 +104,10 @@ public final class Partie {
                         tour();
                     }
                 }
+                break;
+            case MEURT: 
+                etape = Etape.TOUR_SUIVANT;
+                tour();
                 break;
             case MORT:
             	int echellekarmique = joueurs[tour].getEchelleKarmique();

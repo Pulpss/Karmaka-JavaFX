@@ -21,7 +21,7 @@ public abstract class Joueur {
     
     public Joueur(String nom) {
         this.nom = nom;
-        this.echelleKarmique = 0;
+        this.echelleKarmique = 4;
         this.nbAnneaux = 0;
         this.main = new Main();
         this.deck = new Deck();
