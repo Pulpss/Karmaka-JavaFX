@@ -24,8 +24,8 @@ public class EchelleController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println(Partie.getInstance().toString());
         Partie partie = Partie.getInstance();
-        int j1 = partie.getJoueur(0).getPoints();
-        int j2 = partie.getJoueur(1).getPoints();
+        int j1 = partie.getJoueur(0).getEchelleKarmique();
+        int j2 = partie.getJoueur(1).getEchelleKarmique();
         System.out.println("J1 : " + j1 + " J2 : " + j2);
         if (j1 < 4) {
             j1Pion.setLayoutY(400);

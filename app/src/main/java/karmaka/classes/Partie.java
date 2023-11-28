@@ -25,7 +25,7 @@ public final class Partie {
 
     public enum Etape {
         DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
-        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MEURT, MORT, GAGNANT 
+        PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MEURT, MORT, GAGNANT
     }
 
     private Partie(Joueur j1, Joueur j2) throws IOException {
@@ -105,87 +105,69 @@ public final class Partie {
                     }
                 }
                 break;
-            case MEURT: 
+            case MEURT:
                 etape = Etape.TOUR_SUIVANT;
                 tour();
                 break;
             case MORT:
-            	int echellekarmique = joueurs[tour].getEchelleKarmique();
-            	int nbAnneaux = joueurs[tour].getNbAnneaux();
+                int echellekarmique = joueurs[tour].getEchelleKarmique();
+                int nbAnneaux = joueurs[tour].getNbAnneaux();
                 int points = oeuvres.calculerPoints();
                 Router.getInstance().instructions(
                         "Vous etes mort. Nous allons vérifier si vous arrivez à vous réincarner.");
-            	
-                
-                //J'ai pas osé supprimer mais si mon code marche on peut enlever le bout de code ci-dessous
-                /*
-                if (joueurs[tour].getNbAnneaux() > 0) {
-                    String[] choixPossibles = new String[joueurs[tour].getNbAnneaux() + 1];
-                    for (int i = 0; i < joueurs[tour].getNbAnneaux() + 1; i++) {
-                        choixPossibles[i] = Integer.toString(i);
+
+                // On ajuste nbAnneaux (et points) SSI cela peut changer l'issue Reussite/Echec
+                // de la réincarnation
+                if ((points + nbAnneaux) > echellekarmique && points < echellekarmique) {
+                    // Je suis pas sur d'avoir bien compris le fonctionnement de la méthode .choix()
+                    // donc voir si choixAnneaux marche
+                    // En gros je veux que l'utilisateur choisisse si OUI ou NON il décide de
+                    // dépenser le nb d'anneaux karmique nécessaire pour se réincarner
+                    String choixAnneaux = Router.getInstance()
+                            .choix("Vous pouvez vous réincarner ! Il vous faut pour cela dépenser "
+                                    + (echellekarmique - points + 1)
+                                    + " anneaux Karmiques. Vous en avez actuellement " + nbAnneaux
+                                    + ", allez vous les utiliser ?", "Oui", "Oui", "Non");
+                    // Le joueur dépense le nombre d'anneaux nécessaire pour se réincarner et gagne
+                    // ce meme montant en points
+                    if (choixAnneaux == "Oui") {
+                        nbAnneaux -= echellekarmique - points + 1;
+                        points += echellekarmique - points + 1;
                     }
-                */
-                
-                
-                // On ajuste nbAnneaux (et points) SSI cela peut changer l'issue Reussite/Echec de la réincarnation
-                if ((points + nbAnneaux) >= echellekarmique && points < echellekarmique) {
-                	// Je suis pas sur d'avoir bien compris le fonctionnement de la méthode .choix() donc voir si choixAnneaux marche
-                	// En gros je veux que l'utilisateur choisisse si OUI ou NON il décide de dépenser le nb d'anneaux karmique nécessaire pour se réincarner
-                	String choixAnneaux = Router.getInstance().choix("Vous pouvez vous réincarner ! Il vous faut pour cela dépenser " + (echellekarmique - points)
-                            + " anneaux Karmiques. Vous en avez actuellement " + nbAnneaux + ", allez vous les utiliser ?", "Oui", "Non");
-                	//Le joueur dépense le nombre d'anneaux nécessaire pour se réincarner et gagne ce meme montant en points
-                	if (choixAnneaux == "Oui") {
-                		nbAnneaux -= (echellekarmique - points);
-                		points += (echellekarmique - points);
-                	}
                 }
-                
+
                 // Cas reussite + Victoire
-                if (points >= echellekarmique && echellekarmique == 7) {
-                	Router.getInstance().instructions(
+                if (points > echellekarmique && echellekarmique == 7) {
+                    Router.getInstance().instructions(
                             "Vous avez enfin atteint la Transcendance ! Quelle belle aventure !");
-                	gagnant = tour;
+                    gagnant = tour;
                     etape = Etape.GAGNANT;
                     tour();
                     break;
                 }
                 // Cas simple reussite
-                else if (points >= echellekarmique) {
-                	Router.getInstance().instructions(
+                else if (points > echellekarmique) {
+                    Router.getInstance().instructions(
                             "Félicitations, vous avez réussi à vous réincarner. Vous vous rapprochez de la Transcendance.");
-                	joueurs[tour].setEchelleKarmique(echellekarmique++);
-                	joueurs[tour].setNbAnneaux(nbAnneaux);
+                    joueurs[tour].setEchelleKarmique(echellekarmique+1);
+                    joueurs[tour].setNbAnneaux(nbAnneaux);
                 }
                 // Cas echec
                 else {
+                    joueurs[tour].setNbAnneaux(nbAnneaux+1);
                     Router.getInstance().instructions(
-                            "Vous n'avez pas réussi à vous réincarner, prenez un anneau karmique en compensation. Vous en avez maintenant " + (nbAnneaux++) + ".");
-                    joueurs[tour].setNbAnneaux(nbAnneaux++);
+                            "Vous n'avez pas réussi à vous réincarner, prenez un anneau karmique en compensation. Vous en avez maintenant "
+                                    + nbAnneaux + ".");
                 }
-              //J'ai pas osé supprimé mais si tu juges que mon code marche on peut enlever le bout de code en dessous
-                /*
-                // Affecter les points ou ajouter un anneau
-                if (points > 7) {
-                    gagnant = tour;
-                    etape = Etape.GAGNANT;
-                    tour();
-                    break;
-                } else if (joueurs[tour].getPoints() <= points && joueurs[tour].getPoints() >= 4) {
-                    joueurs[tour].setPoints(points);
-                } else {
-                    joueurs[tour].addAnneau();
-                }
-                */
-                // TODO : regler le pb où toutes les oeuvres ne sont pas défaussées
                 fosse.ajouter(oeuvres.piocher(oeuvres.size()));
                 // Supprimer les System.out.println si cette partie du programme marche
-                System.out.println(main.size()); 
+                System.out.println(main.size());
                 System.out.println(vieFuture.size());
                 main.ajouter(vieFuture.piocher(vieFuture.size()));
                 System.out.println(main.size());
                 System.out.println(vieFuture.size());
                 if (main.size() < 6) {
-                	Router.getInstance().instructions("Vous avez moins de 6 cartes dans votre main. Vous allez piocher "
+                    Router.getInstance().instructions("Vous avez moins de 6 cartes dans votre main. Vous allez piocher "
                             + (6 - main.size()) + " cartes de la Source.");
                     deck.ajouter(source.piocher(6 - main.size()));
                 }
