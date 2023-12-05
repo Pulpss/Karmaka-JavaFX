@@ -2,10 +2,10 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Source;
-import karmaka.view.Router;
 
 public class Longevite extends Carte {
     public Longevite() {
@@ -14,18 +14,18 @@ public class Longevite extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-    	Router.getInstance().instructions("La carte Longévité va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+        joueur.afficher("La carte Longévité va être jouée !");
         Source source = Partie.getInstance().getSource();
-        String choixJoueur = Router.getInstance().choix(
-                "Choisissez le joueur sur lequel vous allez placez les 2 cartes de la source", "Adversaire",
-                "Adversaire", "Moi");
+        String choixJoueur = joueur.choix(
+                "Choisissez le joueur sur lequel vous allez placez les 2 cartes de la source", "Adversaire", "Moi");
         if (choixJoueur == "Adverdaire") {
             Deck deckAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getDeck();
             deckAdv.ajouter(source.piocher(Math.min(2, source.size())));
         } else {
-            Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
+            Deck deck = joueur.getDeck();
             deck.ajouter(source.piocher(Math.min(2, source.size())));
         }
-        Router.getInstance().instructions("Les cartes ont étés ajoutées à la pile du Joueur !");
+        joueur.afficher("Les cartes ont étés ajoutées à la pile du Joueur !");
     }
 }

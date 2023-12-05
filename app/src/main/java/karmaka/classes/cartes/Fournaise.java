@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.VieFuture;
-import karmaka.view.Router;
 
 public class Fournaise extends Carte {
     public Fournaise() {
@@ -16,7 +16,8 @@ public class Fournaise extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-    	Router.getInstance().instructions("La carte Fournaise va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Fournaise va être jouée !");
         VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
                 .getVieFuture();
         Fosse fosse = Partie.getInstance().getFosse();
@@ -24,7 +25,7 @@ public class Fournaise extends Carte {
             ArrayList<Carte> cartes = vieFutureAdv.piocher(Math.min(2, vieFutureAdv.size()));
             fosse.ajouter(cartes);
         } else {
-            Router.getInstance().instructions("L'adversaire n'a pas de carte dans sa vie future !");
+            joueur.afficher("L'adversaire n'a pas de carte dans sa vie future !");
         }
     }
 }

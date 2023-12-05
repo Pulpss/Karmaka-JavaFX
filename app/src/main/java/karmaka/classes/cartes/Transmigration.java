@@ -2,10 +2,10 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.VieFuture;
-import karmaka.view.Router;
 
 public class Transmigration extends Carte {
     public Transmigration() {
@@ -13,15 +13,16 @@ public class Transmigration extends Carte {
     }
 
     public void pouvoir() {
-    	Router.getInstance().instructions("La carte Transmigration va être jouée !");
-        VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
-        Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Transmigration va être jouée !");
+        VieFuture vieFuture = joueur.getVieFuture();
+        Main main = joueur.getMain();
         if (vieFuture.size() != 0) {
-            Carte choix = Router.getInstance().choix("Veuillez choisir une carte dans votre Vie Future.",
+            Carte choix = joueur.choix("Veuillez choisir une carte dans votre Vie Future.",
                     vieFuture.getCartes());
             main.ajouter(vieFuture.piocher(choix));
         } else {
-            Router.getInstance().instructions("Il n'y a pas de cartes dans votre vie future.");
+            joueur.afficher("Il n'y a pas de cartes dans votre vie future.");
         }
     }
 }

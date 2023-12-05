@@ -2,10 +2,10 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
-import karmaka.view.Router;
 
 public class Jubile extends Carte {
     public Jubile() {
@@ -14,14 +14,25 @@ public class Jubile extends Carte {
 
     public void pouvoir() {
         // TODO : tester
-    	Router.getInstance().instructions("La carte Jubile va être jouée !");
-        String choix = Router.getInstance().choix("Combien de carte de votre main voulez vous placez votre", "0", "0",
-                "1", "2");
-        int valeurChoisie = Integer.parseInt(choix);
-        Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
-        Oeuvres oeuvres = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
-        for (int i = 0; i < Math.min(valeurChoisie, main.size()); i++) {
-            Carte c = Router.getInstance().choix("Choisissez une carte à placer sur vos oeuvres.", main.getCartes());
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Jubile va être jouée !");
+        Main main = joueur.getMain();
+        int nbCartes = 0;
+        if (main.size() > 0) {
+            String[] possibles;
+            if (main.size() == 1) {
+                possibles = new String[] { "1" };
+            } else {
+                possibles = new String[] { "1", "2" };
+            }
+            String choix = joueur.choix("Combien de cartes voulez vous transferer sur vos Oeuvres ? ", possibles);
+            nbCartes = Integer.parseInt(choix);
+        } else {
+            joueur.afficher("Votre main est vide.");
+        }
+        Oeuvres oeuvres = joueur.getOeuvres();
+        for (int i = 0; i < Math.min(nbCartes, main.size()); i++) {
+            Carte c = joueur.choix("Choisissez une carte à placer sur vos oeuvres.", main.getCartes());
             oeuvres.ajouter(main.piocher(c));
         }
     }

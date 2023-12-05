@@ -2,11 +2,11 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
-import karmaka.view.Router;
 
 public class Semis extends Carte {
     public Semis() {
@@ -16,31 +16,32 @@ public class Semis extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-    	Router.getInstance().instructions("La carte Semis va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Semis va être jouée !");
         Source source = Partie.getInstance().getSource();
         if (source.size() > 0) {
             source.piocher(Math.min(2, source.size()));
-            Router.getInstance().instructions("Les cartes ont été puisées.");
+            joueur.afficher("Les cartes ont été puisées.");
         } else {
-            Router.getInstance().instructions("La source est vide.");
+            joueur.afficher("La source est vide.");
         }
-        Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
-        VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
+        Main main = joueur.getMain();
+        VieFuture vieFuture = joueur.getVieFuture();
         if (main.size() > 0) {
-            Carte choix = Router.getInstance().choix(
+            Carte choix = joueur.choix(
                     "Veuillez choisir une première carte dans votre main à mettre sur votre vie future.",
                     main.getCartes());
             vieFuture.ajouter(main.piocher(choix));
             if (main.size() > 0) {
-                choix = Router.getInstance().choix(
+                choix = joueur.choix(
                         "Veuillez choisir une deuxième carte dans votre main à mettre sur votre vie future.",
                         main.getCartes());
                 vieFuture.ajouter(main.piocher(choix));
             } else {
-                Router.getInstance().instructions("Il n'y a plus de cartes dans votre main.");
+                joueur.afficher("Il n'y a plus de cartes dans votre main.");
             }
         } else {
-            Router.getInstance().instructions("Il n'y a pas de cartes dans votre main.");
+            joueur.afficher("Il n'y a pas de cartes dans votre main.");
         }
     }
 }

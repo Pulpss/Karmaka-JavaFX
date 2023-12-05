@@ -10,6 +10,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
 
 <VBox prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/21"
    xmlns:fx="http://javafx.com/fxml/1" fx:controller="karmaka.controllers.PlateauController">
@@ -17,6 +20,14 @@
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
          VBox.vgrow="ALWAYS" fx:id="anchorPane">
          <children>
+            <MenuBar>
+               <Menu text="Partie">
+                   <MenuItem text="Nouvelle partie" />
+                   <MenuItem text="Charger" onAction="#handleLoad" />
+                   <MenuItem text="Enregistrer" onAction="#handleSave" />
+                   <MenuItem text="Quitter" />
+               </Menu>
+           </MenuBar>
             <!-- Points Adversaire -->
             <Text layoutX="12" layoutY="51" strokeWidth="0.0" text="Points :">
                <font>

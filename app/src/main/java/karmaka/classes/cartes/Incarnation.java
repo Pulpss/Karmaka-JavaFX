@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Oeuvres;
-import karmaka.view.Router;
 
 public class Incarnation extends Carte {
     public Incarnation() {
@@ -14,15 +14,16 @@ public class Incarnation extends Carte {
     }
 
     public void pouvoir() throws IOException {
-    	Router.getInstance().instructions("La carte Incarnation va être jouée !");
-        Oeuvres oeuvres = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getOeuvres();
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Incarnation va être jouée !");
+        Oeuvres oeuvres = joueur.getOeuvres();
         if (oeuvres.size() > 0) {
-            Carte choix = Router.getInstance().choix(
+            Carte choix = joueur.choix(
                     "Veuillez choisir la carte de votre pile Oeuvres que vous voulez copier : ",
                     oeuvres.getCartes());
             choix.pouvoir();
         } else {
-            Router.getInstance().instructions("Vous n'aviez pas de cartes dans votre pile Oeuvres !");
+            joueur.afficher("Vous n'aviez pas de cartes dans votre pile Oeuvres !");
         }
     }
 }

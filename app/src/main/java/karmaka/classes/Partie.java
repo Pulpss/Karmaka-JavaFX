@@ -12,16 +12,8 @@ import karmaka.classes.piles.VieFuture;
 import karmaka.view.Router;
 
 public final class Partie {
-    private static Joueur[] joueurs = new Joueur[2];
-    private static Source source = new Source();
-    private static Fosse fosse = new Fosse();
     private static Partie instance = null;
-    private static ArrayList<Action> actionsPossibles = new ArrayList<Action>();
-    private static int tour = 0; // 0 = j1, 1 = j2
-    private static int gagnant;
-
-    private static Etape etape = Etape.DEBUT;
-    private static Carte carteChoisie = null;
+    private GameData gameData = new GameData();
 
     public enum Etape {
         DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
@@ -29,10 +21,13 @@ public final class Partie {
     }
 
     private Partie(Joueur j1, Joueur j2) throws IOException {
-        joueurs[0] = j1;
-        joueurs[1] = j2;
+        gameData.joueurs[0] = j1;
+        gameData.joueurs[1] = j2;
         distribuer();
         tour();
+    }
+
+    private Partie() throws IOException {
     }
 
     public static void init(Joueur joueur1, Joueur joueur2) throws IOException {
@@ -41,93 +36,109 @@ public final class Partie {
         }
     }
 
+    public static void init() throws IOException {
+        if (instance == null) {
+            instance = new Partie();
+        }
+    }
+
     public static Partie getInstance() {
         return instance;
     }
 
     public ArrayList<Action> getActionsPossibles() {
-        return actionsPossibles;
+        return gameData.actionsPossibles;
     }
 
     public Joueur getJoueur(int i) {
-        return joueurs[i];
+        return gameData.joueurs[i];
     }
 
     public Source getSource() {
-        return source;
+        return gameData.source;
     }
 
     public Fosse getFosse() {
-        return fosse;
+        return gameData.fosse;
     }
 
     public int getTour() {
-        return tour;
+        return gameData.tour;
     }
 
     public void setCarteChoisie(Carte carte) {
-        carteChoisie = carte;
+        gameData.carteChoisie = carte;
     }
 
     public void setEtape(Etape et) {
-        etape = et;
+        gameData.etape = et;
     }
 
     private void distribuer() {
         for (int i = 0; i < 2; i++) {
-            joueurs[i].getMain().ajouter(source.piocher(4));
-            joueurs[i].getDeck().ajouter(source.piocher(2));
+            gameData.joueurs[i].getMain().ajouter(gameData.source.piocher(4));
+            gameData.joueurs[i].getDeck().ajouter(gameData.source.piocher(2));
+        }
+    }
+
+    public void sauvegarder() {
+        Router.getInstance().sauvegarder(gameData);
+    }
+
+    public void charger() throws IOException {
+        GameData saveData = Router.getInstance().charger();
+        if (saveData != null) {
+            gameData = saveData;
+            Router.getInstance().setScene("plateau");;
         }
     }
 
     public void tour() throws IOException {
-        Deck deck = joueurs[tour].getDeck();
-        Main main = joueurs[tour].getMain();
-        Oeuvres oeuvres = joueurs[tour].getOeuvres();
-        VieFuture vieFuture = joueurs[tour].getVieFuture();
-        switch (etape) {
+        Deck deck = gameData.joueurs[gameData.tour].getDeck();
+        Main main = gameData.joueurs[gameData.tour].getMain();
+        Oeuvres oeuvres = gameData.joueurs[gameData.tour].getOeuvres();
+        VieFuture vieFuture = gameData.joueurs[gameData.tour].getVieFuture();
+        switch (gameData.etape) {
             case DEBUT:
                 if (deck.size() > 0) {
                     // Cas normal de jeu
-                    Router.getInstance().instructions("Veuillez piocher une carte dans votre deck");
-                    actionsPossibles.clear();
-                    actionsPossibles.add(Action.PIOCHER_DECK);
-                    etape = Etape.PIOCHER_DECK;
+                    gameData.joueurs[gameData.tour].afficher("Veuillez piocher une carte dans votre deck");
+                    gameData.actionsPossibles.clear();
+                    gameData.actionsPossibles.add(Action.PIOCHER_DECK);
+                    gameData.etape = Etape.PIOCHER_DECK;
                 } else {
                     if (main.size() > 0) {
                         // Le joueur n'a plus de carte dans son deck mais en a dans sa main donc il joue
-                        etape = Etape.CHOISIR_CARTE_MAIN;
+                        gameData.etape = Etape.CHOISIR_CARTE_MAIN;
                         tour();
                     } else {
                         // Le joueur n'a plus rien donc il meuurt dans d'atroces souffrances !
-                        etape = Etape.MORT;
+                        gameData.etape = Etape.MEURT;
                         tour();
                     }
                 }
                 break;
             case MEURT:
-                etape = Etape.TOUR_SUIVANT;
+                gameData.etape = Etape.TOUR_SUIVANT;
                 tour();
                 break;
             case MORT:
-                int echellekarmique = joueurs[tour].getEchelleKarmique();
-                int nbAnneaux = joueurs[tour].getNbAnneaux();
+                int echellekarmique = gameData.joueurs[gameData.tour].getEchelleKarmique();
+                int nbAnneaux = gameData.joueurs[gameData.tour].getNbAnneaux();
                 int points = oeuvres.calculerPoints();
-                Router.getInstance().instructions(
+                gameData.joueurs[gameData.tour].afficher(
                         "Vous etes mort. Nous allons vérifier si vous arrivez à vous réincarner.");
 
                 // On ajuste nbAnneaux (et points) SSI cela peut changer l'issue Reussite/Echec
                 // de la réincarnation
                 if ((points + nbAnneaux) > echellekarmique && points < echellekarmique) {
-                    // Je suis pas sur d'avoir bien compris le fonctionnement de la méthode .choix()
-                    // donc voir si choixAnneaux marche
                     // En gros je veux que l'utilisateur choisisse si OUI ou NON il décide de
                     // dépenser le nb d'anneaux karmique nécessaire pour se réincarner
-                    String choixAnneaux = Router.getInstance()
+                    String choixAnneaux = gameData.joueurs[gameData.tour]
                             .choix("Vous pouvez vous réincarner ! Il vous faut pour cela dépenser "
                                     + (echellekarmique - points + 1)
                                     + " anneaux Karmiques. Vous en avez actuellement " + nbAnneaux
-                                    + ", allez vous les utiliser ?", "Oui", "Oui", "Non");
+                                    + ", allez vous les utiliser ?", "Oui", "Non");
                     // Le joueur dépense le nombre d'anneaux nécessaire pour se réincarner et gagne
                     // ce meme montant en points
                     if (choixAnneaux == "Oui") {
@@ -138,28 +149,28 @@ public final class Partie {
 
                 // Cas reussite + Victoire
                 if (points > echellekarmique && echellekarmique == 7) {
-                    Router.getInstance().instructions(
+                    gameData.joueurs[gameData.tour].afficher(
                             "Vous avez enfin atteint la Transcendance ! Quelle belle aventure !");
-                    gagnant = tour;
-                    etape = Etape.GAGNANT;
+                    gameData.gagnant = gameData.tour;
+                    gameData.etape = Etape.GAGNANT;
                     tour();
                     break;
                 }
                 // Cas simple reussite
                 else if (points > echellekarmique) {
-                    Router.getInstance().instructions(
+                    gameData.joueurs[gameData.tour].afficher(
                             "Félicitations, vous avez réussi à vous réincarner. Vous vous rapprochez de la Transcendance.");
-                    joueurs[tour].setEchelleKarmique(echellekarmique+1);
-                    joueurs[tour].setNbAnneaux(nbAnneaux);
+                    gameData.joueurs[gameData.tour].setEchelleKarmique(echellekarmique + 1);
+                    gameData.joueurs[gameData.tour].setNbAnneaux(nbAnneaux);
                 }
                 // Cas echec
                 else {
-                    joueurs[tour].setNbAnneaux(nbAnneaux+1);
-                    Router.getInstance().instructions(
+                    gameData.joueurs[gameData.tour].setNbAnneaux(nbAnneaux + 1);
+                    gameData.joueurs[gameData.tour].afficher(
                             "Vous n'avez pas réussi à vous réincarner, prenez un anneau karmique en compensation. Vous en avez maintenant "
                                     + nbAnneaux + ".");
                 }
-                fosse.ajouter(oeuvres.piocher(oeuvres.size()));
+                gameData.fosse.ajouter(oeuvres.piocher(oeuvres.size()));
                 // Supprimer les System.out.println si cette partie du programme marche
                 System.out.println(main.size());
                 System.out.println(vieFuture.size());
@@ -167,52 +178,54 @@ public final class Partie {
                 System.out.println(main.size());
                 System.out.println(vieFuture.size());
                 if (main.size() < 6) {
-                    Router.getInstance().instructions("Vous avez moins de 6 cartes dans votre main. Vous allez piocher "
-                            + (6 - main.size()) + " cartes de la Source.");
-                    deck.ajouter(source.piocher(6 - main.size()));
+                    gameData.joueurs[gameData.tour]
+                            .afficher("Vous avez moins de 6 cartes dans votre main. Vous allez piocher "
+                                    + (6 - main.size()) + " cartes de la Source.");
+                    deck.ajouter(gameData.source.piocher(6 - main.size()));
                 }
-                etape = Etape.TOUR_SUIVANT;
+                gameData.etape = Etape.TOUR_SUIVANT;
                 tour();
                 break;
             case PIOCHER_DECK:
                 main.ajouter(deck.piocher());
                 Router.getInstance().update();
-                etape = Etape.CHOISIR_CARTE_MAIN;
+                gameData.etape = Etape.CHOISIR_CARTE_MAIN;
                 tour();
                 break;
             case CHOISIR_CARTE_MAIN:
-                Router.getInstance().instructions("Veuillez choisir une carte dans votre main ou passez votre tour.");
-                actionsPossibles.clear();
-                actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
+                gameData.joueurs[gameData.tour]
+                        .afficher("Veuillez choisir une carte dans votre main ou passez votre tour.");
+                gameData.actionsPossibles.clear();
+                gameData.actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
                 if (deck.size() > 0) {
-                    actionsPossibles.add(Action.PASSER);
+                    gameData.actionsPossibles.add(Action.PASSER);
                 }
-                etape = Etape.CHOISIR_UTILISATION_CARTE;
+                gameData.etape = Etape.CHOISIR_UTILISATION_CARTE;
                 break;
             case CHOISIR_UTILISATION_CARTE:
-                String choix = Router.getInstance().choix(
-                        "Veuillez choisir une utilisation pour la carte " + carteChoisie.getNom(),
-                        "Points", "Points", "Pouvoir", "Futur");
+                String choix = gameData.joueurs[gameData.tour].choix(
+                        "Veuillez choisir une utilisation pour la carte " + gameData.carteChoisie.getNom(),
+                        "Points", "Pouvoir", "Futur");
                 System.out.println(choix);
                 if (choix == null) {
-                    etape = Etape.CHOISIR_CARTE_MAIN;
+                    gameData.etape = Etape.CHOISIR_CARTE_MAIN;
                     tour();
                     break;
                 }
                 switch (choix) {
                     case "Points":
-                        oeuvres.ajouter(main.piocher(carteChoisie));
-                        etape = Etape.TOUR_SUIVANT;
+                        oeuvres.ajouter(main.piocher(gameData.carteChoisie));
+                        gameData.etape = Etape.TOUR_SUIVANT;
                         tour();
                         break;
                     case "Pouvoir":
-                        carteChoisie.pouvoir();
-                        etape = Etape.PROPOSER_CARTE;
+                        gameData.carteChoisie.pouvoir();
+                        gameData.etape = Etape.PROPOSER_CARTE;
                         tour();
                         break;
                     case "Futur":
-                        vieFuture.ajouter(main.piocher(carteChoisie));
-                        etape = Etape.TOUR_SUIVANT;
+                        vieFuture.ajouter(main.piocher(gameData.carteChoisie));
+                        gameData.etape = Etape.TOUR_SUIVANT;
                         tour();
                         break;
                 }
@@ -220,49 +233,53 @@ public final class Partie {
                 break;
             case PROPOSER_CARTE:
                 Router.getInstance().setScene("plateauPlaceholder");
-                Router.getInstance()
-                        .instructions("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
-                String choixAdversaire = Router.getInstance().choix(
-                        "Voulez vous accepter la carte " + carteChoisie.getNom(), "Accepter", "Accepter", "Refuser");
+                gameData.joueurs[gameData.tour]
+                        .afficher("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
+                String choixAdversaire = gameData.joueurs[(gameData.tour + 1) % 2].choix(
+                        "Voulez vous accepter la carte " + gameData.carteChoisie.getNom(), "Accepter",
+                        "Refuser");
                 if (choixAdversaire == "Accepter") {
-                    VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
+                    VieFuture vieFutureAdv = gameData.joueurs[(gameData.tour + 1) % 2]
                             .getVieFuture();
-                    vieFutureAdv.ajouter(main.piocher(carteChoisie));
+                    vieFutureAdv.ajouter(main.piocher(gameData.carteChoisie));
                 } else {
-                    fosse.ajouter(carteChoisie);
+                    gameData.fosse.ajouter(gameData.carteChoisie);
                 }
-                etape = Etape.TOUR_SUIVANT;
+                gameData.etape = Etape.TOUR_SUIVANT;
                 tour();
                 break;
             case PROPOSER_CARTE_REJOUER:
                 Router.getInstance().setScene("plateauPlaceholder");
-                Router.getInstance()
-                        .instructions("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
-                choixAdversaire = Router.getInstance().choix(
-                        "Voulez vous accepter la carte " + carteChoisie.getNom(), "Accepter", "Accepter", "Refuser");
+                gameData.joueurs[gameData.tour]
+                        .afficher("Veuillez laisser votre adversaire choisir d'accepter ou non la carte.");
+                choixAdversaire = gameData.joueurs[(gameData.tour + 1) % 2].choix(
+                        "Voulez vous accepter la carte " + gameData.carteChoisie.getNom(), "Accepter",
+                        "Refuser");
                 if (choixAdversaire == "Accepter") {
-                    VieFuture vieFutureAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2)
+                    VieFuture vieFutureAdv = gameData.joueurs[(gameData.tour + 1) % 2]
                             .getVieFuture();
-                    vieFutureAdv.ajouter(main.piocher(carteChoisie));
+                    vieFutureAdv.ajouter(main.piocher(gameData.carteChoisie));
                 } else {
-                    fosse.ajouter(carteChoisie);
+                    gameData.fosse.ajouter(gameData.carteChoisie);
                 }
-                Router.getInstance().instructions("Le joueur peut rejouer une carte. Laissez-le continuer.");
+                gameData.joueurs[(gameData.tour + 1) % 2]
+                        .afficher("Le joueur peut rejouer une carte. Laissez-le continuer.");
                 Router.getInstance().setScene("plateau");
-                etape = Etape.CHOISIR_CARTE_MAIN;
+                gameData.etape = Etape.CHOISIR_CARTE_MAIN;
                 tour();
                 break;
             case TOUR_SUIVANT:
-                tour = (tour + 1) % 2;
-                etape = Etape.DEBUT;
-                actionsPossibles.clear();
+                gameData.tour = (gameData.tour + 1) % 2;
+                gameData.etape = Etape.DEBUT;
+                gameData.actionsPossibles.clear();
                 Router.getInstance().setScene("plateauPlaceholder");
-                Router.getInstance().instructions("Changement de joueur ! Ne trichez pas !");
+                gameData.joueurs[gameData.tour].afficher("Changement de joueur ! Ne trichez pas !");
                 Router.getInstance().setScene("plateau");
                 tour();
                 break;
             case GAGNANT:
-                Router.getInstance().instructions("Le joueur " + joueurs[(gagnant + 1)].getNom() + " a gagné !");
+                gameData.joueurs[gameData.tour]
+                        .afficher("Le joueur " + gameData.joueurs[(gameData.gagnant + 1)].getNom() + " a gagné !");
                 break;
         }
         return;

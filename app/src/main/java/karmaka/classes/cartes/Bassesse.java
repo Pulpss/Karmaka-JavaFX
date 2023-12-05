@@ -2,10 +2,10 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
-import karmaka.view.Router;
 
 import java.util.Random;
 
@@ -16,7 +16,8 @@ public class Bassesse extends Carte {
 
     public void pouvoir()  {
         // TODO : tester
-    	Router.getInstance().instructions("La carte Bassesse va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Bassesse va être jouée !");
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         Fosse fosse = Partie.getInstance().getFosse();
@@ -24,6 +25,6 @@ public class Bassesse extends Carte {
             Carte cartePioche = mainAdv.getCartes().get(random.nextInt(mainAdv.size()));
             fosse.ajouter(mainAdv.piocher(cartePioche));
         }
-        Router.getInstance().instructions("Si l'adversaire avait des cartes dans sa main elles ont été défaussées !");
+        joueur.afficher("Si l'adversaire avait des cartes dans sa main elles ont été défaussées !");
     }
 }

@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Carte;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Deck;
 import karmaka.view.CarteView;
@@ -41,7 +42,8 @@ public class PlateauController implements Initializable {
             Partie.getInstance().setEtape(Partie.Etape.TOUR_SUIVANT);
             Partie.getInstance().tour();
         } else {
-            Router.getInstance().instructions("Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
+            Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+            joueur.afficher("Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
         }
     }
 
@@ -57,6 +59,16 @@ public class PlateauController implements Initializable {
         if (actionsPossibles.contains(Action.PIOCHER_DECK)) {
             Partie.getInstance().tour();
         }
+    }
+
+    @FXML
+    public void handleSave() {
+        Partie.getInstance().sauvegarder();
+    }
+
+    @FXML
+    public void handleLoad() throws IOException {
+        Partie.getInstance().charger();
     }
 
     private void handleMouseClicked(Carte c) throws IOException {

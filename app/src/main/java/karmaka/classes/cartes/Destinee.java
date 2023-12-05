@@ -1,12 +1,13 @@
 package karmaka.classes.cartes;
+
 import java.util.ArrayList;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
-import karmaka.view.Router;
 
 public class Destinee extends Carte {
     public Destinee() {
@@ -15,33 +16,40 @@ public class Destinee extends Carte {
                 2);
     }
 
-    public void pouvoir()  {
+    public void pouvoir() {
         // TODO : tester
-    	Router.getInstance().instructions("La carte Destinée va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+        joueur.afficher("La carte Destinée va être jouée !");
         Source source = Partie.getInstance().getSource();
-        VieFuture vieFuture = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getVieFuture();
+        VieFuture vieFuture = joueur.getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(
                 source.getCartes().subList(Math.max(0, source.size() - 3 - 1), source.size() - 1));
-        if (source.size() > 0) {
-            Router.getInstance().afficher("Voici les 3 premières cartes de la source.", troisCartes);
-            int choix = Integer.parseInt(Router.getInstance().choix(
-                    "Combien de cartes voulez vous ajouter à votre vie future ?", "0", "0", "1",
-                    "2"));
-            for (int i = 0; i < choix; i++) {
-                Carte c = Router.getInstance().choix("Choisissez la carte à ajouter à votre vie future.",
-                        troisCartes);
-                vieFuture.ajouter(source.piocher(c));
-                troisCartes.remove(c);
+        int nbCartes = 0;
+        if (troisCartes.size() > 0) {
+            joueur.afficherCartes("Voici les 3 premières cartes de la source.", troisCartes);
+            String[] possibles;
+            if (troisCartes.size() == 1) {
+                possibles = new String[] { "1" };
+            } else {
+                possibles = new String[] { "1", "2" };
             }
-            for (int i = 0; i < troisCartes.size(); i++) {
-                Carte c = Router.getInstance().choix("Choisissez la carte à replacer dans la source en position " + (i+1),
-                        troisCartes);
-                source.ajouter(source.piocher(c));
-                troisCartes.remove(c);
-            }
-
+            String choix = joueur.choix("Combien de cartes voulez vous defausser de votre main ?", possibles);
+            nbCartes = Integer.parseInt(choix);
         } else {
-            Router.getInstance().instructions("La source est vide.");
+            joueur.afficher("La source est vide");
+        }
+        for (int i = 0; i < nbCartes; i++) {
+            Carte c = joueur.choix("Choisissez la carte à ajouter à votre vie future.",
+                    troisCartes);
+            vieFuture.ajouter(source.piocher(c));
+            troisCartes.remove(c);
+        }
+        for (int i = 0; i < troisCartes.size(); i++) {
+            Carte c = joueur.choix(
+                    "Choisissez la carte à replacer dans la source en position " + (i + 1),
+                    troisCartes);
+            source.ajouter(source.piocher(c));
+            troisCartes.remove(c);
         }
 
     }

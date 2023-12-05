@@ -2,6 +2,7 @@ package karmaka.classes.cartes;
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Oeuvres;
@@ -14,15 +15,16 @@ public class Vengeance extends Carte {
 
     public void pouvoir() {
         // TODO: tester
-    	Router.getInstance().instructions("La carte Vengeance va être jouée !");
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
+    	joueur.afficher("La carte Vengeance va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Fosse fosse = Partie.getInstance().getFosse();
         if (oeuvresAdv.size() > 0) {
-            Carte c = Router.getInstance().choix("Choisissez une carte parmis les oeuvres de votre adversaire.",
+            Carte c = joueur.choix("Choisissez une carte parmis les oeuvres de votre adversaire.",
                     oeuvresAdv.getCartes());
             fosse.ajouter(oeuvresAdv.piocher(c));
         } else {
-            Router.getInstance().instructions("Votre adversaire n'a pas d'oeuvres.");
+            joueur.afficher("Votre adversaire n'a pas d'oeuvres.");
         }
     }
 }

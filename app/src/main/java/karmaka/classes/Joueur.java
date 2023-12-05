@@ -1,12 +1,15 @@
 package karmaka.classes;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
 import karmaka.classes.piles.VieFuture;
 
-public abstract class Joueur {
+public abstract class Joueur implements Serializable {
     private String nom;
     private int echelleKarmique;
     private int nbAnneaux;
@@ -14,10 +17,6 @@ public abstract class Joueur {
     private Deck deck;
     private VieFuture vieFuture;
     private Oeuvres oeuvres;
-
-
-    
-    
     
     public Joueur(String nom) {
         this.nom = nom;
@@ -69,4 +68,8 @@ public abstract class Joueur {
         this.nbAnneaux += 1;
     }
 
+    abstract public Carte choix(String message, ArrayList<Carte> cartes);
+    abstract public String choix(String message, String... options);
+    abstract public void afficherCartes(String message, ArrayList<Carte> cartes);
+    abstract public void afficher(String message);
 }

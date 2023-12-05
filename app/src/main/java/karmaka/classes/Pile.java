@@ -1,10 +1,11 @@
 package karmaka.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class Pile {
+public abstract class Pile implements Serializable {
     private ArrayList<Carte> cartes;
 
     public Pile(ArrayList<Carte> cartesInit) {
