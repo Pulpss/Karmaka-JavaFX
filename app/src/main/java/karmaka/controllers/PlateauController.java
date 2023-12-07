@@ -197,8 +197,8 @@ public class PlateauController implements Initializable {
 
     private void initAnneaux() {
         Partie partie = Partie.getInstance();
-        anneaux.setText(Integer.toString(partie.getJoueur(partie.getTour()).getEchelleKarmique()));
-        adversaireAnneaux.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getEchelleKarmique()));
+        anneaux.setText(Integer.toString(partie.getJoueur(partie.getTour()).getNbAnneaux()));
+        adversaireAnneaux.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getNbAnneaux()));
     }
 
     private void initPasser() {

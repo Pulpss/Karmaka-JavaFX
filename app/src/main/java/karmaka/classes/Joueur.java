@@ -81,4 +81,5 @@ public abstract class Joueur implements Serializable {
     abstract public String choix(String message, String... options);
     abstract public void afficherCartes(String message, ArrayList<Carte> cartes);
     abstract public void afficher(String message);
+    abstract public boolean isRobot();
 }

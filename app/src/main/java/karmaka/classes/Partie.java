@@ -65,6 +65,10 @@ public final class Partie {
         return gameData.tour;
     }
 
+    public Carte getCarteChoisie() {
+        return gameData.carteChoisie;
+    }
+
     public void setCarteChoisie(Carte carte) {
         gameData.carteChoisie = carte;
     }
@@ -118,6 +122,9 @@ public final class Partie {
                     gameData.actionsPossibles.clear();
                     gameData.actionsPossibles.add(Action.PIOCHER_DECK);
                     gameData.etape = Etape.PIOCHER_DECK;
+                    if (joueur.isRobot()) {
+                        tour();
+                    }
                 } else {
                     if (main.size() > 0) {
                         // Le joueur n'a plus de carte dans son deck mais en a dans sa main donc il joue
@@ -208,13 +215,17 @@ public final class Partie {
                 tour();
                 break;
             case CHOISIR_CARTE_MAIN:
-                joueur.afficher("Veuillez choisir une carte dans votre main" + (deck.size() > 0 ? " ou passer." : "."));
+                joueur.afficher("Veuillez choisir une carte dans votre main" + (deck.size() > 0 ? " ou passer votre tour." : "."));
                 gameData.actionsPossibles.clear();
                 gameData.actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
                 if (deck.size() > 0) {
                     gameData.actionsPossibles.add(Action.PASSER);
                 }
                 gameData.etape = Etape.CHOISIR_UTILISATION_CARTE;
+                if (joueur.isRobot()) {
+                    gameData.carteChoisie = joueur.choix("robot choisit carte main", main.getCartes());
+                    tour();
+                }
                 break;
             case CHOISIR_UTILISATION_CARTE:
                 String choix = joueur.choix(

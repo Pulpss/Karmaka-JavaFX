@@ -26,4 +26,8 @@ public class Humain extends Joueur {
     public void afficher(String message) {
         Router.getInstance().afficher(message);
     }
+
+    public boolean isRobot() {
+        return false;
+    }
 }
