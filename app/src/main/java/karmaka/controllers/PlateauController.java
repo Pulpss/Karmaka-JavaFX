@@ -17,6 +17,7 @@ import karmaka.classes.Carte;
 import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Deck;
+import karmaka.classes.piles.Fosse;
 import karmaka.view.CarteView;
 import karmaka.view.Router;
 
@@ -123,11 +124,12 @@ public class PlateauController implements Initializable {
 
     private void initFosse() {
         Partie partie = Partie.getInstance();
-        if (partie.getFosse().size() > 0) {
+        Fosse fosseJeu = partie.getFosse();
+        if (fosseJeu.size() > 0) {
             fosse.setVisible(true);
             fosseQte.setVisible(true);
-            fosse.setImage(new Image("/images/cartes/" + partie.getFosse().getCartes().get(0).getNom() + ".png"));
-            fosseQte.setText(Integer.toString(partie.getFosse().size()));
+            fosse.setImage(new Image("/images/cartes/" + fosseJeu.getCartes().get(fosseJeu.size() - 1).getNom() + ".png"));
+            fosseQte.setText(Integer.toString(fosseJeu.size()));
         } else {
             fosse.setVisible(false);
             fosseQte.setVisible(false);

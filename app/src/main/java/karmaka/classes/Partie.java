@@ -227,6 +227,7 @@ public final class Partie {
                         tour();
                         break;
                     case "Pouvoir":
+                        gameData.carteChoisie = main.piocher(gameData.carteChoisie);
                         gameData.carteChoisie.pouvoir();
                         gameData.etape = Etape.PROPOSER_CARTE;
                         tour();
@@ -249,7 +250,7 @@ public final class Partie {
                 if (choixAdversaire == "Accepter") {
                     VieFuture vieFutureAdv = gameData.joueurs[(gameData.tour + 1) % 2]
                             .getVieFuture();
-                    vieFutureAdv.ajouter(main.piocher(gameData.carteChoisie));
+                    vieFutureAdv.ajouter(gameData.carteChoisie);
                 } else {
                     gameData.fosse.ajouter(gameData.carteChoisie);
                 }
@@ -266,7 +267,7 @@ public final class Partie {
                 if (choixAdversaire == "Accepter") {
                     VieFuture vieFutureAdv = gameData.joueurs[(gameData.tour + 1) % 2]
                             .getVieFuture();
-                    vieFutureAdv.ajouter(main.piocher(gameData.carteChoisie));
+                    vieFutureAdv.ajouter(gameData.carteChoisie);
                 } else {
                     gameData.fosse.ajouter(gameData.carteChoisie);
                 }

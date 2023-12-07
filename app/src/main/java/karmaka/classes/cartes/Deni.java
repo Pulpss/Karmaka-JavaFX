@@ -18,7 +18,7 @@ public class Deni extends Carte {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Deni va être jouée !");
-        Main main = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getMain();
+        Main main = joueur.getMain();
         if (main.size() > 0) {
             Fosse fosse = Partie.getInstance().getFosse();
             Carte c = joueur.choix("Choisissez une carte à défausser.", main.getCartes());
