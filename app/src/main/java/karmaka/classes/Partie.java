@@ -139,7 +139,7 @@ public final class Partie {
 
                 // On ajuste nbAnneaux (et points) SSI cela peut changer l'issue Reussite/Echec
                 // de la réincarnation
-                if ((points + nbAnneaux) > echellekarmique && points < echellekarmique) {
+                if ((points + nbAnneaux) >= echellekarmique && points < echellekarmique) {
                     // En gros je veux que l'utilisateur choisisse si OUI ou NON il décide de
                     // dépenser le nb d'anneaux karmique nécessaire pour se réincarner
                     String choixAnneaux = joueur
@@ -156,7 +156,7 @@ public final class Partie {
                 }
 
                 // Cas reussite + Victoire
-                if (points > echellekarmique && echellekarmique == 7) {
+                if (points >= echellekarmique && echellekarmique == 7) {
                     joueur.afficher(
                             "Vous avez enfin atteint la Transcendance ! Quelle belle aventure !");
                     gameData.gagnant = gameData.tour;
@@ -165,7 +165,7 @@ public final class Partie {
                     break;
                 }
                 // Cas simple reussite
-                else if (points > echellekarmique) {
+                else if (points >= echellekarmique) {
                     joueur.afficher(
                             "Félicitations, vous avez réussi à vous réincarner. Vous vous rapprochez de la Transcendance.");
                     joueur.setEchelleKarmique(echellekarmique + 1);
