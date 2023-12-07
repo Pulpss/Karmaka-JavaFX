@@ -1,6 +1,5 @@
 package karmaka.classes;
 
-
 import java.util.ArrayList;
 
 import karmaka.classes.piles.Deck;
@@ -30,14 +29,13 @@ public final class Partie {
     private Partie() {
     }
 
-    public static void init(Joueur joueur1, Joueur joueur2)  {
+    public static void init(Joueur joueur1, Joueur joueur2) {
         if (instance == null) {
             instance = new Partie(joueur1, joueur2);
         }
     }
 
-    
-    public static void init()  {
+    public static void init() {
         if (instance == null) {
             instance = new Partie();
         }
@@ -86,15 +84,16 @@ public final class Partie {
         Router.getInstance().sauvegarder(gameData);
     }
 
-    public void charger()  {
+    public void charger() {
         GameData saveData = Router.getInstance().charger();
         if (saveData != null) {
             gameData = saveData;
-            Router.getInstance().setScene("plateau");;
+            Router.getInstance().setScene("plateau");
+            ;
         }
     }
 
-    public void tour()  {
+    public void tour() {
         Joueur joueur = gameData.joueurs[gameData.tour];
         Deck deck = joueur.getDeck();
         Main main = joueur.getMain();
@@ -128,6 +127,7 @@ public final class Partie {
             case MEURT:
                 gameData.etape = Etape.TOUR_SUIVANT;
                 joueur.setMort(true);
+                joueur.afficher("Vous êtes mort, vous passez votre tour.");
                 tour();
                 break;
             case MORT:
@@ -176,7 +176,7 @@ public final class Partie {
                     joueur.setNbAnneaux(nbAnneaux + 1);
                     joueur.afficher(
                             "Vous n'avez pas réussi à vous réincarner, prenez un anneau karmique en compensation. Vous en avez maintenant "
-                                    + nbAnneaux + ".");
+                                    + joueur.getNbAnneaux() + ".");
                 }
                 gameData.fosse.ajouter(oeuvres.piocher(oeuvres.size()));
                 // Supprimer les System.out.println si cette partie du programme marche
@@ -187,7 +187,7 @@ public final class Partie {
                 System.out.println(vieFuture.size());
                 if (main.size() < 6) {
                     joueur
-                            .afficher("Vous avez moins de 6 cartes dans votre main. Vous allez piocher "
+                            .afficher("Vous avez moins de 6 cartes dans votre vie future. Vous allez piocher "
                                     + (6 - main.size()) + " cartes de la Source.");
                     deck.ajouter(gameData.source.piocher(6 - main.size()));
                 }
@@ -202,8 +202,7 @@ public final class Partie {
                 tour();
                 break;
             case CHOISIR_CARTE_MAIN:
-                joueur
-                        .afficher("Veuillez choisir une carte dans votre main ou passez votre tour.");
+                joueur.afficher("Veuillez choisir une carte dans votre main" + (deck.size() > 0 ? " ou passer." : "."));
                 gameData.actionsPossibles.clear();
                 gameData.actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
                 if (deck.size() > 0) {
