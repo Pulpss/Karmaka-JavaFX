@@ -28,7 +28,7 @@ public class PlateauController implements Initializable {
 
     @FXML
     private Text adversaireVieFutureQte, adversaireDeckQte, sourceQte, fosseQte, deckQte, vieFutureQte,
-            adversairePoints, points;
+            adversaireAnneaux, anneaux;
 
     @FXML
     private HBox main, oeuvres, adversaireOeuvres;
@@ -195,10 +195,10 @@ public class PlateauController implements Initializable {
         }
     }
 
-    private void initPoints() {
+    private void initAnneaux() {
         Partie partie = Partie.getInstance();
-        points.setText(Integer.toString(partie.getJoueur(partie.getTour()).getEchelleKarmique()));
-        adversairePoints.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getEchelleKarmique()));
+        anneaux.setText(Integer.toString(partie.getJoueur(partie.getTour()).getEchelleKarmique()));
+        adversaireAnneaux.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getEchelleKarmique()));
     }
 
     private void initPasser() {
@@ -218,7 +218,7 @@ public class PlateauController implements Initializable {
         initFosse();
         initVieFuture();
         initDeck();
-        initPoints();
+        initAnneaux();
         initPasser();
     }
 }

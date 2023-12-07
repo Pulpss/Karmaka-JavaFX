@@ -28,13 +28,13 @@
                    <MenuItem text="Quitter" />
                </Menu>
            </MenuBar>
-            <!-- Points Adversaire -->
-            <Text layoutX="12" layoutY="51" strokeWidth="0.0" text="Points :">
+            <!-- Anneaux Adversaire -->
+            <Text layoutX="12" layoutY="51" strokeWidth="0.0" text="Anneaux :">
                <font>
                   <Font size="23.0" />
                </font>
             </Text>
-            <Text fx:id="adversairePoints" layoutX="130" layoutY="51" strokeWidth="0.0" text="0">
+            <Text fx:id="adversaireAnneaux" layoutX="140" layoutY="51" strokeWidth="0.0" text="0">
                <font>
                   <Font size="32.0" />
                </font>
@@ -101,13 +101,13 @@
                </font>
             </Text>
 
-            <!-- Points -->
-            <Text layoutX="12" layoutY="579" strokeWidth="0.0" text="Points :">
+            <!-- Anneaux -->
+            <Text layoutX="12" layoutY="579" strokeWidth="0.0" text="Anneaux :">
                <font>
                   <Font size="23.0" />
                </font>
             </Text>
-            <Text fx:id="points" layoutX="130" layoutY="579" strokeWidth="0.0" text="0">
+            <Text fx:id="anneaux" layoutX="140" layoutY="579" strokeWidth="0.0" text="0">
                <font>
                   <Font size="32.0" />
                </font>

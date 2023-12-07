@@ -15,7 +15,7 @@ public final class Partie {
     private GameData gameData = new GameData();
 
     public enum Etape {
-        DEBUT, PIOCHER_DECK, JOUER_CARTE, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
+        DEBUT, PIOCHER_DECK, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
         PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MEURT, MORT, GAGNANT
     }
 
@@ -101,6 +101,12 @@ public final class Partie {
         VieFuture vieFuture = joueur.getVieFuture();
         switch (gameData.etape) {
             case DEBUT:
+                if (gameData.source.size() == 0) {
+                    gameData.source.ajouter(gameData.fosse.piocher(gameData.fosse.size()));
+                    gameData.source.melanger();
+                    tour();
+                    break;
+                }
                 if (joueur.isMort()) {
                     gameData.etape = Etape.MORT;
                     tour();
@@ -144,14 +150,14 @@ public final class Partie {
                     // dépenser le nb d'anneaux karmique nécessaire pour se réincarner
                     String choixAnneaux = joueur
                             .choix("Vous pouvez vous réincarner ! Il vous faut pour cela dépenser "
-                                    + (echellekarmique - points + 1)
+                                    + (echellekarmique - points)
                                     + " anneaux Karmiques. Vous en avez actuellement " + nbAnneaux
                                     + ", allez vous les utiliser ?", "Oui", "Non");
                     // Le joueur dépense le nombre d'anneaux nécessaire pour se réincarner et gagne
                     // ce meme montant en points
                     if (choixAnneaux == "Oui") {
-                        nbAnneaux -= echellekarmique - points + 1;
-                        points += echellekarmique - points + 1;
+                        nbAnneaux -= echellekarmique - points;
+                        points += echellekarmique - points;
                     }
                 }
 
