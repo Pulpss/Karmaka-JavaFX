@@ -1,7 +1,7 @@
 package karmaka.controllers;
 
 import java.net.URL;
-import java.io.IOException;
+
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 
@@ -36,24 +36,25 @@ public class PlateauController implements Initializable {
     private Button passer;
 
     @FXML
-    public void handlePasser() throws IOException {
+    public void handlePasser() {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
         if (actionsPossibles.contains(Action.PASSER)) {
             Partie.getInstance().setEtape(Partie.Etape.TOUR_SUIVANT);
             Partie.getInstance().tour();
         } else {
             Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-            joueur.afficher("Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
+            joueur.afficher(
+                    "Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
         }
     }
 
     @FXML
-    public void handleEchelleButton() throws IOException {
+    public void handleEchelleButton() {
         Router.getInstance().setScene("echelle");
     }
 
     @FXML
-    public void handleDeck() throws IOException {
+    public void handleDeck() {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
         System.out.println(actionsPossibles);
         if (actionsPossibles.contains(Action.PIOCHER_DECK)) {
@@ -67,11 +68,11 @@ public class PlateauController implements Initializable {
     }
 
     @FXML
-    public void handleLoad() throws IOException {
+    public void handleLoad() {
         Partie.getInstance().charger();
     }
 
-    private void handleMouseClicked(Carte c) throws IOException {
+    private void handleMouseClicked(Carte c) {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
         System.out.println(actionsPossibles);
         // Si on peut choisir une carte de la main et si cette carte est dans la main.
@@ -86,19 +87,11 @@ public class PlateauController implements Initializable {
         Partie partie = Partie.getInstance();
         partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        ImageView tempView = new CarteView(c);
-                        tempView.setOnMouseClicked(e -> {
-                            try {
-                                handleMouseClicked(c);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        });
-                        main.getChildren().add(tempView);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ImageView tempView = new CarteView(c);
+                    tempView.setOnMouseClicked(e -> {
+                        handleMouseClicked(c);
+                    });
+                    main.getChildren().add(tempView);
                 });
     }
 
@@ -108,38 +101,22 @@ public class PlateauController implements Initializable {
         ArrayList<ImageView> cartes = new ArrayList<ImageView>();
         partie.getJoueur(partie.getTour()).getOeuvres().getCartes().iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        ImageView tempView = new CarteView(c);
-                        tempView.setOnMouseClicked(e -> {
-                            try {
-                                handleMouseClicked(c);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        });
-                        cartes.add(tempView);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ImageView tempView = new CarteView(c);
+                    tempView.setOnMouseClicked(e -> {
+                        handleMouseClicked(c);
+                    });
+                    cartes.add(tempView);
                 });
         oeuvres.getChildren().addAll(cartes);
         // joueur adversaire
         cartes.clear();
         partie.getJoueur((partie.getTour() + 1) % 2).getOeuvres().getCartes().iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        ImageView tempView = new CarteView(c);
-                        tempView.setOnMouseClicked(e -> {
-                            try {
-                                handleMouseClicked(c);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        });
-                        cartes.add(tempView);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ImageView tempView = new CarteView(c);
+                    tempView.setOnMouseClicked(e -> {
+                        handleMouseClicked(c);
+                    });
+                    cartes.add(tempView);
                 });
         adversaireOeuvres.getChildren().addAll(cartes);
     }

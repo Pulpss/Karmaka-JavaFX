@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -14,7 +14,7 @@ public class Lendemain extends Carte {
         super("Lendemain", Couleur.VERT, "Puisez une carte à la Source. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
         joueur.afficher("La carte Lendemain va être jouée !");

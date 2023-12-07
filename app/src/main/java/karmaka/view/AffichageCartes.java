@@ -1,6 +1,6 @@
 package karmaka.view;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
@@ -19,11 +19,7 @@ public class AffichageCartes extends Alert {
         ArrayList<ImageView> cartesView = new ArrayList<ImageView>();
         cartes.iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        cartesView.add(new CarteView(c));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    cartesView.add(new CarteView(c));
                 });
         // HBox containing all the cards
         HBox hbox = new HBox();

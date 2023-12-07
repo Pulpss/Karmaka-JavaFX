@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -14,7 +14,7 @@ public class Deni extends Carte {
         super("Deni", Couleur.BLEU, "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.", 2);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Deni va être jouée !");

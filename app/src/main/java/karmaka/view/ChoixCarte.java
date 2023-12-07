@@ -1,6 +1,6 @@
 package karmaka.view;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
@@ -24,16 +24,12 @@ public class ChoixCarte extends Alert {
         Label carteSelLabel = new Label("La carte sélectionnée actuellement est: Aucune");
         cartes.iterator()
                 .forEachRemaining(c -> {
-                    try {
-                        ImageView tempView = new CarteView(c);
-                        tempView.setOnMouseClicked(e -> {
-                            carteSel = c;
-                            carteSelLabel.setText("La carte sélectionnée actuellement est: " + c.getNom());
-                        });
-                        cartesView.add(tempView);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ImageView tempView = new CarteView(c);
+                    tempView.setOnMouseClicked(e -> {
+                        carteSel = c;
+                        carteSelLabel.setText("La carte sélectionnée actuellement est: " + c.getNom());
+                    });
+                    cartesView.add(tempView);
                 });
         // HBox containing all the cards
         HBox hbox = new HBox();

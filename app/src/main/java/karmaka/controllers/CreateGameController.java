@@ -1,6 +1,6 @@
 package karmaka.controllers;
 
-import java.io.IOException;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,11 +39,11 @@ public class CreateGameController implements Initializable {
         j2Humain.setSelected(false);
     }
     @FXML
-    private void handleAnnuler() throws IOException {
+    private void handleAnnuler()  {
         Router.getInstance().setScene("menu");
     }
     @FXML
-    private void handleCreer() throws IOException {
+    private void handleCreer()  {
         Router.getInstance().setScene("plateauPlaceholder");
         Joueur j1 = j1Humain.isSelected() ? new Humain(j1Nom.getText()) : new Robot(j1Nom.getText());
         Joueur j2 = j2Humain.isSelected() ? new Humain(j2Nom.getText()) : new Robot(j2Nom.getText());

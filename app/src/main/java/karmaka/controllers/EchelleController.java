@@ -1,7 +1,7 @@
 package karmaka.controllers;
 
 import java.net.URL;
-import java.io.IOException;
+
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ public class EchelleController implements Initializable {
     private AnchorPane j1Pion, j2Pion;
 
     @FXML
-    public void handleRetourButton() throws IOException {
+    public void handleRetourButton()  {
         Router.getInstance().setScene("plateau");
     }
 

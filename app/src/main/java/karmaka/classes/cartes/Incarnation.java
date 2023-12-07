@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -13,7 +13,7 @@ public class Incarnation extends Carte {
         super("Incarnation", Couleur.MOSAIQUE, "Choisissez une de vos Oeuvres. Copiez son pouvoir.", 1);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Incarnation va être jouée !");
         Oeuvres oeuvres = joueur.getOeuvres();

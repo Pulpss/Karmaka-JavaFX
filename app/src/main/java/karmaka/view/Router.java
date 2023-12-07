@@ -6,12 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
-
-import javax.swing.text.html.Option;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,17 +16,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import karmaka.classes.Carte;
 import karmaka.classes.GameData;
-import karmaka.classes.Partie;
 
 public final class Router {
     private static String scene;
@@ -60,17 +50,27 @@ public final class Router {
         return instance;
     }
 
-    public void setScene(String sceneName) throws IOException {
+    public void setScene(String sceneName)  {
         scene = sceneName;
         stage.setTitle(sceneName);
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(scene)))));
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(sceneName)))));
+        } catch (Exception e) {
+            System.out.println("Scene not found: " + sceneName);
+            e.printStackTrace();
+        }
         stage.show();
         System.out.println("Scene changed to " + scene);
     }
 
-    public void update() throws IOException {
+    public void update() {
         stage.setTitle(scene);
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(scene)))));
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(scene)))));
+        } catch (Exception e) {
+            System.out.println("Scene not found: " + scene);
+            e.printStackTrace();
+        }
         stage.show();
         System.out.println("Scene updated to " + scene);
     }

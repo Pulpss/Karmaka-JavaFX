@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -15,7 +15,7 @@ public class Panique extends Carte {
                 "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Panique va être jouée !");

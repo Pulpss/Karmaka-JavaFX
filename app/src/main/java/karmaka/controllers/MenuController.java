@@ -1,6 +1,6 @@
 package karmaka.controllers;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,12 +11,12 @@ import karmaka.view.Router;
 
 public class MenuController implements Initializable {
     @FXML
-    private void handlePlay() throws IOException {
+    private void handlePlay()  {
         Router.getInstance().setScene("createGame");
     }
 
     @FXML
-    private void handleLoad() throws IOException {
+    private void handleLoad()  {
         Partie.init();
         Partie.getInstance().charger();
     }

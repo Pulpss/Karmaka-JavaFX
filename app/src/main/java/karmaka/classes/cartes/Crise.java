@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -15,7 +15,7 @@ public class Crise extends Carte {
         super("Crise", Couleur.ROUGE, "Le rival de votre choix défausse une de ses Oeuvres.", 2);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
         Joueur joueurAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2);
     	joueur.afficher("La carte Crise va être jouée !");

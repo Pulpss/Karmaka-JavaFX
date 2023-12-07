@@ -1,6 +1,6 @@
 package karmaka.classes;
 
-import java.io.IOException;
+
 import java.io.Serializable;
 
 public abstract class Carte implements Serializable {
@@ -28,5 +28,5 @@ public abstract class Carte implements Serializable {
         return couleur;
     }
 
-    public abstract void pouvoir() throws IOException;
+    public abstract void pouvoir();
 }

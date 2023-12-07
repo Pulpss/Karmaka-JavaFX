@@ -1,6 +1,6 @@
 package karmaka.classes.cartes;
 
-import java.io.IOException;
+
 
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
@@ -13,7 +13,7 @@ public class CoupDoeil extends Carte {
         super("CoupDoeil", Couleur.BLEU, "Regardez la Main d’un rival. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
-    public void pouvoir() throws IOException {
+    public void pouvoir()  {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Coup d'oeil va être jouée !");

@@ -11,6 +11,7 @@ import karmaka.classes.piles.VieFuture;
 
 public abstract class Joueur implements Serializable {
     private String nom;
+    private boolean mort;
     private int echelleKarmique;
     private int nbAnneaux;
     private Main main;
@@ -66,6 +67,14 @@ public abstract class Joueur implements Serializable {
 
     public void addAnneau() {
         this.nbAnneaux += 1;
+    }
+
+    public boolean isMort() {
+        return mort;
+    }
+
+    public void setMort(boolean mort) {
+        this.mort = mort;
     }
 
     abstract public Carte choix(String message, ArrayList<Carte> cartes);
