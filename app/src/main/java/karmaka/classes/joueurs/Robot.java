@@ -16,6 +16,7 @@ public class Robot extends Joueur {
 
     public Robot(String nom) {
         super(nom);
+        strategie = Strategie.AGRESSIF;
     }
 
     public Carte choix(String message, ArrayList<Carte> cartes) {
@@ -42,8 +43,7 @@ public class Robot extends Joueur {
     public String choix(String message, String... choix) {
         if (message.contains("Veuillez choisir une utilisation pour la carte")) {
             switch (Partie.getInstance().getCarteChoisie().getCouleur()) {
-                case Couleur.BLEU:
-                    return "Utiliser le pouvoir";
+                case BLEU:
                     break;
             
                 default:
