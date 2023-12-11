@@ -7,11 +7,22 @@ import karmaka.classes.Partie;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.VieFuture;
 
+/**
+ * La classe Transmigration représente une carte du jeu Karmaka avec le pouvoir spécifique "Placez dans votre Main n’importe quelle carte de votre Vie Future.".
+ */
 public class Transmigration extends Carte {
+	/**
+     * Constructeur de la classe Transmigration.
+     * Hérite du constructeur de la classe cartes
+     */
     public Transmigration() {
         super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importe quelle carte de votre Vie Future.", 1);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Transmigration.
+     * Placez dans votre Main n’importe quelle carte de votre Vie Future.
+     */
     public void pouvoir() {
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
     	joueur.afficher("La carte Transmigration va être jouée !");

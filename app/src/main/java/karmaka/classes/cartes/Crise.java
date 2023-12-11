@@ -9,12 +9,22 @@ import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Oeuvres;
 import karmaka.view.Router;
-
+/**
+ * La classe Crise représente une carte du jeu Karmaka avec le pouvoir spécifique "Le rival de votre choix défausse une de ses Oeuvres.".
+ */
 public class Crise extends Carte {
+	/**
+     * Constructeur de la classe Crise.
+     * Hérite du constructeur de la classe cartes.
+     */
     public Crise() {
         super("Crise", Couleur.ROUGE, "Le rival de votre choix défausse une de ses Oeuvres.", 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Crise.
+     * Le rival de votre choix défausse une de ses Oeuvres.
+     */
     public void pouvoir()  {
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
         Joueur joueurAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2);

@@ -9,11 +9,22 @@ import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.VieFuture;
 
+/**
+ * La classe Fournaise représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez les 2 premières cartes de la Vie Future d'un rival.".
+ */
 public class Fournaise extends Carte {
+	/**
+     * Constructeur de la classe Fournaise.
+     * Hérite du constructeur de la classe cartes.
+     */
     public Fournaise() {
         super("Fournaise", Couleur.ROUGE, "Défaussez les 2 premières cartes de la Vie Future d'un rival.", 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Fournaise.
+     * Défaussez les 2 premières cartes de la Vie Future d'un rival.
+     */
     public void pouvoir() {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

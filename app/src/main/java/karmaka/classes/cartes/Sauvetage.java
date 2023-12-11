@@ -9,11 +9,22 @@ import karmaka.classes.Partie;
 import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 
+/**
+ * La classe Sauvetage représente une carte du jeu Karmaka avec le pouvoir spécifique "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.".
+ */
 public class Sauvetage extends Carte {
+	/**
+     * Constructeur de la classe Sauvetage.
+     * Hérite du constructeur de la classe cartes
+     */
     public Sauvetage() {
         super("Sauvetage", Couleur.VERT, "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.", 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Sauvetage.
+     * Ajoutez à votre Main une des 3 dernières cartes de la Fosse.
+     */
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

@@ -9,11 +9,22 @@ import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.Main;
 
+/**
+ * La classe Duperie représente une carte du jeu Karmaka avec le pouvoir spécifique "Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.".
+ */
 public class Duperie extends Carte {
+	/**
+     * Constructeur de la classe Duperie.
+     * Hérite du constructeur de la classe cartes.
+     */
     public Duperie() {
         super("Duperie", Couleur.BLEU, "Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.", 3);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Duperie.
+     * Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.
+     */
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

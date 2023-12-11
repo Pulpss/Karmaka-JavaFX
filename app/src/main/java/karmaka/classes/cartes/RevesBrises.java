@@ -6,11 +6,22 @@ import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
 import karmaka.classes.piles.VieFuture;
 
+/**
+ * La classe RevesBrises représente une carte du jeu Karmaka avec le pouvoir spécifique "Placez la première carte de la Vie Future d'un rival sur la vôtre.".
+ */
 public class RevesBrises extends Carte {
+	/**
+     * Constructeur de la classe RevesBrises.
+     * Hérite du constructeur de la classe cartes
+     */
     public RevesBrises() {
         super("RevesBrises", Couleur.BLEU, "Placez la première carte de la Vie Future d'un rival sur la vôtre.", 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte RevesBrises.
+     * Placez la première carte de la Vie Future d'un rival sur la vôtre.
+     */
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

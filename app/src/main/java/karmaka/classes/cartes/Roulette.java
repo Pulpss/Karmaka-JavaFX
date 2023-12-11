@@ -9,13 +9,24 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Source;
 
+/**
+ * La classe Roulette représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez jusqu’à 2 cartes de votre Main. Vous pouvez ensuite puiser à la Source autant de carte(s) + 1.".
+ */
 public class Roulette extends Carte {
+	/**
+     * Constructeur de la classe Roulette.
+     * Hérite du constructeur de la classe cartes
+     */
     public Roulette() {
         super("Roulette", Couleur.ROUGE,
                 "Défaussez jusqu’à 2 cartes de votre Main. Vous pouvez ensuite puiser à la Source autant de carte(s) + 1.",
                 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Roulette.
+     * Défaussez jusqu’à 2 cartes de votre Main. Vous pouvez ensuite puiser à la Source autant de carte(s) + 1.
+     */
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

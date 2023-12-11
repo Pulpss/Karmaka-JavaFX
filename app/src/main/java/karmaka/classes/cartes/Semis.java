@@ -8,12 +8,23 @@ import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
 
+/**
+ * La classe Semis représente une carte du jeu Karmaka avec le pouvoir spécifique "Puisez 2 cartes à la Source, puis placez sur votre Vie Future 2 cartes de votre Main.".
+ */
 public class Semis extends Carte {
+	/**
+     * Constructeur de la classe Semis.
+     * Hérite du constructeur de la classe cartes
+     */
     public Semis() {
         super("Semis", Couleur.VERT,
                 "Puisez 2 cartes à la Source, puis placez sur votre Vie Future 2 cartes de votre Main.", 2);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Semis.
+     * Puisez 2 cartes à la Source, puis placez sur votre Vie Future 2 cartes de votre Main.
+     */
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

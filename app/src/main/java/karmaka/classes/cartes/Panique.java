@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Joueur;
@@ -9,12 +7,23 @@ import karmaka.classes.Partie;
 import karmaka.classes.Pile;
 import karmaka.classes.piles.Fosse;
 
+/**
+ * La classe Panique représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.".
+ */
 public class Panique extends Carte {
+	/**
+     * Constructeur de la classe Panique.
+     * Hérite du constructeur de la classe cartes
+     */
     public Panique() {
         super("Panique", Couleur.ROUGE,
                 "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte Panique.
+     * Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.
+     */
     public void pouvoir()  {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());

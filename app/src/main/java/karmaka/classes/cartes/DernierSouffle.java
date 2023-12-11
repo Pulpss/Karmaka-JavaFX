@@ -1,7 +1,5 @@
 package karmaka.classes.cartes;
 
-
-
 import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Joueur;
@@ -10,11 +8,22 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 import karmaka.view.Router;
 
+/**
+ * La classe DernierSouffle représente une carte du jeu Karmaka avec le pouvoir spécifique "Le joueur de votre choix défausse une carte de sa Main.".
+ */
 public class DernierSouffle extends Carte {
+	/**
+     * Constructeur de la classe DernierSouffle.
+     * Hérite du constructeur de la classe cartes.
+     */
     public DernierSouffle() {
         super("DernierSouffle", Couleur.ROUGE, "Le joueur de votre choix défausse une carte de sa Main.", 1);
     }
 
+    /**
+     * Met en oeuvre le pouvoir de la carte DernierSouffle.
+     * Le joueur de votre choix défausse une carte de sa Main.
+     */
     public void pouvoir()  {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
