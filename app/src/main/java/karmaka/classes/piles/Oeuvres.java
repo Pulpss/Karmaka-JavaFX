@@ -5,7 +5,17 @@ import java.util.ArrayList;
 import karmaka.classes.Carte;
 import karmaka.classes.Pile;
 
+/**
+ * La classe Oeuvres représente les paquets de cartes associés aux différents joueurs jouant à Karmaka (leurs packets Oeuvres).
+ * Elle étend la classe abstraite Pile et utilise une liste d'objets Carte pour stocker les cartes du paquet.
+ * @see Pile
+ * @see Carte
+ */
 public class Oeuvres extends Pile {
+	/**
+     * Constructeur par défaut de la classe Oeuvres.
+     * Initialise le paquet de cartes en utilisant une liste vide d'objets Carte.
+     */
     public Oeuvres() {
         super(new ArrayList<Carte>());
     }
