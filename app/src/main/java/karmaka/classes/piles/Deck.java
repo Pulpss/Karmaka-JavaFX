@@ -8,6 +8,7 @@ import karmaka.classes.Pile;
 /**
  * La classe Deck représente les paquets de cartes associés aux différents joueurs jouant à Karmaka (leurs pioches).
  * Elle étend la classe abstraite Pile et utilise une liste d'objets Carte pour stocker les cartes du paquet.
+ * 
  * @see Pile
  * @see Carte
  */

@@ -10,10 +10,14 @@ import karmaka.classes.cartes.*;
 /**
  * La classe Source représente un paquet de cartes commun à tous les joueurs jouant à Karmaka (la source).
  * Elle étend la classe abstraite Pile et utilise une liste d'objets Carte pour stocker les cartes du paquet.
+ * La classe contient une liste statique d'objets Carte initiaux qui sont mélangés lors de la création d'une instance de Source.
+ * Les cartes initiales comprennent des instances de différentes cartes telles que Transmigration, CoupDoeil, RevesBrises, etc.
+ * 
  * @see Pile
  * @see Carte
  */
 public class Source extends Pile {
+	
 	/**
      * Liste statique de cartes initiales représentant le contenu de la source au début de la partie.
      * Chaque type de carte est ajouté en plusieurs exemplaires à la liste.
@@ -84,6 +88,10 @@ public class Source extends Pile {
         new Bassesse(),
         new Bassesse()
     ));
+    
+    /**
+     * Constructeur de la classe Source. Initialise la Source avec les cartes initiales et les mélange.
+     */
     public Source() {
         super(cartesInit);
         melanger();

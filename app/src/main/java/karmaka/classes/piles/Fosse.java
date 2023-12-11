@@ -8,6 +8,7 @@ import karmaka.classes.Pile;
 /**
  * La classe Fosse représente un paquet de cartes commun à tous les joueurs jouant à Karmaka (la fosse).
  * Elle étend la classe abstraite Pile et utilise une liste d'objets Carte pour stocker les cartes du paquet.
+ * 
  * @see Pile
  * @see Carte
  */
