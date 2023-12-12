@@ -39,29 +39,14 @@ public abstract class Carte implements Serializable {
         this.points = points;
     }
 
-    /**
-     * Retourne le nom d'une carte.
-     *
-     * @return Le nom de la carte.
-     */
     public String getNom() {
         return nom;
     }
 
-    /**
-     * Retourne le nombre de points associé à une carte.
-     *
-     * @return Le nombre de points de la carte.
-     */
     public int getPoints() {
         return points;
     }
 
-    /**
-     * Retourne la couleur d'une carte.
-     *
-     * @return La couleur de la carte.
-     */
     public Couleur getCouleur() {
         return couleur;
     }

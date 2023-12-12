@@ -40,11 +40,6 @@ public abstract class Pile implements Serializable {
         }
     }
 
-    /**
-     * Retourne la liste des cartes dans la pile.
-     *
-     * @return La liste des cartes dans la pile.
-     */
     public ArrayList<Carte> getCartes() {
         return cartes;
     }
@@ -110,18 +105,4 @@ public abstract class Pile implements Serializable {
     public int size() {
         return cartes.size();
     }
-
-    /**
-     * Retourne les noms des cartes dans la pile sous forme d'un tableau de chaînes de caractères.
-     *
-     * @return Les noms des cartes dans la pile.
-     */
-    public String[] getNoms() {
-        String[] noms = new String[cartes.size()];
-        for (int i = 0; i < cartes.size(); i++) {
-            noms[i] = cartes.get(i).getNom();
-        }
-        return noms;
-    }
-
 }

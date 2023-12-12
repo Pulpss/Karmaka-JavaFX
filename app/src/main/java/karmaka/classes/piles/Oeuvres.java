@@ -13,6 +13,7 @@ import karmaka.classes.Pile;
  * @see Carte
  */
 public class Oeuvres extends Pile {
+	
 	/**
      * Constructeur par défaut de la classe Oeuvres.
      * Initialise le paquet de cartes en utilisant une liste vide d'objets Carte.

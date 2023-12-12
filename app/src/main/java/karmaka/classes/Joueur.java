@@ -57,83 +57,39 @@ public abstract class Joueur implements Serializable {
         this.oeuvres = new Oeuvres();
     }
 
-    /**
-     * Retourne la main de cartes du joueur.
-     *
-     * @return La main de cartes du joueur.
-     */
     public Main getMain() {
         return main;
     }
-    
-    /**
-     * Retourne le niveau actuel sur l'échelle karmique du joueur.
-     *
-     * @return Le niveau sur l'échelle karmique du joueur.
-     */
+
     public int getEchelleKarmique() {
         return echelleKarmique;
     }
-    
-    /**
-     * Retourne le deck du joueur.
-     *
-     * @return Le deck du joueur.
-     */
+
     public Deck getDeck() {
         return deck;
     }
 
-    /**
-     * Retourne la pile "Vie future" du joueur.
-     *
-     * @return La pile "Vie future" du joueur.
-     */
     public VieFuture getVieFuture() {
         return vieFuture;
     }
 
-    /**
-     * Retourne la pile "Oeuvres" réalisées par le joueur.
-     *
-     * @return La pile "Oeuvres" réalisées par le joueur.
-     */
     public Oeuvres getOeuvres() {
         return oeuvres;
     }
 
-    /**
-     * Retourne le nombre d'anneaux karmiques possédés par le joueur.
-     *
-     * @return Le nombre d'anneaux karmiques du joueur.
-     */
     public int getNbAnneaux() {
         return nbAnneaux;
     }
 
-    /**
-     * Définit le nombre d'anneaux karmiques possédé par le joueur.
-     *
-     * @param nbAnneaux Le nouveau nombre d'anneaux karmiques du joueur.
-     */
+
     public void setNbAnneaux(int nbAnneaux) {
         this.nbAnneaux = nbAnneaux;
     }
-    
-    /**
-     * Définit le niveau actuel sur l'échelle karmique du joueur.
-     *
-     * @param echelleKarmique Le nouveau niveau sur l'échelle karmique du joueur.
-     */
+
     public void setEchelleKarmique(int echelleKarmique) {
         this.echelleKarmique = echelleKarmique;
     }
-    
-    /**
-     * Retourne le nom du joueur.
-     *
-     * @return Le nom du joueur.
-     */
+
     public String getNom() {
         return nom;
     }
@@ -154,11 +110,6 @@ public abstract class Joueur implements Serializable {
         return mort;
     }
 
-    /**
-     * Définit l'état de mort du joueur.
-     *
-     * @param mort True si le joueur est mort, sinon False.
-     */
     public void setMort(boolean mort) {
         this.mort = mort;
     }

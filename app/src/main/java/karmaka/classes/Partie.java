@@ -10,15 +10,33 @@ import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
 import karmaka.view.Router;
 
+/**
+ * La classe {@code Partie} représente le moteur de jeu principal pour Karmaka.
+ * Elle gère le déroulement des tours, les actions des joueurs, et maintient l'état actuel de la partie.
+ *
+ * <p>Cette classe suit le modèle du singleton, garantissant une unique instance de la partie.</p>
+ *
+ * <p>Les différentes étapes du jeu sont représentées par l'énumération {@code Etape}.</p>
+ */
 public final class Partie {
     private static Partie instance = null;
     private GameData gameData = new GameData();
 
+    /**
+     * L'énumération {@code Etape} représente les différentes étapes du déroulement d'une partie de Karmaka.
+     * Chaque valeur de cette énumération correspond à une phase spécifique du tour de jeu.
+     */
     public enum Etape {
         DEBUT, PIOCHER_DECK, CHOISIR_CARTE_MAIN, CHOISIR_UTILISATION_CARTE, PROPOSER_CARTE,
         PROPOSER_CARTE_REJOUER, TOUR_SUIVANT, MEURT, MORT, GAGNANT
     }
 
+    /**
+     * Méthode d'initialisation d'une partie de Karmaka avec deux joueurs.
+     *
+     * @param j1 Le joueur 1.
+     * @param j2 Le joueur 2.
+     */
     private Partie(Joueur j1, Joueur j2) {
         gameData.joueurs[0] = j1;
         gameData.joueurs[1] = j2;
@@ -26,15 +44,27 @@ public final class Partie {
         tour();
     }
 
+    /**
+     * Constructeur privé pour le singleton, initialise la partie sans joueurs.
+     */
     private Partie() {
     }
 
+    /**
+     * Initialise la partie avec deux joueurs.
+     *
+     * @param joueur1 Le joueur 1.
+     * @param joueur2 Le joueur 2.
+     */
     public static void init(Joueur joueur1, Joueur joueur2) {
         if (instance == null) {
             instance = new Partie(joueur1, joueur2);
         }
     }
 
+    /**
+     * Initialise la partie sans joueurs.
+     */
     public static void init() {
         if (instance == null) {
             instance = new Partie();
@@ -77,6 +107,10 @@ public final class Partie {
         gameData.etape = et;
     }
 
+    /**
+     * Distribue initialement les cartes aux joueurs en les piochant depuis la source.
+     * Chaque joueur reçoit 4 cartes dans sa main et 2 cartes dans sa pile deck.
+     */
     private void distribuer() {
         for (int i = 0; i < 2; i++) {
             gameData.joueurs[i].getMain().ajouter(gameData.source.piocher(4));
@@ -84,10 +118,17 @@ public final class Partie {
         }
     }
 
+    /**
+     * Sauvegarde l'état actuel de la partie en utilisant le gestionnaire de routage.
+     */
     public void sauvegarder() {
         Router.getInstance().sauvegarder(gameData);
     }
 
+    /**
+     * Charge l'état précédemment sauvegardé de la partie en utilisant le gestionnaire de routage.
+     * Si une sauvegarde est chargée avec succès, la scène est définie sur "plateau".
+     */
     public void charger() {
         GameData saveData = Router.getInstance().charger();
         if (saveData != null) {
@@ -97,6 +138,9 @@ public final class Partie {
         }
     }
 
+    /**
+     * Effectue une série d'actions et de vérifications pour gérer le déroulement d'un tour de jeu.
+     */
     public void tour() {
         Joueur joueur = gameData.joueurs[gameData.tour];
         Deck deck = joueur.getDeck();
