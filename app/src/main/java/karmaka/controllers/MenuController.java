@@ -19,6 +19,7 @@ public class MenuController implements Initializable {
     private void handleLoad()  {
         Partie.init();
         Partie.getInstance().charger();
+        Partie.getInstance().tour();
     }
 
     @FXML

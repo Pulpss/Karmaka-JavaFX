@@ -6,6 +6,7 @@ import karmaka.classes.Carte;
 import karmaka.classes.Couleur;
 import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
+import karmaka.view.Router;
 
 public class Robot extends Joueur {
     private enum Strategie {
@@ -21,18 +22,21 @@ public class Robot extends Joueur {
 
     public Carte choix(String message, ArrayList<Carte> cartes) {
         Carte c;
-        if (message == "robot choisit carte main") { 
+        if (message == "robot choisit carte main") {
             switch (strategie) {
                 case AGRESSIF:
                     // premiere carte rouge ou premiere carte
-                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.ROUGE).findFirst().orElse(cartes.get(0));
+                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.ROUGE).findFirst()
+                            .orElse(cartes.get(0));
                     break;
                 case DEFENSIF:
                     // premiere carte bleu ou premiere carte
-                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.BLEU).findFirst().orElse(cartes.get(0));
+                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.BLEU).findFirst()
+                            .orElse(cartes.get(0));
                 case FERMIER:
                     // premiere carte verte ou premiere carte
-                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.VERT).findFirst().orElse(cartes.get(0));
+                    c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.VERT).findFirst()
+                            .orElse(cartes.get(0));
                 default:
                     break;
             }
@@ -42,10 +46,17 @@ public class Robot extends Joueur {
 
     public String choix(String message, String... choix) {
         if (message.contains("Veuillez choisir une utilisation pour la carte")) {
-            switch (Partie.getInstance().getCarteChoisie().getCouleur()) {
-                case BLEU:
-                    break;
-            
+            Couleur couleur = Partie.getInstance().getCarteChoisie().getCouleur();
+            switch (strategie) {
+                case AGRESSIF:
+                    // premiere utilisation rouge ou premiere utilisation
+                    return couleur == Couleur.ROUGE ? "Pouvoir" : "Points";
+                case DEFENSIF:
+                    // premiere utilisation bleu ou premiere utilisation
+                    return couleur == Couleur.BLEU ? "Pouvoir" : "Points";
+                case FERMIER:
+                    // premiere utilisation verte ou premiere utilisation
+                    return couleur == Couleur.VERT ? "Points" : "Futur";
                 default:
                     break;
             }
@@ -58,6 +69,7 @@ public class Robot extends Joueur {
     }
 
     public void afficher(String message) {
+        Router.getInstance().afficher(message);
         return;
     }
 

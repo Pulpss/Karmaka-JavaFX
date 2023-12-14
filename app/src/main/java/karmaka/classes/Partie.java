@@ -41,7 +41,6 @@ public final class Partie {
         gameData.joueurs[0] = j1;
         gameData.joueurs[1] = j2;
         distribuer();
-        tour();
     }
 
     /**
@@ -259,6 +258,11 @@ public final class Partie {
                 tour();
                 break;
             case CHOISIR_CARTE_MAIN:
+                if (main.size() == 0) {
+                    gameData.etape = Etape.TOUR_SUIVANT;
+                    tour();
+                    break;
+                }
                 joueur.afficher("Veuillez choisir une carte dans votre main" + (deck.size() > 0 ? " ou passer votre tour." : "."));
                 gameData.actionsPossibles.clear();
                 gameData.actionsPossibles.add(Action.CHOISIR_CARTE_MAIN);
@@ -349,7 +353,7 @@ public final class Partie {
                 break;
             case GAGNANT:
                 joueur
-                        .afficher("Le joueur " + gameData.joueurs[(gameData.gagnant + 1)].getNom() + " a gagné !");
+                        .afficher("Le joueur " + gameData.joueurs[(gameData.gagnant + 1)%2].getNom() + " a gagné !");
                 break;
         }
         return;

@@ -1,7 +1,5 @@
 package karmaka.controllers;
 
-
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
@@ -26,28 +24,34 @@ public class CreateGameController implements Initializable {
     private void handleJ1Humain() {
         j1Robot.setSelected(false);
     }
+
     @FXML
     private void handleJ1Robot() {
         j1Humain.setSelected(false);
     }
+
     @FXML
     private void handleJ2Humain() {
         j2Robot.setSelected(false);
     }
+
     @FXML
     private void handleJ2Robot() {
         j2Humain.setSelected(false);
     }
+
     @FXML
-    private void handleAnnuler()  {
+    private void handleAnnuler() {
         Router.getInstance().setScene("menu");
     }
+
     @FXML
-    private void handleCreer()  {
+    private void handleCreer() {
         Router.getInstance().setScene("plateauPlaceholder");
         Joueur j1 = j1Humain.isSelected() ? new Humain(j1Nom.getText()) : new Robot(j1Nom.getText());
         Joueur j2 = j2Humain.isSelected() ? new Humain(j2Nom.getText()) : new Robot(j2Nom.getText());
         Partie.init(j1, j2);
         Router.getInstance().setScene("plateau");
+        Partie.getInstance().tour();
     }
 }
