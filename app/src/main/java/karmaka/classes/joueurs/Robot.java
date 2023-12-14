@@ -21,31 +21,31 @@ public class Robot extends Joueur {
     }
 
     public Carte choix(String message, ArrayList<Carte> cartes) {
-        Carte c;
-        if (message == "robot choisit carte main") {
+        Carte c = cartes.get(0);
+        if (message.contains("choisit une carte de sa main pour la jouer")) {
             switch (strategie) {
                 case AGRESSIF:
                     // premiere carte rouge ou premiere carte
                     c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.ROUGE).findFirst()
-                            .orElse(cartes.get(0));
+                           .orElse(cartes.get(0));
                     break;
                 case DEFENSIF:
                     // premiere carte bleu ou premiere carte
                     c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.BLEU).findFirst()
                             .orElse(cartes.get(0));
+                    break;
                 case FERMIER:
                     // premiere carte verte ou premiere carte
                     c = cartes.stream().filter(carte -> carte.getCouleur() == Couleur.VERT).findFirst()
                             .orElse(cartes.get(0));
-                default:
                     break;
             }
         }
-        return cartes.get((int) (Math.random() * cartes.size()));
+        return c;
     }
 
     public String choix(String message, String... choix) {
-        if (message.contains("Veuillez choisir une utilisation pour la carte")) {
+        if (message.contains("va choisir une utilisation pour la carte")) {
             Couleur couleur = Partie.getInstance().getCarteChoisie().getCouleur();
             switch (strategie) {
                 case AGRESSIF:
@@ -57,6 +57,22 @@ public class Robot extends Joueur {
                 case FERMIER:
                     // premiere utilisation verte ou premiere utilisation
                     return couleur == Couleur.VERT ? "Points" : "Futur";
+                default:
+                    break;
+            }
+        }
+        else if (message.contains("Le bot adverse va vérifier s'il accepte la carte")) {
+            Couleur couleur = Partie.getInstance().getCarteChoisie().getCouleur();
+            switch (strategie) {
+                case AGRESSIF:
+                    // premiere utilisation rouge ou premiere utilisation
+                    return couleur == Couleur.ROUGE ? "Accepter" : "Refuser";
+                case DEFENSIF:
+                    // premiere utilisation bleu ou premiere utilisation
+                    return couleur == Couleur.BLEU ? "Accepter" : "Refuser";
+                case FERMIER:
+                    // premiere utilisation verte ou premiere utilisation
+                    return couleur == Couleur.VERT ? "Accepter" : "Refuser";
                 default:
                     break;
             }
