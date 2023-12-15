@@ -139,6 +139,7 @@ public final class Partie {
 
     /**
      * Effectue une série d'actions et de vérifications pour gérer le déroulement d'un tour de jeu.
+     * Prend notamment en compte si le joueur actif est un humain ou un bot.
      */
     public void tour() {
         Joueur joueur = gameData.joueurs[gameData.tour];

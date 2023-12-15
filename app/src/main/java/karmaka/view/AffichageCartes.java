@@ -13,7 +13,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import karmaka.classes.Carte;
 
+/**
+ * La classe AffichageCartes étend la classe Alert de JavaFX et est utilisée pour afficher les cartes dans une boîte de dialogue.
+ * Elle prend un message et une liste de cartes en paramètres pour créer une boîte de dialogue avec une disposition spécifique.
+ */
 public class AffichageCartes extends Alert {
+	 
+	/**
+     * Constructeur de la classe AffichageCartes.
+     *
+     * @param message Le message à afficher dans la boîte de dialogue.
+     * @param cartes  La liste de cartes à afficher dans la boîte de dialogue.
+     */
     public AffichageCartes(String message, ArrayList<Carte> cartes) {
         super(AlertType.NONE);
         ArrayList<ImageView> cartesView = new ArrayList<ImageView>();
@@ -21,26 +32,27 @@ public class AffichageCartes extends Alert {
                 .forEachRemaining(c -> {
                     cartesView.add(new CarteView(c));
                 });
-        // HBox containing all the cards
+        // HBox contenant toutes les cartes.
         HBox hbox = new HBox();
         hbox.setSpacing(10);
         hbox.setPrefWidth(00);
         hbox.getChildren().addAll(cartesView);
-        // ScrollPane containing the HBox
+        // ScrollPane contenant la HBox pour gérer le défilement si nécessaire.
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setContent(hbox);
+        // Label pour afficher le message au-dessus des cartes.
         Label label = new Label(message);
-        // VBox containing the label and the ScrollPane
+        // VBox contenant le label et le ScrollPane.
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.getChildren().addAll(label, scrollPane);
-        // DialogPane containing the VBox (necessary for alert)
+        // DialogPane contenant la VBox (nécessaire pour la boîte de dialogue).
         DialogPane dialogPane = new DialogPane();
         dialogPane.setContent(vbox);
-        // Alert containing the DialogPane
+        // Configuration de la boîte de dialogue.
         super.setWidth(800);
         super.setTitle("Affichage cartes.");
         super.setDialogPane(dialogPane);

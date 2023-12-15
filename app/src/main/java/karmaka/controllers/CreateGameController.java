@@ -12,7 +12,7 @@ import karmaka.view.Router;
 
 public class CreateGameController implements Initializable {
     @FXML
-    private RadioButton j1Humain, j1Robot, j2Humain, j2Robot;
+    private RadioButton j1Humain, j1Robot, j2Humain, j2Robot, j1RobotOff, j1RobotDef, j1RobotFerm, j2RobotOff, j2RobotDef, j2RobotFerm;
     @FXML
     private TextField j1Nom, j2Nom;
 
@@ -41,6 +41,42 @@ public class CreateGameController implements Initializable {
     }
 
     @FXML
+    private void j1RobotOff() {
+    	j1RobotDef.setSelected(false);
+    	j1RobotFerm.setSelected(false);
+    }
+
+    @FXML
+    private void j1RobotDef() {
+    	j1RobotOff.setSelected(false);
+    	j1RobotFerm.setSelected(false);
+    }
+    
+    @FXML
+    private void j1RobotFerm() {
+    	j1RobotDef.setSelected(false);
+    	j1RobotOff.setSelected(false);
+    }
+    
+    @FXML
+    private void j2RobotOff() {
+    	j2RobotDef.setSelected(false);
+    	j2RobotFerm.setSelected(false);
+    }
+
+    @FXML
+    private void j2RobotDef() {
+    	j2RobotOff.setSelected(false);
+    	j2RobotFerm.setSelected(false);
+    }
+    
+    @FXML
+    private void j2RobotFerm() {
+    	j2RobotDef.setSelected(false);
+    	j2RobotOff.setSelected(false);
+    }
+    
+    @FXML
     private void handleAnnuler() {
         Router.getInstance().setScene("menu");
     }
@@ -50,6 +86,13 @@ public class CreateGameController implements Initializable {
         Router.getInstance().setScene("plateauPlaceholder");
         Joueur j1 = j1Humain.isSelected() ? new Humain(j1Nom.getText()) : new Robot(j1Nom.getText());
         Joueur j2 = j2Humain.isSelected() ? new Humain(j2Nom.getText()) : new Robot(j2Nom.getText());
+        if (j1Robot.isSelected()){
+        	
+        }
+        if (j2Robot.isSelected()){
+        	
+        }
+
         Partie.init(j1, j2);
         Router.getInstance().setScene("plateau");
         Partie.getInstance().tour();
