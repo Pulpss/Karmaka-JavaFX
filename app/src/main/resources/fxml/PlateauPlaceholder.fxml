@@ -12,6 +12,11 @@
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
          VBox.vgrow="ALWAYS">
          <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/plateau.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="adversaireVieFuture" fitHeight="160" fitWidth="115" layoutX="200"
                layoutY="16">
             </ImageView>

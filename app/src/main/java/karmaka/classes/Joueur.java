@@ -3,6 +3,7 @@ package karmaka.classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import karmaka.classes.cartes.Deni;
 import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;

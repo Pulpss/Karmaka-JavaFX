@@ -70,7 +70,8 @@ public final class Router {
         scene = sceneName;
         stage.setTitle(sceneName);
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(sceneName)))));
+            Scene newScene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(sceneName))));
+            stage.setScene(newScene);   
         } catch (Exception e) {
             System.out.println("Scene not found: " + sceneName);
             e.printStackTrace();
