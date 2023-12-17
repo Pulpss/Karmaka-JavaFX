@@ -26,13 +26,13 @@ public class PlateauPlaceholderController implements Initializable {
     @FXML
     public void initialize(URL arg0, ResourceBundle arg1) {
         source.setImage(new Image("/images/cartes/Back.png"));
-        fosse.setImage(new Image("/images/cartes/Bassesse.png"));
+        fosse.setImage(new Image("/images/cartes/Back.png"));
         adversaireDeck.setImage(new Image("/images/cartes/Back.png"));
-        adversaireOeuvres.setImage(new Image("/images/cartes/Bassesse.png"));
-        adversaireVieFuture.setImage(new Image("/images/cartes/Bassesse.png"));
+        adversaireOeuvres.setImage(new Image("/images/cartes/Back.png"));
+        adversaireVieFuture.setImage(new Image("/images/cartes/Back.png"));
         deck.setImage(new Image("/images/cartes/Back.png"));
-        oeuvres.setImage(new Image("/images/cartes/Bassesse.png"));
-        vieFuture.setImage(new Image("/images/cartes/Bassesse.png"));
-        main.setImage(new Image("/images/cartes/Bassesse.png"));
+        oeuvres.setImage(new Image("/images/cartes/Back.png"));
+        vieFuture.setImage(new Image("/images/cartes/Back.png"));
+        main.setImage(new Image("/images/cartes/Back.png"));
     }
 }
