@@ -1,6 +1,5 @@
 package karmaka.view;
 
-
 import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
@@ -14,12 +13,14 @@ import javafx.scene.layout.VBox;
 import karmaka.classes.Carte;
 
 /**
- * La classe AffichageCartes étend la classe Alert de JavaFX et est utilisée pour afficher les cartes dans une boîte de dialogue.
- * Elle prend un message et une liste de cartes en paramètres pour créer une boîte de dialogue avec une disposition spécifique.
+ * La classe AffichageCartes étend la classe Alert de JavaFX et est utilisée
+ * pour afficher les cartes dans une boîte de dialogue.
+ * Elle prend un message et une liste de cartes en paramètres pour créer une
+ * boîte de dialogue avec une disposition spécifique.
  */
 public class AffichageCartes extends Alert {
-	 
-	/**
+
+    /**
      * Constructeur de la classe AffichageCartes.
      *
      * @param message Le message à afficher dans la boîte de dialogue.

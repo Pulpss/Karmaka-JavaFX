@@ -22,7 +22,8 @@ import karmaka.classes.Carte;
 import karmaka.classes.GameData;
 
 /**
- * La classe Router gère la navigation entre les différentes vues de l'application.
+ * La classe Router gère la navigation entre les différentes vues de
+ * l'application.
  */
 public final class Router {
     private static String scene;
@@ -66,12 +67,12 @@ public final class Router {
         return instance;
     }
 
-    public void setScene(String sceneName)  {
+    public void setScene(String sceneName) {
         scene = sceneName;
         stage.setTitle(sceneName);
         try {
             Scene newScene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(scenes.get(sceneName))));
-            stage.setScene(newScene);   
+            stage.setScene(newScene);
         } catch (Exception e) {
             System.out.println("Scene not found: " + sceneName);
             e.printStackTrace();
@@ -98,7 +99,7 @@ public final class Router {
     /**
      * Affiche une boîte de dialogue d'information avec le message spécifié.
      *
-     * @param message Le message à afficher.
+     * @param inst Le message à afficher.
      */
     public void afficher(String inst) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -135,7 +136,8 @@ public final class Router {
      * Affiche une boîte de dialogue de choix de carte parmi une liste.
      *
      * @param message Le message à afficher.
-     * @param cartes  La liste des cartes parmi lesquelles l'utilisateur peut choisir.
+     * @param cartes  La liste des cartes parmi lesquelles l'utilisateur peut
+     *                choisir.
      * @return La carte choisie par l'utilisateur.
      */
     public Carte choix(String message, ArrayList<Carte> cartes) {

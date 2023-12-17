@@ -5,16 +5,17 @@ import javafx.scene.image.ImageView;
 import karmaka.classes.Carte;
 
 /**
- * La classe CarteView étend ImageView et représente la vue graphique d'une carte.
+ * La classe CarteView étend ImageView et représente la vue graphique d'une
+ * carte.
  */
 public class CarteView extends ImageView {
-	
-	/**
+
+    /**
      * Constructeur de la classe CarteView.
      *
      * @param c Carte associée à la vue.
      */
-    public CarteView (Carte c)  {
+    public CarteView(Carte c) {
         super();
         super.setFitHeight(160);
         super.setFitWidth(115);

@@ -22,17 +22,22 @@
                 </ImageView>
                 <AnchorPane fx:id="j1Pion" layoutX="95" layoutY="400">
                     <children>
-                       <Circle fill="#1f93ff" layoutX="37.0" layoutY="53.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
-                       <Text fx:id="j1Nom" layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur 1" wrappingWidth="52.0" />
+                        <Circle fill="#1f93ff" layoutX="37.0" layoutY="53.0" radius="38.0"
+                            stroke="BLACK" strokeType="INSIDE" />
+                        <Text fx:id="j1Nom" layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE"
+                            strokeWidth="0.0" text="Joueur 1" wrappingWidth="52.0" />
                     </children>
-                 </AnchorPane>
-                 <AnchorPane fx:id="j2Pion" layoutX="240.0" layoutY="400">
+                </AnchorPane>
+                <AnchorPane fx:id="j2Pion" layoutX="240.0" layoutY="400">
                     <children>
-                       <Circle fill="#ff2121" layoutX="37.0" layoutY="53.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
-                       <Text fx:id="j2Nom" layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur 2" wrappingWidth="52.0" />
+                        <Circle fill="#ff2121" layoutX="37.0" layoutY="53.0" radius="38.0"
+                            stroke="BLACK" strokeType="INSIDE" />
+                        <Text fx:id="j2Nom" layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE"
+                            strokeWidth="0.0" text="Joueur 2" wrappingWidth="52.0" />
                     </children>
-                 </AnchorPane>
-                <Button onMouseClicked="#handleRetourButton" layoutX="344.0" layoutY="505.0" mnemonicParsing="false" text="Retour" />
+                </AnchorPane>
+                <Button onMouseClicked="#handleRetourButton" layoutX="344.0" layoutY="505.0"
+                    mnemonicParsing="false" text="Retour" />
             </children>
         </AnchorPane>
     </children>

@@ -20,7 +20,8 @@
             </ImageView>
             <Button onMouseClicked="#handlePlay" layoutX="175.0" layoutY="178.0"
                mnemonicParsing="false" prefHeight="62.0" prefWidth="290.0" text="Jouer" />
-            <Button onMouseClicked="#handleLoad" layoutX="175.0" layoutY="264.0" mnemonicParsing="false" prefHeight="62.0"
+            <Button onMouseClicked="#handleLoad" layoutX="175.0" layoutY="264.0"
+               mnemonicParsing="false" prefHeight="62.0"
                prefWidth="290.0" text="Charger une partie" />
          </children>
       </AnchorPane>

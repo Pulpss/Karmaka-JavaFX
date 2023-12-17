@@ -8,15 +8,16 @@ import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Source;
 
 /**
- * La classe Longevite représente une carte du jeu Karmaka avec le pouvoir spécifique "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.".
+ * La classe Longevite représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.".
  */
 public class Longevite extends Carte {
-	/**
+    /**
      * Constructeur de la classe Longevite.
      * Hérite du constructeur de la classe cartes
      */
     public Longevite() {
-    	
+
         super("Longevite", Couleur.VERT, "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.", 2, false);
     }
 

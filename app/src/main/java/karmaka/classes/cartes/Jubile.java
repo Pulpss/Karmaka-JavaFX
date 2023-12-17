@@ -8,15 +8,16 @@ import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
 
 /**
- * La classe Jubile représente une carte du jeu Karmaka avec le pouvoir spécifique "Placez jusqu’à 2 cartes de votre Main sur vos Oeuvres.".
+ * La classe Jubile représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Placez jusqu’à 2 cartes de votre Main sur vos Oeuvres.".
  */
 public class Jubile extends Carte {
-	/**
+    /**
      * Constructeur de la classe Jubile.
      * Hérite du constructeur de la classe cartes
      */
     public Jubile() {
-    	
+
         super("Jubile", Couleur.VERT, "Placez jusqu’à 2 cartes de votre Main sur vos Oeuvres.", 3, false);
     }
 
@@ -27,7 +28,7 @@ public class Jubile extends Carte {
     public void pouvoir() {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Jubile va être jouée !");
+        joueur.afficher("La carte Jubile va être jouée !");
         Main main = joueur.getMain();
         int nbCartes = 0;
         if (main.size() > 0) {

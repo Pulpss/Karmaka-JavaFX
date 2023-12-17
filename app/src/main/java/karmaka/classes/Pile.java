@@ -7,18 +7,21 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * La classe abstraite Pile représente une pile de cartes dans le jeu Karmaka.
- * Elle contient des méthodes pour mélanger les cartes, piocher des cartes, ajouter des cartes à la pile, etc.
- * Cette classe est conçue pour être étendue par des classes spécifiques de piles, telles que Deck, Main, VieFuture, Oeuvres, etc.
- * Elle implémente l'interface Serializable pour permettre la sérialisation des instances de piles.
+ * Elle contient des méthodes pour mélanger les cartes, piocher des cartes,
+ * ajouter des cartes à la pile, etc.
+ * Cette classe est conçue pour être étendue par des classes spécifiques de
+ * piles, telles que Deck, Main, VieFuture, Oeuvres, etc.
+ * Elle implémente l'interface Serializable pour permettre la sérialisation des
+ * instances de piles.
  *
  * @see Serializable
  */
 public abstract class Pile implements Serializable {
-    
-	/** La liste des cartes dans la pile. */
-	private ArrayList<Carte> cartes;
 
-	/**
+    /** La liste des cartes dans la pile. */
+    private ArrayList<Carte> cartes;
+
+    /**
      * Constructeur de la classe Pile.
      *
      * @param cartesInit La liste initiale des cartes dans la pile.
@@ -72,7 +75,8 @@ public abstract class Pile implements Serializable {
      * Pioche une carte spécifique de la pile.
      *
      * @param c La carte à piocher.
-     * @return La carte piochée, ou null si la carte n'est pas présente dans la pile.
+     * @return La carte piochée, ou null si la carte n'est pas présente dans la
+     *         pile.
      */
     public Carte piocher(Carte c) {
         boolean sup = cartes.remove(c);

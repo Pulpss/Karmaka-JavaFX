@@ -12,7 +12,9 @@ import karmaka.classes.Partie;
 import karmaka.view.Router;
 
 /**
- * La classe EchelleController gère les actions et les interactions de l'interface utilisateur pour l'affichage de l'échelle karmique des joueurs dans le jeu.
+ * La classe EchelleController gère les actions et les interactions de
+ * l'interface utilisateur pour l'affichage de l'échelle karmique des joueurs
+ * dans le jeu.
  */
 public class EchelleController implements Initializable {
     @FXML
@@ -25,12 +27,13 @@ public class EchelleController implements Initializable {
      * Gère l'action du bouton "Retour" pour revenir à la scène du plateau de jeu.
      */
     @FXML
-    public void handleRetourButton()  {
+    public void handleRetourButton() {
         Router.getInstance().setScene("plateau");
     }
 
     /**
-     * Initialise le contrôleur après que son élément racine ait été complètement traité.
+     * Initialise le contrôleur après que son élément racine ait été complètement
+     * traité.
      *
      * @param arg0 URL utilisée pour résoudre les chemins relatifs aux ressources.
      * @param arg1 ResourceBundle qui contient les paramètres régionaux actuels.
@@ -48,7 +51,7 @@ public class EchelleController implements Initializable {
     /**
      * Met à jour la position du pion en fonction de l'échelle karmique du joueur.
      *
-     * @param pion   Le pion à mettre à jour.
+     * @param pion            Le pion à mettre à jour.
      * @param echelleKarmique L'échelle karmique du joueur.
      */
     private void updatePionPosition(AnchorPane pion, int echelleKarmique) {

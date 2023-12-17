@@ -36,6 +36,8 @@ public class CreateGameController implements Initializable {
         j2Strat.setVisible(false);
         j1Strat.getItems().addAll(Robot.Strategie.values());
         j2Strat.getItems().addAll(Robot.Strategie.values());
+        j1Strat.getSelectionModel().selectFirst();
+        j2Strat.getSelectionModel().selectFirst();
     }
 
     /**

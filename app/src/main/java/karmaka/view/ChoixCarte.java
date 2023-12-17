@@ -1,6 +1,5 @@
 package karmaka.view;
 
-
 import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
@@ -14,7 +13,8 @@ import javafx.scene.layout.VBox;
 import karmaka.classes.Carte;
 
 /**
- * La classe ChoixCarte étend la classe Alert et représente une boîte de dialogue
+ * La classe ChoixCarte étend la classe Alert et représente une boîte de
+ * dialogue
  * permettant à l'utilisateur de choisir une carte parmi une liste.
  */
 public class ChoixCarte extends Alert {
@@ -24,7 +24,7 @@ public class ChoixCarte extends Alert {
      * Constructeur de la classe ChoixCarte.
      *
      * @param message Message à afficher dans la boîte de dialogue.
-     * @param cartes Liste des cartes parmi lesquelles l'utilisateur peut choisir.
+     * @param cartes  Liste des cartes parmi lesquelles l'utilisateur peut choisir.
      */
     public ChoixCarte(String message, ArrayList<Carte> cartes) {
         super(AlertType.NONE);
@@ -56,7 +56,8 @@ public class ChoixCarte extends Alert {
         scrollPane.setContent(hbox);
         // Étiquette affichant le message
         Label label = new Label(message);
-        // VBox contenant l'étiquette, le ScrollPane et l'étiquette de la carte sélectionnée
+        // VBox contenant l'étiquette, le ScrollPane et l'étiquette de la carte
+        // sélectionnée
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.getChildren().addAll(label, scrollPane, carteSelLabel);

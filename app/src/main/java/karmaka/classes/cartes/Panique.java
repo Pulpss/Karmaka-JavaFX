@@ -8,26 +8,30 @@ import karmaka.classes.Pile;
 import karmaka.classes.piles.Fosse;
 
 /**
- * La classe Panique représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.".
+ * La classe Panique représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Défaussez la première carte de la Pile d'un joueur. Vous pouvez
+ * ensuite jouer une autre carte.".
  */
 public class Panique extends Carte {
-	/**
+    /**
      * Constructeur de la classe Panique.
      * Hérite du constructeur de la classe cartes
      */
     public Panique() {
         super("Panique", Couleur.ROUGE,
-                "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1, true);
+                "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1,
+                true);
     }
 
     /**
      * Met en oeuvre le pouvoir de la carte Panique.
-     * Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.
+     * Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer
+     * une autre carte.
      */
-    public void pouvoir()  {
+    public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Panique va être jouée !");
+        joueur.afficher("La carte Panique va être jouée !");
         Fosse fosse = Partie.getInstance().getFosse();
         Pile pileAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getDeck();
         if (pileAdv.size() > 0) {

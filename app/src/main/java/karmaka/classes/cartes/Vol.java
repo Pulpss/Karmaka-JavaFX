@@ -8,10 +8,11 @@ import karmaka.classes.piles.Main;
 import karmaka.classes.piles.Oeuvres;
 
 /**
- * La classe Vol représente une carte du jeu Karmaka avec le pouvoir spécifique "Placez dans votre Main l’Oeuvre Exposée d'un rival.".
+ * La classe Vol représente une carte du jeu Karmaka avec le pouvoir spécifique
+ * "Placez dans votre Main l’Oeuvre Exposée d'un rival.".
  */
 public class Vol extends Carte {
-	/**
+    /**
      * Constructeur de la classe Vol.
      * Hérite du constructeur de la classe cartes
      */
@@ -26,7 +27,7 @@ public class Vol extends Carte {
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Vol va être jouée !");
+        joueur.afficher("La carte Vol va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Main main = joueur.getMain();
         if (oeuvresAdv.size() > 0) {

@@ -10,10 +10,11 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 
 /**
- * La classe Sauvetage représente une carte du jeu Karmaka avec le pouvoir spécifique "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.".
+ * La classe Sauvetage représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.".
  */
 public class Sauvetage extends Carte {
-	/**
+    /**
      * Constructeur de la classe Sauvetage.
      * Hérite du constructeur de la classe cartes
      */
@@ -28,7 +29,7 @@ public class Sauvetage extends Carte {
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Sauvetage va être jouée !");
+        joueur.afficher("La carte Sauvetage va être jouée !");
         Fosse fosse = Partie.getInstance().getFosse();
         Main main = joueur.getMain();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(

@@ -9,7 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * La classe PlateauPlaceholderController initialise les images de la scène du plateau de jeu (placeholder)avant le début d'une partie.
+ * La classe PlateauPlaceholderController initialise les images de la scène du
+ * plateau de jeu (placeholder)avant le début d'une partie.
  */
 public class PlateauPlaceholderController implements Initializable {
     // Cards dimensions are 160x115
@@ -18,7 +19,8 @@ public class PlateauPlaceholderController implements Initializable {
             main;
 
     /**
-     * Initialise les images de la scène du plateau de jeu (placeholder) avant le début d'une partie.
+     * Initialise les images de la scène du plateau de jeu (placeholder) avant le
+     * début d'une partie.
      *
      * @param arg0 URL utilisée pour résoudre les chemins relatifs aux ressources.
      * @param arg1 ResourceBundle qui contient les paramètres régionaux actuels.

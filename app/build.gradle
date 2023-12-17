@@ -16,6 +16,11 @@ repositories {
     mavenCentral()
 }
 
+javadoc {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.encoding = 'UTF-8'
+}
+
 javafx {
     version = '21'
     modules = [ 'javafx.controls', 'javafx.fxml' ]

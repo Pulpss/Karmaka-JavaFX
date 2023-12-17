@@ -9,10 +9,11 @@ import karmaka.classes.piles.Oeuvres;
 import karmaka.view.Router;
 
 /**
- * La classe Vengeance représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez l’Oeuvre Exposée d’un rival.".
+ * La classe Vengeance représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Défaussez l’Oeuvre Exposée d’un rival.".
  */
 public class Vengeance extends Carte {
-	/**
+    /**
      * Constructeur de la classe Vengeance.
      * Hérite du constructeur de la classe cartes
      */
@@ -27,7 +28,7 @@ public class Vengeance extends Carte {
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Vengeance va être jouée !");
+        joueur.afficher("La carte Vengeance va être jouée !");
         Oeuvres oeuvresAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getOeuvres();
         Fosse fosse = Partie.getInstance().getFosse();
         if (oeuvresAdv.size() > 0) {

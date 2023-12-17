@@ -10,15 +10,18 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.VieFuture;
 
 /**
- * La classe Recyclage représente une carte du jeu Karmaka avec le pouvoir spécifique "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.".
+ * La classe Recyclage représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Ajoutez à votre Vie Future une des 3 dernières cartes de la
+ * Fosse.".
  */
 public class Recyclage extends Carte {
-	/**
+    /**
      * Constructeur de la classe Recyclage.
      * Hérite du constructeur de la classe cartes
      */
     public Recyclage() {
-        super("Recyclage", Couleur.VERT, "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", 1, false);
+        super("Recyclage", Couleur.VERT, "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", 1,
+                false);
     }
 
     /**
@@ -28,7 +31,7 @@ public class Recyclage extends Carte {
     public void pouvoir() {
         // TODO: tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Recyclage va être jouée !");
+        joueur.afficher("La carte Recyclage va être jouée !");
         Fosse fosse = Partie.getInstance().getFosse();
         VieFuture vieFuture = joueur.getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(

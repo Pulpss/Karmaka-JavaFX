@@ -8,25 +8,27 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 
 import java.util.Random;
+
 /**
- * La classe Bassesse représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez au hasard 2 cartes de la Main d’un rival.".
+ * La classe Bassesse représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Défaussez au hasard 2 cartes de la Main d’un rival.".
  */
 public class Bassesse extends Carte {
-	/**
+    /**
      * Constructeur de la classe Bassesse.
      * Hérite du constructeur de la classe cartes.
      */
-	public Bassesse() {
+    public Bassesse() {
         super("Bassesse", Couleur.ROUGE, "Défaussez au hasard 2 cartes de la Main d’un rival.", 3, false);
     }
-    
+
     /**
      * Met en oeuvre le pouvoir de la carte Bassesse.
      * Défausse au hasard deux cartes de la main d'un rival.
      */
-    public void pouvoir()  {
+    public void pouvoir() {
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Bassesse va être jouée !");
+        joueur.afficher("La carte Bassesse va être jouée !");
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         int nbCartesAdv = mainAdv.size();
@@ -37,11 +39,9 @@ public class Bassesse extends Carte {
         }
         if (nbCartesAdv >= 2) {
             joueur.afficher("2 cartes de la main de l'adversaire ont été défaussées !");
-        }
-        else if (nbCartesAdv == 1) {
+        } else if (nbCartesAdv == 1) {
             joueur.afficher("1 carte de la main de l'adversaire a été défaussée !");
-        }
-        else {
+        } else {
             joueur.afficher("Votre adversaire n'avait aucune carte à se défausser !");
         }
     }

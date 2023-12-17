@@ -8,10 +8,11 @@ import karmaka.classes.piles.Fosse;
 import karmaka.classes.piles.Main;
 
 /**
- * La classe Deni représente une carte du jeu Karmaka avec le pouvoir spécifique "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.".
+ * La classe Deni représente une carte du jeu Karmaka avec le pouvoir spécifique
+ * "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.".
  */
 public class Deni extends Carte {
-	/**
+    /**
      * Constructeur de la classe Deni.
      * Hérite du constructeur de la classe cartes.
      */
@@ -23,10 +24,10 @@ public class Deni extends Carte {
      * Met en oeuvre le pouvoir de la carte Deni.
      * Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.
      */
-    public void pouvoir()  {
+    public void pouvoir() {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-    	joueur.afficher("La carte Deni va être jouée !");
+        joueur.afficher("La carte Deni va être jouée !");
         Main main = joueur.getMain();
         if (main.size() > 0) {
             Fosse fosse = Partie.getInstance().getFosse();

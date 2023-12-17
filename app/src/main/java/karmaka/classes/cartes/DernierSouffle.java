@@ -9,10 +9,11 @@ import karmaka.classes.piles.Main;
 import karmaka.view.Router;
 
 /**
- * La classe DernierSouffle représente une carte du jeu Karmaka avec le pouvoir spécifique "Le joueur de votre choix défausse une carte de sa Main.".
+ * La classe DernierSouffle représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Le joueur de votre choix défausse une carte de sa Main.".
  */
 public class DernierSouffle extends Carte {
-	/**
+    /**
      * Constructeur de la classe DernierSouffle.
      * Hérite du constructeur de la classe cartes.
      */
@@ -24,17 +25,19 @@ public class DernierSouffle extends Carte {
      * Met en oeuvre le pouvoir de la carte DernierSouffle.
      * Le joueur de votre choix défausse une carte de sa Main.
      */
-    public void pouvoir()  {
+    public void pouvoir() {
         // TODO : tester
         Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
         Joueur joueurAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2);
-    	joueur.afficher("La carte Dernier Souffle va être jouée !");
-        String choixJoueur = joueur.choix("Choisissez le joueur qui va défausser une carte de sa main", "Adversaire", "Moi");
+        joueur.afficher("La carte Dernier Souffle va être jouée !");
+        String choixJoueur = joueur.choix("Choisissez le joueur qui va défausser une carte de sa main", "Adversaire",
+                "Moi");
         if (choixJoueur == "Adversaire") {
             Main mainAdv = joueurAdv.getMain();
             Fosse fosse = Partie.getInstance().getFosse();
             if (mainAdv.size() > 0) {
-                // Dans le cas ou l'adversaire doit défausser une carte, l'adversaire choisit quelle carte il doit défausser.
+                // Dans le cas ou l'adversaire doit défausser une carte, l'adversaire choisit
+                // quelle carte il doit défausser.
                 Router.getInstance().setScene("plateauPlaceholder");
                 joueur.afficher("Laissez votre adversaire choisir une carte à défausser.");
                 Carte carte = joueurAdv.choix("Veuillez choisir une carte à défausser", mainAdv.getCartes());
@@ -44,8 +47,7 @@ public class DernierSouffle extends Carte {
             } else {
                 joueur.afficher("L'adversaire n'a pas de carte en main !");
             }
-        }
-        else {
+        } else {
             Main main = joueur.getMain();
             Fosse fosse = Partie.getInstance().getFosse();
             if (main.size() > 0) {

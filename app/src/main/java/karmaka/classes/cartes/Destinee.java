@@ -10,10 +10,12 @@ import karmaka.classes.piles.Source;
 import karmaka.classes.piles.VieFuture;
 
 /**
- * La classe Destinee représente une carte du jeu Karmaka avec le pouvoir spécifique "Regardez les 3 premières cartes de la Source; ajoutez-en jusqu’à 2 à votre Vie Future. Replacez le reste dans l'ordre souhaité.".
+ * La classe Destinee représente une carte du jeu Karmaka avec le pouvoir
+ * spécifique "Regardez les 3 premières cartes de la Source; ajoutez-en jusqu’à
+ * 2 à votre Vie Future. Replacez le reste dans l'ordre souhaité.".
  */
 public class Destinee extends Carte {
-	/**
+    /**
      * Constructeur de la classe Destinee.
      * Hérite du constructeur de la classe cartes.
      */
@@ -25,7 +27,8 @@ public class Destinee extends Carte {
 
     /**
      * Met en oeuvre le pouvoir de la carte Destinee.
-     * Regardez les 3 premières cartes de la Source; ajoutez-en jusqu’à 2 à votre Vie Future. Replacez le reste dans l'ordre souhaité.
+     * Regardez les 3 premières cartes de la Source; ajoutez-en jusqu’à 2 à votre
+     * Vie Future. Replacez le reste dans l'ordre souhaité.
      */
     public void pouvoir() {
         // TODO : tester
