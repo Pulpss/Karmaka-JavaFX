@@ -10,5 +10,5 @@ package karmaka.classes;
  * </ul>
  */
 public enum Action {
-    PIOCHER_DECK, CHOISIR_CARTE_MAIN, PASSER
+    PIOCHER_DECK, CHOISIR_CARTE_MAIN, PASSER, TOUR_SUIVANT_ROBOT
 }

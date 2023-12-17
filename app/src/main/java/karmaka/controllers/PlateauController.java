@@ -14,9 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Carte;
-import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
-import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Fosse;
 import karmaka.view.CarteView;
 import karmaka.view.Router;
@@ -38,7 +36,7 @@ public class PlateauController implements Initializable {
     private HBox main, oeuvres, adversaireOeuvres;
 
     @FXML
-    private Button passer;
+    private Button passer, suivantRobot;
 
     /**
      * Gère l'action du bouton "Passer" pour passer au tour suivant si l'action est possible.
@@ -49,10 +47,14 @@ public class PlateauController implements Initializable {
         if (actionsPossibles.contains(Action.PASSER)) {
             Partie.getInstance().setEtape(Partie.Etape.TOUR_SUIVANT);
             Partie.getInstance().tour();
-        } else {
-            Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
-            joueur.afficher(
-                    "Vous ne pouvez pas passer votre tour. (C'est sans doute parce que vous n'avez pas encore piocher.)");
+        }
+    }
+
+    @FXML
+    public void handleSuivantRobot() {
+        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        if (actionsPossibles.contains(Action.TOUR_SUIVANT_ROBOT)) {
+            Partie.getInstance().tour();
         }
     }
 
@@ -250,11 +252,20 @@ public class PlateauController implements Initializable {
      * Initialise la visibilité du bouton "Passer" en fonction de la présence de cartes dans le deck du joueur actuel.
      */
     private void initPasser() {
-        Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
-        if (deck.size() > 0) {
+        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        if (actionsPossibles.contains(Action.PASSER)) {
             passer.setVisible(true);
         } else {
             passer.setVisible(false);
+        }
+    }
+
+    private void initTourSuivantRobot() {
+        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        if (actionsPossibles.contains(Action.TOUR_SUIVANT_ROBOT)) {
+            suivantRobot.setVisible(true);
+        } else {
+            suivantRobot.setVisible(false);
         }
     }
 
@@ -274,5 +285,6 @@ public class PlateauController implements Initializable {
         initDeck();
         initAnneaux();
         initPasser();
+        initTourSuivantRobot();
     }
 }

@@ -80,6 +80,10 @@
             <Button onMouseClicked="#handleEchelleButton" layoutX="100" layoutY="237"
                mnemonicParsing="false" prefHeight="70" prefWidth="160" text="Echelle" />
 
+            <!-- Bouton Tour Suivant Robot -->
+            <Button fx:id="suivantRobot" onMouseClicked="#handleSuivantRobot" layoutX="1100" layoutY="237"
+               mnemonicParsing="false" prefHeight="70" prefWidth="160" text="Tour suivant" />
+
             <!-- Source -->
             <ImageView fx:id="source" fitHeight="160" fitWidth="115" layoutX="415" layoutY="192">
                <image>
