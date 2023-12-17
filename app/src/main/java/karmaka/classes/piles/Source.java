@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import karmaka.classes.Carte;
+import karmaka.classes.Partie;
 import karmaka.classes.Pile;
 import karmaka.classes.cartes.*;
 
@@ -100,5 +101,60 @@ public class Source extends Pile {
     public Source() {
         super(cartesInit);
         melanger();
+    }
+
+    public void realimenter() {
+        Fosse fosse = Partie.getInstance().getFosse();
+        super.ajouter(fosse.piocher(fosse.size()));
+        super.melanger();
+
+    }
+
+    /**
+     * Pioche un nombre spécifié de cartes de la pile.
+     *
+     * @param qte Le nombre de cartes à piocher.
+     * @return La liste des cartes piochées.
+     */
+    @Override
+    public ArrayList<Carte> piocher(int qte) {
+        if (super.getCartes().size() - qte < 0) {
+            realimenter();
+        }
+        ArrayList<Carte> cartesPiochees = new ArrayList<Carte>();
+        int iMax = qte <= super.getCartes().size() ? qte : super.getCartes().size() - 1;
+        for (int i = 0; i < iMax; i++) {
+            cartesPiochees.add(super.getCartes().remove(super.getCartes().size() - 1));
+        }
+        return cartesPiochees;
+    }
+
+    /**
+     * Pioche une carte de la pile.
+     *
+     * @return La carte piochée, ou null si la pile est vide.
+     */
+    @Override
+    public Carte piocher() {
+        if (super.getCartes().size() == 0) {
+            realimenter();
+        }
+        return super.getCartes().size() != 0 ? super.getCartes().remove(super.getCartes().size() - 1) : null;
+    }
+
+    /**
+     * Pioche une carte spécifique de la pile.
+     *
+     * @param c La carte à piocher.
+     * @return La carte piochée, ou null si la carte n'est pas présente dans la
+     *         pile.
+     */
+    @Override
+    public Carte piocher(Carte c) {
+        if (super.getCartes().size() == 0) {
+            realimenter();
+        }
+        boolean sup = super.getCartes().remove(c);
+        return sup ? c : null;
     }
 }

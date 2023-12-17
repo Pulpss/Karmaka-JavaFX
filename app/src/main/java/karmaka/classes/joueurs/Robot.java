@@ -49,7 +49,7 @@ public class Robot extends Joueur {
     public Carte choix(String message, ArrayList<Carte> cartes) {
         Carte c = cartes.get(0);
         // Analyse du contexte du message pour déterminer la stratégie appropriée.
-        if (message.contains("choisit une carte de sa main pour la jouer")) {
+        if (message.contains("robot choisit carte main")) {
             switch (strategie) {
                 case AGRESSIF:
                     // Choix de la première carte rouge ou de la première carte si aucune carte
@@ -85,7 +85,7 @@ public class Robot extends Joueur {
      * @return La chaîne de caractères représentant le choix du robot.
      */
     public String choix(String message, String... choix) {
-        if (message.contains("va choisir une utilisation pour la carte")) {
+        if (message.contains("Veuillez choisir une utilisation pour la carte")) {
             Couleur couleur = Partie.getInstance().getCarteChoisie().getCouleur();
             // Analyse du contexte du message pour déterminer la stratégie appropriée.
             switch (strategie) {
@@ -97,7 +97,7 @@ public class Robot extends Joueur {
                     return couleur == Couleur.BLEU ? "Pouvoir" : "Points";
                 case FERMIER:
                     // Choix de "Pouvoir" si la carte est verte, sinon choix de "Points".
-                    return couleur == Couleur.VERT ? "Points" : "Futur";
+                    return couleur == Couleur.VERT ? "Pouvoir" : "Points";
                 default:
                     break;
             }

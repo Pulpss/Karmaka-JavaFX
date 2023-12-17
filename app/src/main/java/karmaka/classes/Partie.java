@@ -150,6 +150,10 @@ public final class Partie {
         }
     }
 
+    public int getGagnant() {
+        return gameData.gagnant;
+    }
+
     /**
      * Effectue une série d'actions et de vérifications pour gérer le déroulement
      * d'un tour de jeu.
@@ -163,12 +167,6 @@ public final class Partie {
         VieFuture vieFuture = joueur.getVieFuture();
         switch (gameData.etape) {
             case DEBUT:
-                if (gameData.source.size() == 0) {
-                    gameData.source.ajouter(gameData.fosse.piocher(gameData.fosse.size()));
-                    gameData.source.melanger();
-                    tour();
-                    break;
-                }
                 if (joueur.isMort()) {
                     gameData.etape = Etape.MORT;
                     tour();
@@ -250,7 +248,7 @@ public final class Partie {
                 }
 
                 // Cas reussite + Victoire
-                if (points >= echellekarmique && echellekarmique == 7) {
+                if (points >= echellekarmique && echellekarmique >= 7) {
                     if (joueur.isRobot()) {
                         joueur.afficher(joueur.getNom()
                                 + " a enfin atteint la Transcendance ! Les IAs vont dominer le monde ! !");
@@ -487,7 +485,8 @@ public final class Partie {
                 break;
             case GAGNANT:
                 joueur
-                        .afficher("Le joueur " + gameData.joueurs[gameData.gagnant].getNom() + " a gagné !");
+                        .afficher("Le joueur " + gameData.joueurs[gameData.gagnant].getNom() + " a gagné ! Merci d'avoir joué !");
+                Router.getInstance().setScene("gagnant");
                 break;
         }
         return;

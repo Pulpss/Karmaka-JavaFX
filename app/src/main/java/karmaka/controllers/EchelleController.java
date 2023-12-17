@@ -55,13 +55,13 @@ public class EchelleController implements Initializable {
      * @param echelleKarmique L'échelle karmique du joueur.
      */
     private void updatePionPosition(AnchorPane pion, int echelleKarmique) {
-        if (echelleKarmique < 4) {
+        if (echelleKarmique <= 4) {
             pion.setLayoutY(400);
-        } else if (echelleKarmique < 5) {
+        } else if (echelleKarmique <= 5) {
             pion.setLayoutY(310);
-        } else if (echelleKarmique < 6) {
+        } else if (echelleKarmique <= 6) {
             pion.setLayoutY(220);
-        } else if (echelleKarmique < 7) {
+        } else if (echelleKarmique <= 7) {
             pion.setLayoutY(130);
         } else {
             pion.setLayoutY(40);

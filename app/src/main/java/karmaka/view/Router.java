@@ -50,6 +50,7 @@ public final class Router {
         scenes.put("plateau", "fxml/Plateau.fxml");
         scenes.put("plateauPlaceholder", "fxml/PlateauPlaceholder.fxml");
         scenes.put("echelle", "fxml/Echelle.fxml");
+        scenes.put("gagnant", "fxml/Gagnant.fxml");
     }
 
     /**
