@@ -15,7 +15,7 @@ public class Incarnation extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Incarnation() {
-        super("Incarnation", Couleur.MOSAIQUE, "Choisissez une de vos Oeuvres. Copiez son pouvoir.", 1);
+        super("Incarnation", Couleur.MOSAIQUE, "Choisissez une de vos Oeuvres. Copiez son pouvoir.", 1, false);
     }
 
     /**

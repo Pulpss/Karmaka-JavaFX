@@ -15,7 +15,7 @@ public class CoupDoeil extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
     public CoupDoeil() {
-        super("CoupDoeil", Couleur.BLEU, "Regardez la Main d’un rival. Vous pouvez ensuite jouer une autre carte.", 1);
+        super("CoupDoeil", Couleur.BLEU, "Regardez la Main d’un rival. Vous pouvez ensuite jouer une autre carte.", 1, true);
     }
 
     /**
@@ -27,7 +27,5 @@ public class CoupDoeil extends Carte {
     	joueur.afficher("La carte Coup d'oeil va être jouée !");
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
         joueur.afficherCartes("Voici la main de votre adversaire.", mainAdv.getCartes());
-        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
-        Partie.getInstance().tour();
     }
 }

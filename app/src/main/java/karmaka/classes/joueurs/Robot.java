@@ -17,7 +17,7 @@ public class Robot extends Joueur {
 	/**
      * Enumération représentant les différentes stratégies que le robot peut adopter.
      */
-    private enum Strategie {
+    public enum Strategie {
         AGRESSIF, DEFENSIF, FERMIER
     }
 
@@ -28,9 +28,9 @@ public class Robot extends Joueur {
      *
      * @param nom Le nom du robot.
      */
-    public Robot(String nom) {
+    public Robot(String nom, Strategie strat) {
         super(nom);
-        strategie = Strategie.AGRESSIF;
+        strategie = strat;
     }
 
     /**

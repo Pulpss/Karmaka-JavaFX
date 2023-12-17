@@ -16,7 +16,7 @@ public class Vol extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Vol() {
-        super("Vol", Couleur.BLEU, "Placez dans votre Main l’Oeuvre Exposée d'un rival.", 3);
+        super("Vol", Couleur.BLEU, "Placez dans votre Main l’Oeuvre Exposée d'un rival.", 3, false);
     }
 
     /**

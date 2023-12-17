@@ -94,6 +94,11 @@ public class PlateauController implements Initializable {
         Partie.getInstance().charger();
     }
 
+    @FXML
+    public void handleQuit() {
+        return;
+    }
+
     /**
      * Gère le clic sur une carte dans la main du joueur.
      *

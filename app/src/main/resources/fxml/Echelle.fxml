@@ -17,7 +17,7 @@
                 <ImageView fitHeight="544.0" fitWidth="410.0" pickOnBounds="true"
                     preserveRatio="true">
                     <image>
-                        <Image url="@/images/plateau.png" />
+                        <Image url="@/images/echelle.png" />
                     </image>
                 </ImageView>
                 <AnchorPane fx:id="j1Pion" layoutX="95" layoutY="400">

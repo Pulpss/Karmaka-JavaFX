@@ -17,7 +17,7 @@ public class Lendemain extends Carte {
      */
     public Lendemain() {
     	
-        super("Lendemain", Couleur.VERT, "Puisez une carte à la Source. Vous pouvez ensuite jouer une autre carte.", 1);
+        super("Lendemain", Couleur.VERT, "Puisez une carte à la Source. Vous pouvez ensuite jouer une autre carte.", 1, true);
     }
 
     /**
@@ -36,7 +36,5 @@ public class Lendemain extends Carte {
             System.out.println("La source est vide.");
         }
         joueur.afficher("Vous pouvez rejouer.");
-        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
-        Partie.getInstance().tour();
     }
 }

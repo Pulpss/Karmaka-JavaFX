@@ -16,7 +16,7 @@ public class Voyage extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Voyage() {
-        super("Voyage", Couleur.VERT, "Puisez 3 cartes à la Source. Vous pouvez ensuite jouer une autre carte.", 3);
+        super("Voyage", Couleur.VERT, "Puisez 3 cartes à la Source. Vous pouvez ensuite jouer une autre carte.", 3, true);
     }
 
     /**
@@ -34,7 +34,5 @@ public class Voyage extends Carte {
         } else {
             joueur.afficher("La source est vide.");
         }
-        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
-        Partie.getInstance().tour();
     }
 }

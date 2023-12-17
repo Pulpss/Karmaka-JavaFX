@@ -18,7 +18,7 @@ public class Crise extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
     public Crise() {
-        super("Crise", Couleur.ROUGE, "Le rival de votre choix défausse une de ses Oeuvres.", 2);
+        super("Crise", Couleur.ROUGE, "Le rival de votre choix défausse une de ses Oeuvres.", 2, false);
     }
 
     /**

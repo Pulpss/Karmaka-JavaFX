@@ -17,7 +17,7 @@ public class Bassesse extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
 	public Bassesse() {
-        super("Bassesse", Couleur.ROUGE, "Défaussez au hasard 2 cartes de la Main d’un rival.", 3);
+        super("Bassesse", Couleur.ROUGE, "Défaussez au hasard 2 cartes de la Main d’un rival.", 3, false);
     }
     
     /**
@@ -29,11 +29,20 @@ public class Bassesse extends Carte {
     	joueur.afficher("La carte Bassesse va être jouée !");
         Random random = new Random();
         Main mainAdv = Partie.getInstance().getJoueur((Partie.getInstance().getTour() + 1) % 2).getMain();
+        int nbCartesAdv = mainAdv.size();
         Fosse fosse = Partie.getInstance().getFosse();
         for (int i = 0; i < Math.min(2, mainAdv.size()); i++) {
             Carte cartePioche = mainAdv.getCartes().get(random.nextInt(mainAdv.size()));
             fosse.ajouter(mainAdv.piocher(cartePioche));
         }
-        joueur.afficher("Si l'adversaire avait des cartes dans sa main elles ont été défaussées !");
+        if (nbCartesAdv >= 2) {
+            joueur.afficher("2 cartes de la main de l'adversaire ont été défaussées !");
+        }
+        else if (nbCartesAdv == 1) {
+            joueur.afficher("1 carte de la main de l'adversaire a été défaussée !");
+        }
+        else {
+            joueur.afficher("Votre adversaire n'avait aucune carte à se défausser !");
+        }
     }
 }

@@ -17,7 +17,7 @@ public class DernierSouffle extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
     public DernierSouffle() {
-        super("DernierSouffle", Couleur.ROUGE, "Le joueur de votre choix défausse une carte de sa Main.", 1);
+        super("DernierSouffle", Couleur.ROUGE, "Le joueur de votre choix défausse une carte de sa Main.", 1, false);
     }
 
     /**

@@ -18,7 +18,7 @@ public class Sauvetage extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Sauvetage() {
-        super("Sauvetage", Couleur.VERT, "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.", 2);
+        super("Sauvetage", Couleur.VERT, "Ajoutez à votre Main une des 3 dernières cartes de la Fosse.", 2, false);
     }
 
     /**

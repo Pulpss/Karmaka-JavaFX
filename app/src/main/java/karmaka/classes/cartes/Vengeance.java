@@ -17,7 +17,7 @@ public class Vengeance extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Vengeance() {
-        super("Vengeance", Couleur.ROUGE, "Défaussez l’Oeuvre Exposée d’un rival.", 3);
+        super("Vengeance", Couleur.ROUGE, "Défaussez l’Oeuvre Exposée d’un rival.", 3, false);
     }
 
     /**

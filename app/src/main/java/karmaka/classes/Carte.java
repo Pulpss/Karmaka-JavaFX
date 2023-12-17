@@ -23,6 +23,9 @@ public abstract class Carte implements Serializable {
     
 	/** Le nombre de points de la carte. */
 	private int points;
+
+    /** Un indicateur indiquant si le joueur va rejouer après la carte ou non. */
+    private boolean rejouer;
 	
 	/**
      * Constructeur de la classe Carte.
@@ -31,12 +34,14 @@ public abstract class Carte implements Serializable {
      * @param couleur La couleur de la carte.
      * @param description La description de la carte.
      * @param points Le nombre de points de la carte.
+     * @param rejouer Un indicateur indiquant si le joueur va rejouer après la carte ou non.
 	*/
-    public Carte(String nom, Couleur couleur, String description, int points) {
+    public Carte(String nom, Couleur couleur, String description, int points, boolean rejouer) {
         this.nom = nom;
         this.couleur = couleur;
         this.description = description;
         this.points = points;
+        this.rejouer = rejouer;
     }
 
     public String getNom() {
@@ -49,6 +54,10 @@ public abstract class Carte implements Serializable {
 
     public Couleur getCouleur() {
         return couleur;
+    }
+
+    public boolean getRejouer() {
+        return rejouer;
     }
     
     /**

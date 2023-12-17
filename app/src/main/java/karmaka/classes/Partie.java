@@ -186,16 +186,19 @@ public final class Partie {
                     gameData.etape = Etape.PIOCHER_DECK;
                     if (joueur.isRobot()) {
                         tour();
+                        break;
                     }
                 } else {
                     if (main.size() > 0) {
                         // Le joueur n'a plus de carte dans son deck mais en a dans sa main donc il joue
                         gameData.etape = Etape.CHOISIR_CARTE_MAIN;
                         tour();
+                        break;
                     } else {
                         // Le joueur n'a plus rien donc il meuurt dans d'atroces souffrances !
                         gameData.etape = Etape.MEURT;
                         tour();
+                        break;
                     }
                 }
                 break;
@@ -354,7 +357,11 @@ public final class Partie {
                     case "Pouvoir":
                         gameData.carteChoisie = main.piocher(gameData.carteChoisie);
                         gameData.carteChoisie.pouvoir();
-                        gameData.etape = Etape.PROPOSER_CARTE;
+                        if (gameData.carteChoisie.getRejouer()) {
+                            gameData.etape = Etape.PROPOSER_CARTE_REJOUER;
+                        } else {
+                            gameData.etape = Etape.PROPOSER_CARTE;
+                        }
                         tour();
                         break;
                     case "Futur":

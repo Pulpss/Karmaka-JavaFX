@@ -18,7 +18,7 @@ public class Duperie extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
     public Duperie() {
-        super("Duperie", Couleur.BLEU, "Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.", 3);
+        super("Duperie", Couleur.BLEU, "Regardez 3 cartes de la Main d’un rival; ajoutez-en une à votre Main.", 3, false);
     }
 
     /**

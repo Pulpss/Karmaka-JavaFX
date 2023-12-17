@@ -16,7 +16,7 @@ public class Deni extends Carte {
      * Hérite du constructeur de la classe cartes.
      */
     public Deni() {
-        super("Deni", Couleur.BLEU, "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.", 2);
+        super("Deni", Couleur.BLEU, "Défaussez une carte de votre Main. Copiez le pouvoir de cette carte.", 2, false);
     }
 
     /**

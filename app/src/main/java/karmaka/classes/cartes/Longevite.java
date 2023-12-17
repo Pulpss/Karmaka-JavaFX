@@ -17,7 +17,7 @@ public class Longevite extends Carte {
      */
     public Longevite() {
     	
-        super("Longevite", Couleur.VERT, "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.", 2);
+        super("Longevite", Couleur.VERT, "Placez 2 cartes puisées à la Source sur la Pile d'un joueur.", 2, false);
     }
 
     /**

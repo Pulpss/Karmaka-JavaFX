@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ComboBox?>
 
 <VBox prefHeight="489.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="karmaka.controllers.CreateGameController">
   <children>
@@ -33,6 +34,7 @@
                         <RadioButton fx:id="j1Robot"  onMouseClicked="#handleJ1Robot" mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
+                  <ComboBox fx:id="j1Strat"/>
                   <Label text="Nom :" />
                   <TextField fx:id="j1Nom" />
                </children>
@@ -57,6 +59,7 @@
                         <RadioButton fx:id="j2Robot"  onMouseClicked="#handleJ2Robot" mnemonicParsing="false" text="Robot" />
                      </children>
                   </HBox>
+                  <ComboBox fx:id="j2Strat"/>
                   <Label text="Nom :" />
                   <TextField fx:id="j2Nom" />
                </children>

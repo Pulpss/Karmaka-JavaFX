@@ -18,7 +18,7 @@ public class Recyclage extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Recyclage() {
-        super("Recyclage", Couleur.VERT, "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", 1);
+        super("Recyclage", Couleur.VERT, "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse.", 1, false);
     }
 
     /**
@@ -32,7 +32,7 @@ public class Recyclage extends Carte {
         Fosse fosse = Partie.getInstance().getFosse();
         VieFuture vieFuture = joueur.getVieFuture();
         ArrayList<Carte> troisCartes = new ArrayList<Carte>(
-                fosse.getCartes().subList(Math.max(0, fosse.size() - 3 - 1), fosse.size() - 1));
+                fosse.getCartes().subList(Math.max(0, fosse.size() - 3), fosse.size() - 1));
         if (troisCartes.size() > 0) {
             Carte c = joueur.choix("Choisissez une carte à ajouter à votre vie future.", troisCartes);
             vieFuture.ajouter(fosse.piocher(c));

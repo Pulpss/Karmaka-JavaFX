@@ -16,7 +16,7 @@ public class Transmigration extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public Transmigration() {
-        super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importe quelle carte de votre Vie Future.", 1);
+        super("Transmigration", Couleur.BLEU, "Placez dans votre Main n’importe quelle carte de votre Vie Future.", 1, false);
     }
 
     /**

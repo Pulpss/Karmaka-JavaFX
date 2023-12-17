@@ -15,7 +15,7 @@ public class RevesBrises extends Carte {
      * Hérite du constructeur de la classe cartes
      */
     public RevesBrises() {
-        super("RevesBrises", Couleur.BLEU, "Placez la première carte de la Vie Future d'un rival sur la vôtre.", 2);
+        super("RevesBrises", Couleur.BLEU, "Placez la première carte de la Vie Future d'un rival sur la vôtre.", 2, false);
     }
 
     /**

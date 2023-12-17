@@ -17,7 +17,7 @@ public class Panique extends Carte {
      */
     public Panique() {
         super("Panique", Couleur.ROUGE,
-                "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1);
+                "Défaussez la première carte de la Pile d'un joueur. Vous pouvez ensuite jouer une autre carte.", 1, true);
     }
 
     /**
@@ -36,7 +36,5 @@ public class Panique extends Carte {
         } else {
             joueur.afficher("L'adversaire n'avait pas de cartes dans sa pile. Vous pouvez quand même rejouer.");
         }
-        Partie.getInstance().setEtape(Partie.Etape.PROPOSER_CARTE_REJOUER);
-        Partie.getInstance().tour();
     }
 }

@@ -16,7 +16,7 @@ public class Mimetisme extends Carte {
      */
     public Mimetisme() {
     	
-        super("Mimetisme", Couleur.MOSAIQUE, "Choisissez un Rival. Copiez le pouvoir de son Oeuvre Exposée.", 1);
+        super("Mimetisme", Couleur.MOSAIQUE, "Choisissez un Rival. Copiez le pouvoir de son Oeuvre Exposée.", 1, false);
     }
     
     /**
