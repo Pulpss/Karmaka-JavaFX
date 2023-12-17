@@ -21,17 +21,28 @@ import javafx.stage.Stage;
 import karmaka.classes.Carte;
 import karmaka.classes.GameData;
 
+/**
+ * La classe Router gère la navigation entre les différentes vues de l'application.
+ */
 public final class Router {
     private static String scene;
     private static Stage stage;
     private static Router instance = null;
     private static HashMap<String, String> scenes = new HashMap<String, String>();
 
+    /**
+     * Constructeur privé pour appliquer le modèle Singleton.
+     *
+     * @param initStage La scène principale de l'application.
+     */
     private Router(Stage initStage) {
         stage = initStage;
         addScenes();
     }
 
+    /**
+     * Ajoute les différentes scènes de l'application à la table de hachage.
+     */
     private void addScenes() {
         scenes.put("menu", "fxml/Menu.fxml");
         scenes.put("createGame", "fxml/CreateGame.fxml");
@@ -40,6 +51,11 @@ public final class Router {
         scenes.put("echelle", "fxml/Echelle.fxml");
     }
 
+    /**
+     * Initialise le Router avec la scène principale.
+     *
+     * @param stage La scène principale de l'application.
+     */
     public static void init(Stage stage) {
         if (instance == null) {
             instance = new Router(stage);
@@ -63,6 +79,9 @@ public final class Router {
         System.out.println("Scene changed to " + scene);
     }
 
+    /**
+     * Met à jour la scène actuelle de l'application.
+     */
     public void update() {
         stage.setTitle(scene);
         try {
@@ -75,6 +94,11 @@ public final class Router {
         System.out.println("Scene updated to " + scene);
     }
 
+    /**
+     * Affiche une boîte de dialogue d'information avec le message spécifié.
+     *
+     * @param message Le message à afficher.
+     */
     public void afficher(String inst) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Instructions");
@@ -84,6 +108,13 @@ public final class Router {
         alert.showAndWait();
     }
 
+    /**
+     * Affiche une boîte de dialogue de choix avec les options spécifiées.
+     *
+     * @param message Le message à afficher.
+     * @param choix   Les options disponibles.
+     * @return Le choix de l'utilisateur.
+     */
     public String choix(String message, String... choix) {
         ChoiceDialog<String> dialog = new ChoiceDialog<String>(choix[0], choix);
         dialog.setTitle("Veuillez faire un choix.");
@@ -99,6 +130,13 @@ public final class Router {
         }
     }
 
+    /**
+     * Affiche une boîte de dialogue de choix de carte parmi une liste.
+     *
+     * @param message Le message à afficher.
+     * @param cartes  La liste des cartes parmi lesquelles l'utilisateur peut choisir.
+     * @return La carte choisie par l'utilisateur.
+     */
     public Carte choix(String message, ArrayList<Carte> cartes) {
         ChoixCarte alert = new ChoixCarte(message, cartes);
 
@@ -111,12 +149,23 @@ public final class Router {
         }
     }
 
+    /**
+     * Affiche une boîte de dialogue contenant une liste de cartes.
+     *
+     * @param message Le message à afficher.
+     * @param cartes  La liste des cartes à afficher.
+     */
     public void afficherCartes(String message, ArrayList<Carte> cartes) {
         AffichageCartes alert = new AffichageCartes(message, cartes);
 
         alert.showAndWait();
     }
 
+    /**
+     * Sauvegarde les données de la partie dans un fichier.
+     *
+     * @param gameData Les données de la partie à sauvegarder.
+     */
     private void savePartieToFile(GameData gameData, File file) {
         try {
             FileOutputStream fileOut = new FileOutputStream(file);
@@ -129,6 +178,11 @@ public final class Router {
         }
     }
 
+    /**
+     * Permet à l'utilisateur de sauvegarder la partie en cours dans un fichier.
+     *
+     * @param gameData Les données de la partie à sauvegarder.
+     */
     public void sauvegarder(GameData gameData) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sauvegarder");
@@ -140,6 +194,12 @@ public final class Router {
         }
     }
 
+    /**
+     * Charge les données d'une partie depuis un fichier.
+     *
+     * @param file Le fichier à partir duquel charger les données de la partie.
+     * @return Les données de la partie chargées depuis le fichier.
+     */
     private GameData loadPartieFromFile(File file) {
         GameData gameData = null;
         try {
@@ -157,6 +217,11 @@ public final class Router {
         return gameData;
     }
 
+    /**
+     * Permet à l'utilisateur de charger une partie depuis un fichier.
+     *
+     * @return Les données de la partie chargées depuis le fichier.
+     */
     public GameData charger() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Charger");

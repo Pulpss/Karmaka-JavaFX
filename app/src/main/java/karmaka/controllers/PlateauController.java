@@ -21,6 +21,10 @@ import karmaka.classes.piles.Fosse;
 import karmaka.view.CarteView;
 import karmaka.view.Router;
 
+/**
+ * La classe PlateauController gère les actions et les interactions de l'interface utilisateur
+ * pour la scène du plateau de jeu du jeu Karmaka.
+ */
 public class PlateauController implements Initializable {
     // Cards dimensions are 115x160
     @FXML
@@ -36,6 +40,9 @@ public class PlateauController implements Initializable {
     @FXML
     private Button passer;
 
+    /**
+     * Gère l'action du bouton "Passer" pour passer au tour suivant si l'action est possible.
+     */
     @FXML
     public void handlePasser() {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
@@ -49,11 +56,17 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Gère l'action du bouton "Échelle" pour afficher la scène de l'échelle karmique.
+     */
     @FXML
     public void handleEchelleButton() {
         Router.getInstance().setScene("echelle");
     }
 
+    /**
+     * Gère l'action du bouton "Deck" pour piocher une carte du deck si l'action est possible.
+     */
     @FXML
     public void handleDeck() {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
@@ -63,16 +76,27 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Gère l'action du bouton "Sauvegarder" pour sauvegarder l'état actuel de la partie.
+     */
     @FXML
     public void handleSave() {
         Partie.getInstance().sauvegarder();
     }
 
+    /**
+     * Gère l'action du bouton "Charger" pour charger une partie sauvegardée.
+     */
     @FXML
     public void handleLoad() {
         Partie.getInstance().charger();
     }
 
+    /**
+     * Gère le clic sur une carte dans la main du joueur.
+     *
+     * @param c La carte sur laquelle le joueur a cliqué.
+     */
     private void handleMouseClicked(Carte c) {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
         System.out.println(actionsPossibles);
@@ -84,6 +108,9 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise la disposition des cartes de la main du joueur actuel sur l'interface graphique.
+     */
     private void initMain() {
         Partie partie = Partie.getInstance();
         partie.getJoueur(partie.getTour()).getMain().getCartes().iterator()
@@ -96,6 +123,9 @@ public class PlateauController implements Initializable {
                 });
     }
 
+    /**
+     * Initialise la disposition des cartes dans la zone des œuvres des deux joueurs sur l'interface graphique.
+     */
     private void initOeuvres() {
         // joueur actuel
         Partie partie = Partie.getInstance();
@@ -122,6 +152,9 @@ public class PlateauController implements Initializable {
         adversaireOeuvres.getChildren().addAll(cartes);
     }
 
+    /**
+     * Initialise la disposition de la fosse du jeu sur l'interface graphique.
+     */
     private void initFosse() {
         Partie partie = Partie.getInstance();
         Fosse fosseJeu = partie.getFosse();
@@ -136,6 +169,9 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise la disposition des cartes dans la zone de la vie future des deux joueurs sur l'interface graphique.
+     */
     private void initVieFuture() {
         Partie partie = Partie.getInstance();
         // joueur actuel vie future
@@ -162,6 +198,9 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise la disposition des cartes dans la zone du deck des deux joueurs sur l'interface graphique.
+     */
     private void initDeck() {
         Partie partie = Partie.getInstance();
         // joueur actuel deck
@@ -184,6 +223,9 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise la disposition de la source du jeu sur l'interface graphique.
+     */
     private void initSource() {
         Partie partie = Partie.getInstance();
         if (partie.getSource().size() > 0) {
@@ -195,12 +237,18 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise la disposition des anneaux des deux joueurs sur l'interface graphique.
+     */
     private void initAnneaux() {
         Partie partie = Partie.getInstance();
         anneaux.setText(Integer.toString(partie.getJoueur(partie.getTour()).getNbAnneaux()));
         adversaireAnneaux.setText(Integer.toString(partie.getJoueur((partie.getTour() + 1) % 2).getNbAnneaux()));
     }
 
+    /**
+     * Initialise la visibilité du bouton "Passer" en fonction de la présence de cartes dans le deck du joueur actuel.
+     */
     private void initPasser() {
         Deck deck = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
         if (deck.size() > 0) {
@@ -210,6 +258,12 @@ public class PlateauController implements Initializable {
         }
     }
 
+    /**
+     * Initialise les éléments graphiques de la scène du plateau de jeu lors de son affichage.
+     *
+     * @param arg0 URL utilisée pour résoudre les chemins relatifs aux ressources.
+     * @param arg1 ResourceBundle qui contient les paramètres régionaux actuels.
+     */
     @FXML
     public void initialize(URL arg0, ResourceBundle arg1) {
         initSource();
