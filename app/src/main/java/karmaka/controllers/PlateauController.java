@@ -15,7 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import karmaka.classes.Action;
 import karmaka.classes.Carte;
+import karmaka.classes.Joueur;
 import karmaka.classes.Partie;
+import karmaka.classes.piles.Deck;
 import karmaka.classes.piles.Fosse;
 import karmaka.view.CarteView;
 import karmaka.view.Router;
@@ -47,9 +49,12 @@ public class PlateauController implements Initializable {
     @FXML
     public void handlePasser() {
         ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
+        Joueur joueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour());
         if (actionsPossibles.contains(Action.PASSER)) {
             Partie.getInstance().setEtape(Partie.Etape.TOUR_SUIVANT);
             Partie.getInstance().tour();
+        } else {
+            joueur.afficher("Vous ne pouvez pas passer votre tour. Vous n'avez sans doute pas encore pioché de carte.");
         }
     }
 
@@ -271,8 +276,8 @@ public class PlateauController implements Initializable {
      * cartes dans le deck du joueur actuel.
      */
     private void initPasser() {
-        ArrayList<Action> actionsPossibles = Partie.getInstance().getActionsPossibles();
-        if (actionsPossibles.contains(Action.PASSER)) {
+        Deck deckJoueur = Partie.getInstance().getJoueur(Partie.getInstance().getTour()).getDeck();
+        if (deckJoueur.size() > 0) {
             passer.setVisible(true);
         } else {
             passer.setVisible(false);
