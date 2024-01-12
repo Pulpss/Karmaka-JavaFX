@@ -6,3 +6,6 @@ build
 /bin/
 .metadata
 .classpath
+
+# For IntelliJ
+.idea
